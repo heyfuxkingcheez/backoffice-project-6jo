@@ -1,0 +1,27 @@
+.main-box {
+  display: block;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.head {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  text-align: center;
+  font-size: 3em;
+}
+
+.queen {
+  margin: 0px;
+  padding: 0px;
+  width: 60px;
+  margin-right: 2%;
+}
