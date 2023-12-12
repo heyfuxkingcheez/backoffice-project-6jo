@@ -58,5 +58,5 @@ export class MenuService {
   };
 
   // 메뉴 수정
-  updateMenu = async;
+  // updateMenu = async;
 }
