@@ -10,6 +10,8 @@ export class MenuRepository {
     return menus;
   };
 
+  // 메뉴 상세 조회
+
   // 메뉴 등록
   createMenu = async (category, RestaurantId, name, introduce, price) => {
     const createdMenu = await prisma.menu.create({
