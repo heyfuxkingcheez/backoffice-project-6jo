@@ -6,6 +6,105 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+
+model Users {
+  userId   Int @id @default(autoincrement()) @map("userId")
+  role boolean @map("role") // 사업자 false 손님 true
+  email String  @unique @map("email") // 이메일
+  nickname String @map("nickname") // 닉네임
+  password String @map("password") // 비번
+
+  createdAt DateTime @default(now()) @map("createdAt") // 가입일
+  updatedAt DateTime @updatedAt @map("updatedAt") // 정보 수정일
+
+  points Point[] // User 테이블과 Point 테이블이 1:N 관계 (사용자는 포인트 레코드를 여러개 가질 수 있음)
+  Restaurants Restaurants? // Users 테이블과 Restaurants 테이블이 1:1 관계 (식당은 있을수도 없을수도 있음) 
+  orders Order[] // Users 테이블과 Orders 테이블이 1:N 관계 (사용자는 Orders를 여러개 가질 수 있음)
+  @@map("Users")
+}
+
+model Point {
+  pointId Int @id @default(autoincrement()) @map("pointId") 
+  UserId Int @map("UserId")
+  income Int @map("income") // 입금
+  expense Int @map("expense") // 출금
+  balance Int @map("balance") // 잔액
+
+  createdAt DateTime @default(now()) @map("createdAt") // 거래날짜
+
+  User Users @relation(fields: [UserId], references: [userId], onDelete: Cascade)
+
+  @@map("Point") 
+}
+
+
+model Restaurants {
+  restaurantId Int @id @default(autoincrement()) @map("restaurantId")
+  UserId Int @map("UserId")
+  
+  category int @map("category") // 음식점 카테고리(한식,중식 등)
+  name String @map("name") // 가게이름
+  address String @map("address") // 가게주소
+  introduce String @db.Text @map("introduce") // 가게소개
+  businessHours String @map("businessHours") // 가게 영업시간
+  phoneNumber String @map("phoneNumber") // 가게 전화번호
+
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+
+  User Users @relation(fields: [UserId], references: [userId], onDelete: Cascade)
+  menu Menu[] // Restaurants 테이블과 Menu 테이블이 1:N 관계 (식당은 Menu를 여러개 가질 수 있음)
+
+  @@map("Restaurants")
+}
+
+model Menu {
+
+  menuId Int @id @default(autoincrement()) @map("menuId")
+  RestaurantId Int @map("RestaurantId")
+  category int @map("category") // 음식 카테고리(메인메뉴, 사이드메뉴, 음료, 기타 등)
+  name String @map("name") // 메뉴이름
+  introduce String @db.Text @map("introduce") // 메뉴 소개
+  price Int @map("price") // 메뉴 가격
+
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+
+  orders Order[] // order에 대해 n:m 관계
+  Restaurant Restaurants @relation(fields: [RestaurantId], references: [restaurantId], onDelete: Cascade)
+
+  @@unique([restaurantId, name]) // 같은 아이디의 식당에서는 똑같은 이름의 메뉴 중복등록 불가
+  @@map("Menu")
+}
+
+model Orders {
+  orderId Int @id @default(autoincrement()) @map("orderId")
+  orderDetails Json @map("orderDetails") // 주문한 음식 / 품목별 수량을 json 형태로 받음 [{메뉴이름 : 수량}, {메뉴이름 : 수량}]
+  totalPrice int @map("totalPrice") // 주문한 내역 총 가격
+  isCompleted boolean @map("isCompleted") // 처리중 false / 배달완료 true
+
+  createdAt DateTime @default(now()) @map("createdAt")
+
+  menu Menu[] 메뉴에 대해 n:m 관계
+  User Users @relation(fields: [UserId], references: [userId], onDelete: Cascade) // 사용자 하나를 가질 수 있음
+  Reviews Reviews? // Orders 테이블과 Reviews 테이블이 1:1 관계 (리뷰는 있을수도 없을수도 있음) 
+
+  @@map("Orders")
+}
+
+model Reviews {
+  reviewId Int @id @default(autoincrement()) @map("reviewId")
+  star int @map("star") // 별점
+  review String @db.Text @map("review") // 리뷰 내용
+
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+
+  Order Orders @relation(fields: [orderId], references: [orderId])
+  
+  @@map("Reviews")
 }
