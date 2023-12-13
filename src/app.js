@@ -6,10 +6,12 @@ import { configDotenv } from "dotenv";
 import router from "./routers/index.js";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
+// import { cors } from "cors";
 
 configDotenv();
 
 const app = express();
+// app.use(cors({ origin: "*" }));
 
 app.use(
   morgan("dev"),

@@ -6,8 +6,9 @@ export class UsersController {
   }
 
   signup = async (req, res, next) => {
+    res.setHeader("Access-Control-Allow-origin", "*");
     try {
-      const { email, nickname, password, passwordConfirm, address } =
+      const { email, nickname, password, passwordConfirm, role } =
         await req.body;
 
       if (!email) {
@@ -59,7 +60,7 @@ export class UsersController {
         email,
         nickname,
         password,
-        address
+        role
       );
 
       return res.status(201).json({
