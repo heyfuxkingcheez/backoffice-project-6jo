@@ -70,6 +70,7 @@ model Menu {
   name String @map("name") // 메뉴이름
   introduce String @db.Text @map("introduce") // 메뉴 소개
   price Int @map("price") // 메뉴 가격
+  image String @map("image") // 메뉴 이미지
 
   createdAt DateTime @default(now()) @map("createdAt")
   updatedAt DateTime @updatedAt @map("updatedAt")
