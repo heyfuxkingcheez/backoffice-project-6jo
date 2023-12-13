@@ -19,8 +19,6 @@ document
         role: Boolean(role),
       });
       alert("등록완료!");
-
-      console.log("나야", email);
     } catch (error) {
       console.error(error);
     }
@@ -35,40 +33,31 @@ document
       const result = await axios.post("/api/email-check", {
         email,
       });
-      //   A = result.data.authNumber;
-      const authNumber = prompt("인증번호 입력하셈");
+
+      console.log("인증번호:", result.data.authNumber);
+      A = result.data.authNumber;
+
+      alert("메일함을 확인해 주세요");
     } catch (error) {
       console.error(error);
     }
   });
+
 let A;
 
-// axios.defaults.withCredentials = true;
-// document.querySelector("#users").addEventListener("submit", function (event) {
-//   event.preventDefault();
-
-//   var email = document.getElementById("email").value;
-//   var password = document.getElementById("newPassword").value;
-//   var passwordConfirm = document.getElementById("passwordConfirm").value;
-//   var nickname = document.getElementById("nickname").value;
-
-//   axios
-//     .post("/api/signup", {
-//       email: email,
-//       password: password,
-//       passwordConfirm: passwordConfirm,
-//       nickname: nickname,
-//     })
-//     .then(function (response) {
-//       alert(response.data.message || "도원결의 성공!");
-
-//       window.location.href = "index.html";
-//     })
-//     .catch(function (error) {
-//       if (error.response) {
-//         alert(error.response.data.message);
-//       } else {
-//         alert(" 방해공작 발생! 다시 시도해주세요.");
-//       }
-//     });
-// });
+document
+  .getElementById("auth-check")
+  .addEventListener("click", async function () {
+    try {
+      const authNumber = document.getElementById("authNumber").value;
+      console.log("여기있니?", A);
+      console.log("넌누구냐", authNumber);
+      if (Number(authNumber) === Number(A)) {
+        alert("이메일 인증 성공");
+      } else {
+        alert("이메일 인증 실패");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  });
