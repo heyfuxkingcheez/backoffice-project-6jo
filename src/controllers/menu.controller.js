@@ -18,7 +18,7 @@ export class MenuController {
   };
 
   // 메뉴 상세 조회
-  getmenu = async (req, res, next) => {
+  getMenu = async (req, res, next) => {
     try {
       const { menuId } = req.params;
       const menu = await this.menuService.findOneMenu(menuId);

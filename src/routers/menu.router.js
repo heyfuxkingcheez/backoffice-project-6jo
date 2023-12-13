@@ -9,10 +9,10 @@ menusRouter.post("/", menusController.createMenu);
 // 메뉴 목록 조회 API
 menusRouter.get("/", menusController.getMenus);
 // 메뉴 상세 조회 API
-menusRouter.get("/:menuId", menusController);
+menusRouter.get("/:menuId", menusController.getMenu);
 // 메뉴 수정 API
-menusRouter.put("/:menuId", menusController);
+menusRouter.put("/:menuId", menusController.updateMenu);
 // 메뉴 삭제 API
-menusRouter.delete("/:menuId", menusController);
+menusRouter.delete("/:menuId", menusController.deleteMenu);
 
 export { menusRouter };
