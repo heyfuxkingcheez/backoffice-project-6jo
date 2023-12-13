@@ -2,7 +2,7 @@ console.log("어 그래 형이야");
 
 document
   .getElementById("submit")
-  .addEventListener("submit", async function (event) {
+  .addEventListener("click", async function (event) {
     event.preventDefault();
     try {
       const email = document.getElementById("email").value;
