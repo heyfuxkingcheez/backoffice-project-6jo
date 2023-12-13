@@ -1,4 +1,4 @@
-import { RestaurantsRepository } from "../repositories/restaurants.repository";
+import { RestaurantsRepository } from "../repositories/restaurants.repository.js";
 
 export class RestaurantsService {
   restaurantsRepository = new RestaurantsRepository();

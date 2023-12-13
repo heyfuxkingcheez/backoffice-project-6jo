@@ -1,4 +1,4 @@
-import { RestaurantsService } from "../services/restaurants.service";
+import { RestaurantsService } from "../services/restaurants.service.js";
 
 export class RestaurantsController {
   restaurantsService = new RestaurantsService();
