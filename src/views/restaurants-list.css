@@ -69,7 +69,7 @@ button > img {
 
 .main-image {
   position: relative;
-  height: 300px;
+  height: 150px;
   background-color: antiquewhite;
   display: flex;
   flex-direction: row;
@@ -78,20 +78,9 @@ button > img {
   margin-bottom: 30px;
 }
 
-.outer-wrqpper {
-  width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .search-input {
   text-align: center;
-  margin-bottom: 100px;
+
   width: 400px;
   height: 50px;
   border: 1px solid lightgrey;
@@ -110,23 +99,23 @@ button > img {
   border-radius: 5px;
 
   position: absolute;
-  bottom: 60%;
-  left: 56%;
+  bottom: 38%;
+  left: 55%;
 }
 .search-btn > button > img {
   width: 100%;
 }
 
-.col-box {
+.category-list {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.row-box {
-  width: 150px;
-  height: 150px;
+.category {
+  width: 120px;
+  height: 100px;
   margin: 15px;
   border: 1px solid black;
   border-radius: 15px;
@@ -137,17 +126,9 @@ button > img {
   align-items: center;
 }
 
-.category-name {
-  color: rgb(40, 39, 39);
-  margin-bottom: 10px;
-}
-
-.category-img {
-  width: 90px;
-  height: 90px;
-}
-
-.category-img > img {
-  width: 95px;
-  height: 95px;
+.category > button {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
 }
