@@ -43,4 +43,37 @@ export class RestaurantsRepository {
 
     return restaurant;
   };
+
+  // 식당 수정
+  updateRestaurant = async (
+    restaurantId,
+    category,
+    name,
+    address,
+    introduce,
+    businessHours,
+    phoneNumber
+  ) => {
+    const updatedRestaurant = await prisma.restaurants.update({
+      where: { restaurantId: +restaurantId },
+      data: {
+        category,
+        name,
+        address,
+        introduce,
+        businessHours,
+        phoneNumber,
+      },
+    });
+    return updatedRestaurant;
+  };
+
+  // 식당 삭제
+  deleteRestaurant = async (restaurantId) => {
+    const deletedRestaurant = await prisma.restaurants.delete({
+      where: { restaurantId: +restaurantId },
+    });
+
+    return deletedRestaurant;
+  };
 }

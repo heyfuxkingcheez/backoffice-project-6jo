@@ -37,13 +37,27 @@ export class MenuService {
   };
 
   // 메뉴 등록
-  createMenu = async (category, name, introduce, price) => {
+
+  createMenu = async (
+    category,
+    restaurantId,
+    name,
+    introduce,
+    price,
+    image,
+    role
+  ) => {
+    if (!role === true) throw new Error("권한이 없습니다.");
+
+    console.log("image: ", image);
+
     const createdMenu = await this.menuRepository.createMenu(
       category,
-      RestaurantId,
+      restaurantId,
       name,
       introduce,
-      price
+      price,
+      image
     );
 
     return {
@@ -58,18 +72,33 @@ export class MenuService {
   };
 
   // 메뉴 수정
-  updateMenu = async (menuId, category, name, introduce, price) => {
+  updateMenu = async (
+    menuId,
+    category,
+    name,
+    introduce,
+    price,
+    userId,
+    restaurantId
+  ) => {
     const menu = await this.menuRepository.findOneMenu(menuId);
+    const isOwner = await this.menuRepository.findOwnerRestaurant(userId);
+
+    if (restaurantId !== isOwner.Restaurants.restaurantId)
+      throw new Error("권한이 없습니다.");
+
     if (!menu) throw new Error("메뉴가 없어요");
-    // if (menu.RestaurantId !== RestaurantId) throw new Error("권한이 없습니다");
+
     if (menuId) {
       await this.menuRepository.updateMenu(
         menuId,
         category,
         name,
         introduce,
-        price
+        price,
+        userId
       );
+
       const updatedMenu = await this.menuRepository.findOneMenu(menuId);
       return {
         menuId: updatedMenu.menuId,
@@ -84,10 +113,13 @@ export class MenuService {
   };
 
   // 메뉴 삭제
-  deleteMenu = async (menuId) => {
+  deleteMenu = async (restaurantId, menuId, userId) => {
     const menu = await this.menuRepository.findOneMenu(menuId);
     if (!menu) throw new Error("메뉴가 없어요");
-    // if(menu.RestaurantId !== RestaurantId) throw new Error("권한이 없습니다.")
+
+    const isOWoner = await this.menuRepository.findOwnerRestaurant(userId);
+    if (menu.RestaurantId !== isOWoner.Restaurants.restaurantId)
+      throw new Error("권한이 없습니다");
 
     await this.menuRepository.deleteMenu(menuId);
   };

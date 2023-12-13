@@ -6,11 +6,7 @@ const restaurantsRouter = Router();
 const restaurantsController = new RestaurantsController();
 
 // 식당 등록 API
-restaurantsRouter.post(
-  "/",
-  auth_middleware,
-  restaurantsController.createRestaurant
-);
+restaurantsRouter.post("/", restaurantsController.createRestaurant);
 // 식당 목록 조회 API
 restaurantsRouter.get("/", restaurantsController.findAllRestaurants);
 // 식당 상세 조회 API
@@ -19,9 +15,17 @@ restaurantsRouter.get(
   restaurantsController.findRestaurantById
 );
 
-// // 식당 수정 API
-// router.put("/:restaurantId", restaurantsController);
-// // 식당 삭제 API
-// router.delete("/:restaurantId", restaurantsController);
+// 식당 수정 API
+restaurantsRouter.put(
+  "/:restaurantId",
+  auth_middleware,
+  restaurantsController.updateRestaurant
+);
+
+// 식당 삭제 API
+restaurantsRouter.delete(
+  "/:restaurantId",
+  restaurantsController.deleteRestaurant
+);
 
 export { restaurantsRouter };
