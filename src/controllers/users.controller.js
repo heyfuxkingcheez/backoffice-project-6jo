@@ -7,7 +7,7 @@ export class UsersController {
 
   signup = async (req, res, next) => {
     try {
-      const { role, email, nickname, password, passwordConfirm, address } =
+      const { email, nickname, password, passwordConfirm, address } =
         await req.body;
 
       if (!email) {
@@ -56,7 +56,6 @@ export class UsersController {
       }
 
       const data = await this.usersService.signup(
-        role,
         email,
         nickname,
         password,

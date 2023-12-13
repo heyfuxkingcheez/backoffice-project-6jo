@@ -5,11 +5,10 @@ POST http://localhost:3333/api/users/signup
 Content-Type: application/json
 
 {
-	"role": true,
-	"email": "example@gmail.com",
+	"email": "example1@gmail.com",
 	"password": "aaaa1111",
 	"passwordConfirm": "aaaa1111",
-	"nickname": "욱기정",
+	"nickname": "이하늘",
 	"address": "미주알고주알"
 }
 

@@ -2,11 +2,11 @@ import bcrypt from "bcrypt";
 import { prisma } from "../utils/prisma/index.js";
 
 export class UsersRepository {
-  createOne = async (role, email, nickname, password) => {
+  createOne = async (email, nickname, password) => {
     const hashedPassword = bcrypt.hashSync(password, 12);
 
     const newUser = await prisma.users.create({
-      data: { role, email, password: hashedPassword, nickname },
+      data: { email, password: hashedPassword, nickname },
     });
 
     delete newUser.password;
