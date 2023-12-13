@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import { prisma } from "../utils/prisma/index.js";
 
 export class UsersRepository {
-  createOne = async (email, nickname, password) => {
+  createOne = async (email, nickname, password, role) => {
     const hashedPassword = bcrypt.hashSync(password, 12);
 
     const newUser = await prisma.users.create({

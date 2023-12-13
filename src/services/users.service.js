@@ -40,8 +40,8 @@ export class UsersService {
       throw new HttpStatus.Unauthorized("일치하는 인증 정보가 없습니다.");
     }
 
-    const accessToken = jwt.sign({ userId: user.id }, JWT_ACCESS_TOKEN_SECRET, {
-      expiresIn: JWT_ACCESS_TOKEN_EXPIRES_IN,
+    const accessToken = jwt.sign({ userId: user.id }, process.env.TOKENKEY, {
+      expiresIn: process.env.JWT_EXPIRE,
     });
 
     return accessToken;

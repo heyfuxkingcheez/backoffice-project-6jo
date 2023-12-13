@@ -18,7 +18,7 @@ export class AuthService {
     if (!user) {
       throw new Error("이메일 또는 비밀번호가 다릅니다.");
     }
-    const same = bcrypt.compareSync(password, user.password)
+    const same = bcrypt.compareSync(password, user.password);
     if (!same) {
       throw new Error("이메일 또는 비밀번호가 다릅니다.");
     }
