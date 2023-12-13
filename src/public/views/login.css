@@ -91,9 +91,12 @@ button > img {
   margin-right: auto;
   margin-bottom: 50px;
   background-color: #df5536;
-  width: 80%;
+  width: 480px;
   border-radius: 20px;
-  height: 150px;
+  height: 120px;
+  color: white;
+  font-size: 50px;
+  padding-top: 23px;
 }
 
 .title-image > img {
