@@ -13,12 +13,27 @@ export class MenuService {
         menuId: menu.menuId,
         category: menu.category,
         name: menu.name,
-        introduce: menu.introduce,
         price: menu.price,
         createdAt: menu.createdAt,
         updatedAt: menu.updatedAt,
       };
     });
+  };
+
+  // 메뉴 상세 조회
+  findOneMenu = async () => {
+    const menu = await this.menuRepository.findOneMenu();
+    if (menu.length === 0) throw new Error("메뉴가 없어요");
+
+    return {
+      menuId: menu.menuId,
+      category: menu.category,
+      name: menu.name,
+      introduce: menu.introduce,
+      price: menu.price,
+      createdAt: menu.createdAt,
+      updatedAt: menu.updatedAt,
+    };
   };
 
   // 메뉴 등록
@@ -41,4 +56,7 @@ export class MenuService {
       updatedAt: createdMenu.updatedAt,
     };
   };
+
+  // 메뉴 수정
+  updateMenu = async;
 }

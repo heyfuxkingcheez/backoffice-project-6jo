@@ -5,13 +5,27 @@ export class MenuController {
   // 메뉴 목록 조회
   getMenus = async (req, res, next) => {
     try {
-      console.log("asd");
       const menus = await this.menuService.findAllMenus();
 
       return res.status(200).json({
         success: true,
         message: "메뉴 목록 조회 성공!",
         data: menus,
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  // 메뉴 상세 조회
+  getmenu = async (req, res, next) => {
+    try {
+      const menu = await this.menuService.findOneMenu();
+
+      return res.status(200).json({
+        success: true,
+        message: "메뉴 상세 조회 성공!",
+        data: menu,
       });
     } catch (err) {
       next(err);
