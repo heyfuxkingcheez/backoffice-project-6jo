@@ -1,15 +1,26 @@
 #회원가입
-
 ###
 POST http://localhost:3333/api/users/signup
 Content-Type: application/json
 
 {
-	"email": "example1@gmail.com",
+	"email": "example2@gmail.com",
 	"password": "aaaa1111",
 	"passwordConfirm": "aaaa1111",
-	"nickname": "이하늘",
+	"nickname": "김효진",
 	"address": "미주알고주알"
 }
+
+#로그인
+###
+
+POST http://localhost:3333/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "example1@gmail.com",
+  "password": "aaaa1111"
+}
+
 
 
