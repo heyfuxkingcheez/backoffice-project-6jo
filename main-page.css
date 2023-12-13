@@ -1,0 +1,104 @@
+.nav {
+  height: 130px;
+  background-color: #df5536;
+  position: relative;
+}
+
+#join {
+  background-color: white;
+  width: 80px;
+  height: 27px;
+
+  color: rgb(40, 39, 39);
+  border: none;
+  border-radius: 5px;
+
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+#cart {
+  background-color: white;
+  width: 27px;
+  height: 27px;
+  border: none;
+  border-radius: 5px;
+
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+#my-page {
+  background-color: white;
+  width: 27px;
+  height: 27px;
+  border: none;
+  border-radius: 5px;
+
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.main-image {
+  height: 300px;
+  background-color: antiquewhite;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.outer-wrqpper {
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-input {
+  text-align: center;
+  margin-bottom: 100px;
+  width: 400px;
+  height: 30px;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+
+.col-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.row-box {
+  width: 150px;
+  height: 150px;
+  margin: 15px;
+  border: 1px solid black;
+  border-radius: 15px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.category-name {
+  color: rgb(40, 39, 39);
+  margin-bottom: 10px;
+}
+
+.category-img {
+  background-color: bisque;
+  width: 90px;
+  height: 90px;
+}
