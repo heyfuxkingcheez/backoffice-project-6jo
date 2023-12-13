@@ -1,3 +1,7 @@
+import bcrypt from "bcrypt";
+import { PASSWORD_HASH_SALT_ROUNDS } from "";
+import { prisma } from "../utils/prisma/index.js";
+
 export class UsersRepository {
   createOne = async ({ email, password, nickname }) => {
     const hashedPassword = bcrypt.hashSync(password, PASSWORD_HASH_SALT_ROUNDS);
