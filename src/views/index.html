@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>임금님밥상</title>
-    <link rel="stylesheet" href="./main-page.css"" />
+    <link rel="stylesheet" href="./index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="./public/index.public.js"></script>
   </head>
   <body>
     <div class="nav1">
@@ -12,6 +14,7 @@
         <button id="cart"><img src="../image/cart.png" /></button>
         <button id="my-page"><img src="../image/user.png" /></button>
         <button id="join">회원가입</button>
+        <button id="login">로그인</button>
       </div>
     </div>
     <div class="nav2">
@@ -23,7 +26,9 @@
         type="text"
         placeholder="수라간 / 차림메뉴 검색"
       />
-      <div class="search-btn"><button><img src="../image/search.png"></button></div>
+      <div class="search-btn">
+        <button><img src="../image/search.png" /></button>
+      </div>
     </div>
     <div class="outer-wrqpper">
       <div class="col-box">
