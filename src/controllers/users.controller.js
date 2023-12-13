@@ -7,7 +7,7 @@ export class UsersController {
 
   signup = async (req, res, next) => {
     try {
-      const { email, password, passwordConfirm, nickname, address } = req.bady;
+      const { email, password, passwordConfirm, nickname, address } = req.body;
 
       if (!email) {
         return res.status(400).json({
