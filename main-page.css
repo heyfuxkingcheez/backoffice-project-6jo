@@ -98,7 +98,11 @@
 }
 
 .category-img {
-  background-color: bisque;
   width: 90px;
   height: 90px;
+}
+
+.category-img > img {
+  width: 95px;
+  height: 95px;
 }
