@@ -21,9 +21,9 @@ export class MenuService {
   };
 
   // 메뉴 상세 조회
-  findOneMenu = async () => {
-    const menu = await this.menuRepository.findOneMenu();
-    if (menu.length === 0) throw new Error("메뉴가 없어요");
+  findOneMenu = async (menuId) => {
+    const menu = await this.menuRepository.findOneMenu(menuId);
+    if (!menu) throw new Error("메뉴가 없어요");
 
     return {
       menuId: menu.menuId,
@@ -37,7 +37,7 @@ export class MenuService {
   };
 
   // 메뉴 등록
-  createMenu = async (category, RestaurantId, name, introduce, price) => {
+  createMenu = async (category, name, introduce, price) => {
     const createdMenu = await this.menuRepository.createMenu(
       category,
       RestaurantId,
@@ -58,5 +58,37 @@ export class MenuService {
   };
 
   // 메뉴 수정
-  updateMenu = async;
+  updateMenu = async (menuId, category, name, introduce, price) => {
+    const menu = await this.menuRepository.findOneMenu(menuId);
+    if (!menu) throw new Error("메뉴가 없어요");
+    // if (menu.RestaurantId !== RestaurantId) throw new Error("권한이 없습니다");
+    if (menuId) {
+      await this.menuRepository.updateMenu(
+        menuId,
+        category,
+        name,
+        introduce,
+        price
+      );
+      const updatedMenu = await this.menuRepository.findOneMenu(menuId);
+      return {
+        menuId: updatedMenu.menuId,
+        category: updatedMenu.category,
+        name: updatedMenu.name,
+        introduce: updatedMenu.introduce,
+        price: updatedMenu.price,
+        createdAt: updatedMenu.createdAt,
+        updatedAt: updatedMenu.updatedAt,
+      };
+    }
+  };
+
+  // 메뉴 삭제
+  deleteMenu = async (menuId) => {
+    const menu = await this.menuRepository.findOneMenu(menuId);
+    if (!menu) throw new Error("메뉴가 없어요");
+    // if(menu.RestaurantId !== RestaurantId) throw new Error("권한이 없습니다.")
+
+    await this.menuRepository.deleteMenu(menuId);
+  };
 }
