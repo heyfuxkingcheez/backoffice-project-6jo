@@ -15,9 +15,17 @@ restaurantsRouter.get(
   restaurantsController.findRestaurantById
 );
 
-// // 식당 수정 API
-// router.put("/:restaurantId", restaurantsController);
-// // 식당 삭제 API
-// router.delete("/:restaurantId", restaurantsController);
+// 식당 수정 API
+restaurantsRouter.put(
+  "/:restaurantId",
+  auth_middleware,
+  restaurantsController.updateRestaurant
+);
+
+// 식당 삭제 API
+restaurantsRouter.delete(
+  "/:restaurantId",
+  restaurantsController.deleteRestaurant
+);
 
 export { restaurantsRouter };
