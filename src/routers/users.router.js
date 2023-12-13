@@ -1,11 +1,9 @@
 import { Router } from "express";
-import { AuthController } from "../controllers/auth.controller.js";
+import { UsersController } from "../controllers/users.controller.js";
 
-const authRouter = Router();
-const authController = new AuthController();
+const usersRouter = Router();
+const usersController = new UsersController();
 
-authRouter.post("/signup", authController.signup); //회원가입
+usersRouter.post("/signup", usersController.signup); //회원가입
 
-authRouter.post("/signin", authController.signin); //로그인
-
-export { authRouter };
+export { usersRouter };

@@ -7,7 +7,8 @@ export class UsersController {
 
   signup = async (req, res, next) => {
     try {
-      const { email, password, passwordConfirm, nickname, address } = req.bady;
+      const { email, nickname, password, passwordConfirm, address } =
+        await req.body;
 
       if (!email) {
         return res.status(400).json({
@@ -54,12 +55,12 @@ export class UsersController {
         });
       }
 
-      const data = await this.usersService.signup({
+      const data = await this.usersService.signup(
         email,
         nickname,
         password,
-        address,
-      });
+        address
+      );
 
       return res.status(201).json({
         success: true,
