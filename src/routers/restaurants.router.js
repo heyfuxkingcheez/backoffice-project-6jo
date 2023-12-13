@@ -6,11 +6,7 @@ const restaurantsRouter = Router();
 const restaurantsController = new RestaurantsController();
 
 // 식당 등록 API
-restaurantsRouter.post(
-  "/",
-  auth_middleware,
-  restaurantsController.createRestaurant
-);
+restaurantsRouter.post("/", restaurantsController.createRestaurant);
 // 식당 목록 조회 API
 restaurantsRouter.get("/", restaurantsController.findAllRestaurants);
 // 식당 상세 조회 API

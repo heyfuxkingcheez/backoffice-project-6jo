@@ -20,9 +20,16 @@ export class RestaurantsController {
   // 식당 등록
   createRestaurant = async (req, res, next) => {
     try {
-      const userId = res.locals.user.userId;
-      const { category, name, address, introduce, businessHours, phoneNumber } =
-        await req.body;
+      // const userId = res.locals.user.userId;
+      const {
+        userId,
+        category,
+        name,
+        address,
+        introduce,
+        businessHours,
+        phoneNumber,
+      } = await req.body;
       console.log(req.body);
       const createdRestaurant = await this.restaurantsService.createRestaurant(
         userId,
