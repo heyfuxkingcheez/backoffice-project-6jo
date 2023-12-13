@@ -12,7 +12,7 @@ export class UsersService {
     this.usersRepository = new UsersRepository();
   }
 
-  signup = async (role, email, nickname, password) => {
+  signup = async (email, nickname, password) => {
     const existedUser = await this.usersRepository.readOneByEmail(email);
 
     if (existedUser) {
@@ -20,7 +20,6 @@ export class UsersService {
     }
 
     const newUser = await this.usersRepository.createOne(
-      role,
       email,
       nickname,
       password
