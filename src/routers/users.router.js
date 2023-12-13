@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { UserController } from "../controllers/users.controller.js";
+import { UsersController } from "../controllers/users.controller.js";
 
-const userRouter = Router();
-const userController = new UserController();
+const usersRouter = Router();
+const usersController = new UsersController();
 
-userRouter.post("/signup", userController.signup); //회원가입
+usersRouter.post("/signup", usersController.signup); //회원가입
 
-export { userRouter };
+export { usersRouter };

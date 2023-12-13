@@ -1,10 +1,9 @@
 import bcrypt from "bcrypt";
-import { PASSWORD_HASH_SALT_ROUNDS } from "";
 import { prisma } from "../utils/prisma/index.js";
 
 export class UsersRepository {
-  createOne = async ({ email, password, nickname }) => {
-    const hashedPassword = bcrypt.hashSync(password, PASSWORD_HASH_SALT_ROUNDS);
+  createOne = async (email, nickname, password) => {
+    const hashedPassword = bcrypt.hashSync(password, 12);
 
     const newUser = await prisma.users.create({
       data: { email, password: hashedPassword, nickname },

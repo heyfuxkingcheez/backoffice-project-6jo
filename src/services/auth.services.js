@@ -5,7 +5,7 @@ import { AuthRepository } from "../repositories/auth.repository.js";
 
 const tokenKey = process.env.TOKENKEY;
 
-export class AuthController {
+export class AuthService {
   authRepository = new AuthRepository();
 
   logIn = async (email, password) => {
