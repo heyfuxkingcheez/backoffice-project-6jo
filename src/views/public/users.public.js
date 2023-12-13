@@ -1,27 +1,48 @@
 console.log("어 그래 형이야");
 
-document.getElementById("submit").addEventListener("click", async function () {
-  try {
-    const email = document.getElementById("email").value;
-    const nickname = document.getElementById("nickname").value;
-    const password = document.getElementById("password").value;
-    const passwordConfirm = document.getElementById("passwordConfirm").value;
-    const role = document.getElementById("role").value;
+document
+  .getElementById("submit")
+  .addEventListener("submit", async function (event) {
+    event.preventDefault();
+    try {
+      const email = document.getElementById("email").value;
+      const nickname = document.getElementById("nickname").value;
+      const password = document.getElementById("password").value;
+      const passwordConfirm = document.getElementById("passwordConfirm").value;
+      const role = document.getElementById("role").value;
 
-    await axios.post("/api/users/signup", {
-      email: email,
-      nickname: nickname,
-      password: password,
-      passwordConfirm: passwordConfirm,
-      role: role,
-    });
-    alert("등록완료!");
+      await axios.post("/api/users/signup", {
+        email: email,
+        nickname: nickname,
+        password: password,
+        passwordConfirm: passwordConfirm,
+        role: Boolean(role),
+      });
+      alert("등록완료!");
 
-    console.log("나야", email);
-  } catch (error) {
-    console.error(error);
-  }
-});
+      console.log("나야", email);
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+document
+  .getElementById("auth-submit")
+  .addEventListener("click", async function () {
+    try {
+      const email = document.getElementById("email").value;
+
+      const result = await axios.post("/api/email-check", {
+        email,
+      });
+      //   A = result.data.authNumber;
+      const authNumber = prompt("인증번호 입력하셈");
+    } catch (error) {
+      console.error(error);
+    }
+  });
+let A;
+
 // axios.defaults.withCredentials = true;
 // document.querySelector("#users").addEventListener("submit", function (event) {
 //   event.preventDefault();

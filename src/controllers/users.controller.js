@@ -6,7 +6,6 @@ export class UsersController {
   }
 
   signup = async (req, res, next) => {
-    res.setHeader("Access-Control-Allow-origin", "*");
     try {
       const { email, nickname, password, passwordConfirm, role } =
         await req.body;
