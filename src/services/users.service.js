@@ -1,29 +1,30 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import {
-  JWT_ACCESS_TOKEN_SECRET,
-  JWT_ACCESS_TOKEN_EXPIRES_IN,
-} from "../constants/security.costant.js";
-import * as HttpStatus from "../errors/http-status.error.js";
+// import {
+//   JWT_ACCESS_TOKEN_SECRET,
+//   JWT_ACCESS_TOKEN_EXPIRES_IN,
+// } from "../constants/security.costant.js";
+// import * as HttpStatus from "../errors/http-status.error.js";
 import { UsersRepository } from "../repositories/users.repository.js";
 
-export class AuthService {
+export class UsersService {
   constructor() {
     this.usersRepository = new UsersRepository();
   }
 
-  signup = async ({ email, name, password }) => {
+  signup = async (role, email, nickname, password) => {
     const existedUser = await this.usersRepository.readOneByEmail(email);
 
     if (existedUser) {
       throw new HttpStatus.BadRequest("이미 가입 된 이메일입니다.");
     }
 
-    const newUser = await this.usersRepository.createOne({
+    const newUser = await this.usersRepository.createOne(
+      role,
       email,
-      password,
-      name,
-    });
+      nickname,
+      password
+    );
 
     return newUser;
   };

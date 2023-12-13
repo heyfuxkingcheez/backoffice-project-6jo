@@ -6,7 +6,7 @@ import { usersRouter } from "./users.router.js";
 
 const router = express.Router();
 
-router.use("/", usersRouter);
+router.use("/users", usersRouter);
 router.use("/auth", authRouter);
 router.use("/suragan", restaurantsRouter);
 router.use("/suragan/charimpyo", menusRouter);
