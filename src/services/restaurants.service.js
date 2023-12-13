@@ -34,16 +34,15 @@ export class RestaurantsService {
     businessHours,
     phoneNumber
   ) => {
-    const createdRestaurant =
-      await this.restaurantsRepository.createdRestaurant(
-        userId,
-        category,
-        name,
-        address,
-        introduce,
-        businessHours,
-        phoneNumber
-      );
+    const createdRestaurant = await this.restaurantsRepository.createRestaurant(
+      userId,
+      category,
+      name,
+      address,
+      introduce,
+      businessHours,
+      phoneNumber
+    );
 
     return {
       userId: createdRestaurant.UserId,

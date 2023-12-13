@@ -20,10 +20,11 @@ export class RestaurantsController {
   // 식당 등록
   createRestaurant = async (req, res, next) => {
     try {
-      const userId = req.user;
+      const userId = res.locals.user.userId;
       const { category, name, address, introduce, businessHours, phoneNumber } =
         await req.body;
-      const createRestaurant = await this.restaurantsService.createRestaurant(
+      console.log(req.body);
+      const createdRestaurant = await this.restaurantsService.createRestaurant(
         userId,
         category,
         name,
@@ -36,7 +37,7 @@ export class RestaurantsController {
       return res.status(200).json({
         success: true,
         message: "식당 등록 성공!",
-        data: createRestaurant,
+        data: createdRestaurant,
       });
     } catch (err) {
       next(err);

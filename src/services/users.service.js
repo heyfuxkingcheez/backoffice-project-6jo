@@ -28,22 +28,22 @@ export class UsersService {
     return newUser;
   };
 
-  signin = async ({ email, password }) => {
-    const user = await this.usersRepository.readOneByEmail(email);
-    const hashedPassword = user?.password ?? "";
+  // signin = async ({ email, password }) => {
+  //   const user = await this.usersRepository.readOneByEmail(email);
+  //   const hashedPassword = user?.password ?? "";
 
-    const isPasswordMatched = bcrypt.compareSync(password, hashedPassword);
+  //   const isPasswordMatched = bcrypt.compareSync(password, hashedPassword);
 
-    const isCorrectUser = user && isPasswordMatched;
+  //   const isCorrectUser = user && isPasswordMatched;
 
-    if (!isCorrectUser) {
-      throw new HttpStatus.Unauthorized("일치하는 인증 정보가 없습니다.");
-    }
+  //   if (!isCorrectUser) {
+  //     throw new HttpStatus.Unauthorized("일치하는 인증 정보가 없습니다.");
+  //   }
 
-    const accessToken = jwt.sign({ userId: user.id }, process.env.TOKENKEY, {
-      expiresIn: process.env.JWT_EXPIRE,
-    });
+  //   const accessToken = jwt.sign({ userId: user.id }, process.env.TOKENKEY, {
+  //     expiresIn: process.env.JWT_EXPIRE,
+  //   });
 
-    return accessToken;
-  };
+  //   return accessToken;
+  // };
 }
