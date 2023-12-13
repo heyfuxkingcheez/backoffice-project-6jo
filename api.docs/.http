@@ -15,7 +15,7 @@ Content-Type: application/json
 #로그인
 ###
 
-POST http://localhost:4000/api/auth/login
+POST http://localhost:3333/api/auth/login
 Content-Type: application/json
 
 {
@@ -25,22 +25,59 @@ Content-Type: application/json
 
 # 식당 등록
 ###
-POST http://localhost:4000/api/suragan
+POST http://localhost:3333/api/suragan
 Content-Type: application/json
 
 {
 	"category" :1,
-	"name":"호호요리",
-	"address":"장안동",
-	"introduce":"맛있어요",
+	"name":"도미노피자",
+	"address":"신림동",
+	"introduce":"레전드피자",
 	"businessHours":"9:00~19:00",
 	"phoneNumber":"010-2234-5566"
 }
 
 # 식당 조회
 ###
-GET http://localhost:4000/api/suragan
+GET http://localhost:3333/api/suragan
 Content-Type: application/json
+
+# 메뉴 목록 조회
+###
+GET http://localhost:3333/api/suragan/4/charimpyo
+
+# 메뉴 상세 조회
+###
+GET http://localhost:3333/api/suragan/4/charimpyo/5
+
+# 메뉴 등록
+###
+POST http://localhost:3333/api/suragan/4/charimpyo
+Content-Type: application/json
+
+{
+	"category": 1,
+	"name": "페퍼로니 피자",
+	"introduce": "존맛",
+	"price": 25000,
+	"image": "url"
+}
+
+# 메뉴 수정
+###
+PATCH http://localhost:3333/api/suragan/4/charimpyo/10
+Content-Type: application/json
+
+{
+	"name": "고구마 무스 피자"
+}
+
+# 메뉴 삭제
+###
+DELETE http://localhost:3333/api/suragan/4/charimpyo/10
+
+
+
 
 
 # 식당 상세 조회
