@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import crypto from "crypto";
+import bcrypt from "bcrypt";
 import "dotenv/config";
 import { AuthRepository } from "../repositories/auth.repository.js";
 
@@ -12,12 +12,13 @@ export class AuthService {
     if (!Object.keys({ email, password }).length) {
       throw new Error("데이터 형식이 올바르지 않습니다.");
     }
-    const user = await this.usersRepository.findExistUser(email);
-    const hashedPassword = crypto
-      .createHash("sha256")
-      .update(password)
-      .digest("hex");
-    if (!user || user.password !== hashedPassword) {
+
+    const user = await this.authRepository.findExistUser(email);
+    if (!user) {
+      throw new Error("이메일 또는 비밀번호가 다릅니다.");
+    }
+    const same = bcrypt.compareSync(password, user.password);
+    if (!same) {
       throw new Error("이메일 또는 비밀번호가 다릅니다.");
     }
 

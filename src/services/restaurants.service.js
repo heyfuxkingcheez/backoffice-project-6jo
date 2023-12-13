@@ -34,16 +34,15 @@ export class RestaurantsService {
     businessHours,
     phoneNumber
   ) => {
-    const createdRestaurant =
-      await this.restaurantsRepository.createdRestaurant(
-        userId,
-        category,
-        name,
-        address,
-        introduce,
-        businessHours,
-        phoneNumber
-      );
+    const createdRestaurant = await this.restaurantsRepository.createRestaurant(
+      userId,
+      category,
+      name,
+      address,
+      introduce,
+      businessHours,
+      phoneNumber
+    );
 
     return {
       userId: createdRestaurant.UserId,
@@ -63,5 +62,57 @@ export class RestaurantsService {
     );
 
     return restaurant;
+  };
+
+  // 식당 수정
+  updateRestaurant = async (
+    restaurantId,
+    userId,
+    category,
+    name,
+    address,
+    introduce,
+    businessHours,
+    phoneNumber
+  ) => {
+    const restaurant = await this.restaurantsRepository.findRestaurantById(
+      restaurantId
+    );
+    if (!restaurant) throw new Error("존재하는 식당이 아니에요! ");
+    if (restaurantId) {
+      await this.restaurantsRepository.updateRestaurant(
+        restaurantId,
+        category,
+        name,
+        address,
+        introduce,
+        businessHours,
+        phoneNumber
+      );
+      const updatedRestaurant =
+        await this.restaurantsRepository.findRestaurantById(restaurantId);
+      return {
+        restaurantId: updatedRestaurant.restaurantId,
+        userId: updatedRestaurant.userId,
+        category: updatedRestaurant.category,
+        name: updatedRestaurant.name,
+        address: updatedRestaurant.address,
+        introduce: updatedRestaurant.introduce,
+        businessHours: updatedRestaurant.businessHours,
+        phoneNumber: updatedRestaurant.phoneNumber,
+        createdAt: updatedRestaurant.createdAt,
+        updatedAt: updatedRestaurant.updatedAt,
+      };
+    }
+  };
+
+  // 식당 삭제
+  deleteRestaurant = async (restaurantId) => {
+    const restaurant = await this.restaurantsRepository.findRestaurantById(
+      restaurantId
+    );
+    if (!restaurant) throw new Error("존재하는 식당이 아니에요!");
+
+    await this.restaurantsRepository.deleteRestaurant(restaurantId);
   };
 }

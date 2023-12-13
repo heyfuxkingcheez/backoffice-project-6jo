@@ -9,6 +9,6 @@ const router = express.Router();
 router.use("/users", usersRouter);
 router.use("/auth", authRouter);
 router.use("/suragan", restaurantsRouter);
-router.use("/suragan/charimpyo", menusRouter);
+router.use("/suragan", menusRouter);
 
 export default router;

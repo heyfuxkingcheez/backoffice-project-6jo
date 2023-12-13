@@ -20,18 +20,41 @@ export class MenuRepository {
   };
 
   // 메뉴 등록
-  createMenu = async (category, RestaurantId, name, introduce, price) => {
+
+  createMenu = async (
+    category,
+    restaurantId,
+    name,
+    introduce,
+    price,
+    image
+  ) => {
     const createdMenu = await prisma.menu.create({
       data: {
         category,
-        RestaurantId,
+        RestaurantId: +restaurantId,
         name,
         introduce,
         price,
+        image,
       },
     });
 
     return createdMenu;
+  };
+
+  // 메뉴가 사용자의 사업장인지 인증
+  findOwnerRestaurant = async (userId) => {
+    const isOwner = await prisma.users.findUnique({
+      where: { userId },
+      include: {
+        Restaurants: {
+          select: { restaurantId: true },
+        },
+      },
+    });
+
+    return isOwner;
   };
 
   // 메뉴 수정
