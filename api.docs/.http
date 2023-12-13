@@ -1,14 +1,15 @@
 #회원가입
 ###
+
 POST http://localhost:4000/api/users/signup
 Content-Type: application/json
 
 {
-	"email": "example2@gmail.com",
+	"email": "example4@gmail.com",
+	"nickname": "김효진3",
 	"password": "aaaa1111",
 	"passwordConfirm": "aaaa1111",
-	"nickname": "김효진3",
-	"role" : "false"
+	"role": true
 }
 
 #로그인
@@ -42,4 +43,27 @@ GET http://localhost:4000/api/suragan
 Content-Type: application/json
 
 
+# 식당 상세 조회
+###
+GET http://localhost:4000/api/suragan/1
+Content-Type: application/json
 
+
+# 식당 수정
+###
+PUT http://localhost:4000/api/suragan/9
+Content-Type: application/json
+
+{
+	"category" :2,
+	"name":"호호요리",
+	"address":"장안동",
+	"introduce":"맛있어요",
+	"businessHours":"9:00~19:00",
+	"phoneNumber":"010-2234-5566"
+}
+
+# 식당 삭제
+###
+DELETE  http://localhost:4000/api/suragan/9
+Content-Type: application/json
