@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { RestaurantsController } from "../controllers/restaurants.controller";
+import { RestaurantsController } from "../controllers/restaurants.controller.js";
 
 const restaurantsRouter = Router();
 const restaurantsController = new RestaurantsController();
@@ -9,8 +9,10 @@ restaurantsRouter.post("/", restaurantsController.findAllRestaurants);
 // 식당 목록 조회 API
 restaurantsRouter.get("/", restaurantsController.createRestaurant);
 // 식당 상세 조회 API
-restaurantsRouter.get("/:restaurantId", restaurantsController.findRestaurantById);
-
+restaurantsRouter.get(
+  "/:restaurantId",
+  restaurantsController.findRestaurantById
+);
 
 // // 식당 수정 API
 // router.put("/:restaurantId", restaurantsController);
