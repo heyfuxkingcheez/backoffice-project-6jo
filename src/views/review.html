@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>수라간 리스트</title>
+  <link rel="stylesheet" href="./review.css" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script defer src="./public/restaurant.list.public.js"></script>
+</head>
+
+<body>
+
+        <div class="nav1">
+          <div class="btn-box">
+            <button id="cart"><img src="../image/cart.png" /></button>
+            <button id="my-page"><img src="../image/user.png" /></button>
+            <button id="join">회원가입</button>
+          </div>
+        </div>
+        <div class="nav2" id="gohome">
+          <div class="logo-image"><img src="../image/logo.png" /></div>
+        </div>
+
+        <div class="container">
+        <div class="header-tab-container">
+            <!-- 제목과 사진이 들어가는 박스 -->
+            <div class="header-box">
+              <!-- 왼쪽 박스 -->
+              <div class="header-left">
+                <div class="header-title">이거슨 업체명</div>
+                <img src="./image/kingdragon.jpg" class="header-image" />
+              </div>
+      
+              <!-- 오른쪽 박스 -->
+              <div class="header-right">
+                <!-- 오른쪽 박스의 내용을 추가하세요 -->
+                <div class="header-title">여긴 작은 리뷰여</div>
+                <img src="./image/riviewdpdb.png" class="header-image"/>
+              </div>
+            </div>
+        </div>
+          <!-- 탭박스 -->
+          <div class="tab-box">
+            <div class="tabs">
+              <!-- 탭 버튼들 -->
+              <div class="tab" id="detailTab">상세페이지</div>
+              <div class="tab" id="reviewTab">리뷰</div>
+              <div class="tab" id="infoTab">정보</div>
+            </div>
+    
+            <!-- 탭 내용들 -->
+            <div class="tab-content" id="detailContent">
+              <!-- 상세페이지 내용 -->
+              <h2>상세페이지 내용</h2>
+              <p>여긴 내시부 정6품 상세들만 작성할수 있는 페이지 입니다만?</p>
+            </div>
+    
+            <div class="tab-content" id="reviewContent">
+              <!-- 리뷰 내용 -->
+              <h2>리뷰 내용</h2>
+              <p>팀과제 6조판서 느낀점 : 제가 더 열심히 하겠습니드아!!!!!</p>
+            </div>
+    
+            <div class="tab-content" id="infoContent">
+              <!-- 정보 내용 -->
+              <h2>정보 내용</h2>
+              <p>레몬 한개에는 레몬 한개분량의 비타민C 가 들어있다는 사실! 알고계셨나요?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  <script>
+    // JavaScript to handle tab switching
+    document.addEventListener("DOMContentLoaded", function () {
+      const tabs = document.querySelectorAll('.tab');
+      const tabContents = document.querySelectorAll('.tab-content');
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active-tab'));
+          tabContents.forEach(content => {
+            content.classList.remove('active-tab');
+          });
+
+          tab.classList.add('active-tab');
+          tabContents[index].classList.add('active-tab');
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
