@@ -47,6 +47,30 @@ export class RestaurantsService {
     });
   };
 
+  // 오너 - 식당 상세 조회
+
+  findRestaurantByUserId = async (userId) => {
+    const restaurants = await this.restaurantsRepository.findRestaurantByUserId(
+      userId
+    );
+    if (restaurants.length === 0) throw new Error("조회되는 식당이 없어요");
+
+    return restaurants.map((restaurant) => {
+      return {
+        restaurantId: restaurant.restaurantId,
+        userId: restaurant.UserId,
+        category: restaurant.category,
+        name: restaurant.name,
+        address: restaurant.address,
+        introduce: restaurant.introduce,
+        businessHours: restaurant.businessHours,
+        phoneNumber: restaurant.phoneNumber,
+        // createdAt: restaurant.createdAt,
+        // updatedAt: restaurant.updatedAt,
+      };
+    });
+  };
+
   // 식당 등록
   createRestaurant = async (
     userId,

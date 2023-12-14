@@ -18,11 +18,13 @@ export class RestaurantsController {
   //   }
   // };
 
-    // 식당 목록 조회
+  // 식당 목록 조회
   findAllRestaurants = async (req, res, next) => {
     try {
-      const category = req.query.category
-      const restaurants = await this.restaurantsService.findAllRestaurants(category);
+      const category = req.query.category;
+      const restaurants = await this.restaurantsService.findAllRestaurants(
+        category
+      );
 
       return res.status(200).json({
         success: true,
@@ -34,18 +36,31 @@ export class RestaurantsController {
     }
   };
 
+  // 오너 - 식당 상세 조회 API
+  findRestaurantByUserId = async (req, res, next) => {
+    try {
+      // 조회할 식당 아이디
+      // const userId = req.query.UserId;
+      const userId = res.locals.user.userId;
+      console.log(userId);
+      const restaurant = await this.restaurantsService.findRestaurantByUserId(
+        userId
+      );
+      res.status(200).json({
+        Message: `${userId}번 유저의 식당 조회 완료`,
+        data: restaurant,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
   // 식당 등록
   createRestaurant = async (req, res, next) => {
     try {
       const userId = res.locals.user.userId;
-      const {
-        category,
-        name,
-        address,
-        introduce,
-        businessHours,
-        phoneNumber,
-      } = await req.body;
+      const { category, name, address, introduce, businessHours, phoneNumber } =
+        await req.body;
       console.log(req.body);
       const createdRestaurant = await this.restaurantsService.createRestaurant(
         userId,
@@ -116,7 +131,7 @@ export class RestaurantsController {
     try {
       const { restaurantId } = req.params;
       const userId = res.locals.user.userId;
-      await this.restaurantsService.deleteRestaurant(restaurantId,userId);
+      await this.restaurantsService.deleteRestaurant(restaurantId, userId);
 
       return res.status(200).json({
         success: true,

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>임금님밥상</title>
     <link rel="stylesheet" href="./mypage-owner.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="./public/mypage-owner.public.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -26,71 +28,84 @@
       <div class="middle">
         <div class="middle-left">
           <div class="middle-left-1">
-            <div>
-              <h2>업체 이름</h2>
-              <form class="restaurant-info">
-                <div class="info-1">
-                  <span>업체시간</span>
-                  <input type="text" placeholder="12:00 ~ 13:00" />
-                  <button>수정</button>
-                </div>
-                <div class="info-2">
-                  <span>전화번호</span>
-                  <input type="tel" placeholder="113401203" />
-                  <button>수정</button>
-                </div>
-                <div class="info-3">
-                  <span>주소</span>
-                  <input
-                    type="text"
-                    placeholder="서울특별시 관악구 신림동 150"
-                  />
-                  <button>수정</button>
-                </div>
-              </form>
-            </div>
-            <div>
-              <h2>배달 상태</h2>
-              <div></div>
-              <div></div>
-            </div>
+            <div class="restaurant-info"">
+            <h2>수라간 정보</h2>
+
+            <select
+              id="category"
+              class="w-1/2 h-10 p-2 border border-gray-300 rounded-md"
+              name="category"
+            >
+              <option selected disabled>업종</option>
+              <option value="1">1인분</option>
+              <option value="2">치킨</option>
+              <option value="3">중국집</option>
+              <option value="4">한식</option>
+              <option value="5">피자 / 양식</option>
+              <option value="6">야식</option>
+              <option value="7">일식 / 돈까스</option>
+              <option value="8">족발 / 보쌈</option>
+              <option value="9">카페 / 디저트</option>
+              <option value="10">편의점 / 마트</option>
+              <option value="11">패스트푸드</option>
+              <!-- 필요한 만큼 옵션을 추가할 수 있습니다 -->
+            </select>
+
+            <input id="name" type="text" />
+
+            <input id="address" type="text" />
+
+            <input id="introduce" type="text" />
+
+            <input id="businessHours" type="text" />
+
+            <input id="phoneNumber" type="tel" />
+            <button id="restaurant-update-btn">수정</button>
           </div>
+
+          <div class="delivery">
+            <h2>배달 상태</h2>
+            <div></div>
+            <div></div>
+          </div>
+
           <div class="middle-left-2">
-            <h2>차림표 정보</h2>
-            <form action="">
-              <div class="menu-info">
-                <div>
-                  <span>1</span>
-                  <input type="text" placeholder="메뉴 이름" />
-                  <input type="text" placeholder="가격" />
-                  <select name="상태" id="123"></select>
-                  <select name="카테고리" id="123ㄴ"></select>
-                  <button>수정</button>
-                  <button>삭제</button>
-                </div>
-                <div></div>
-                <div></div>
+            <h2 style="margin-bottom: 30px; margin-top: 30px">차림표 정보</h2>
+
+            <div class="menu-info">
+              <select name="카테고리" id="menu-category">
+                <option selected disabled>메뉴 카테고리</option>
+                <option value="1">메인메뉴</option>
+                <option value="2">사이드메뉴</option>
+                <option value="3">음료</option>
+                <option value="4">기타</option>
+              </select>
+              <input type="text" id="name" placeholder="메뉴 이름" />
+              <input type="text" id="price" placeholder="가격" />
+              <input type="text" id="introduce" placeholder="메뉴 설명" />
+              <div class="btns">
+                <button>수정</button>
+                <button>삭제</button>
               </div>
-            </form>
+            </div>
           </div>
         </div>
 
         <div class="middle-right">
           <div class="middle-right-1">
-            <h2>차림표 등록</h2>
-            <form action="">
-              <input type="text" placeholder="이미지url" />
-              <input type="text" placeholder="메뉴 이름" />
-              <input type="text" placeholder="가격" />
-              <input type="text" placeholder="카테고리" />
-              <input type="text" placeholder="메뉴 설명" />
-              <button type="submit">등록</button>
-            </form>
+            <h2 style="margin-top: 30px">차림표 등록</h2>
+            <input type="text" id="create-img" placeholder="이미지url" />
+            <input type="text" id="create-name" placeholder="메뉴 이름" />
+            <input type="text" id="create-price" placeholder="가격" />
+            <input type="text" id="create-category" placeholder="카테고리" />
+            <input type="text" id="create-introduce" placeholder="메뉴 설명" />
+            <div class="create-btn">
+              <button type="button" id="create-btn">등록</button>
+            </div>
           </div>
           <div class="middle-right-2">
-            <span>예정</span>
+            <button id="restaurant-delete-btn">수라간 등록 취소</button>
           </div>
-          <!-- <div class="middle-right-3"> <span>RIGHT3 (380 x 170) <br /> #99E000;</span> </div> -->
         </div>
       </div>
     </div>
