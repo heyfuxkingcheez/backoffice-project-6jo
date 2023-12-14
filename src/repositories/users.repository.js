@@ -6,7 +6,13 @@ export class UsersRepository {
     const hashedPassword = bcrypt.hashSync(password, 12);
 
     const newUser = await prisma.users.create({
-      data: { email, password: hashedPassword, nickname, role },
+      data: {
+        email,
+        password: hashedPassword,
+        nickname,
+        role,
+        points: { create: { income: 0, expense: 0 } },
+      },
     });
 
     delete newUser.password;

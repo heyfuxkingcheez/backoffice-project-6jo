@@ -24,14 +24,18 @@ export class OrderService {
       orderDetails,
       totalPrice
     );
-    const updatedPoint = await this.orderRepository.updatePoint(userId);
+    const createdPoint = await this.orderRepository.createPoint(
+      userId,
+      totalPrice,
+      point.pointId
+    );
 
     return {
       userId: createdOrder.userId,
       MenuId: createdOrder.MenuId,
       orderDetails: createdOrder.orderDetails,
       totalPrice: createdOrder.totalPrice,
-      balance: updatedPoint.balance,
+      balance: createdPoint.balance,
     };
   };
 }
