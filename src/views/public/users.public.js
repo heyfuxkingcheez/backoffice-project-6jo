@@ -9,7 +9,7 @@ document
       const nickname = document.getElementById("nickname").value;
       const password = document.getElementById("password").value;
       const passwordConfirm = document.getElementById("passwordConfirm").value;
-      const role = document.getElementById("role").value;
+      const role = false;
 
       await axios.post("/api/users/signup", {
         email: email,

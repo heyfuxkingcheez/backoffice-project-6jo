@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>임금님밥상</title>
-    <link rel="stylesheet" href="./payment.css" />
+    <link rel="stylesheet" href="./cart.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script defer src=""></script>
   </head>
@@ -35,7 +35,7 @@
       <p>총 가격: <span id="total-price">Orders.totalPrice</span>원</p>
       <button id="checkout-btn">결제하기</button>
     </div>
-    <script>
+    <script> //예시용 스크립트
       // 샘플 장바구니 데이터 
       const cartItems = [
         { id: 1, name: "예시 1", price: 10000, quantity: 2, image: "product1.jpg" },
@@ -78,11 +78,6 @@
 
       renderCart();
 
-      // 결제 버튼 클릭 이벤트 처리 (실제 결제 로직으로 교체하세요)
-      const checkoutBtn = document.getElementById('checkout-btn');
-      checkoutBtn.addEventListener('click', () => {
-        alert('여기에 실제 결제 로직을 구현하세요!');
-      });
     </script>
 
   </body>
