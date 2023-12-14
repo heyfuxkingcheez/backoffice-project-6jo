@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>임금님밥상</title>
+    <link rel="stylesheet" href="./mypage-owner.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="nav1">
+      <div class="btn-box">
+        <button id="cart"><img src="./image/cart.png" /></button>
+        <button id="my-page"><img src="./image/user.png" /></button>
+        <button id="logout">로그아웃</button>
+      </div>
+    </div>
+    <div class="nav2">
+      <div class="logo-image"><img src="./image/logo.png" /></div>
+    </div>
+    <div class="container">
+      <div class="middle">
+        <div class="middle-left">
+          <div class="middle-left-1">
+            <div>
+              <h2>업체 이름</h2>
+              <form class="restaurant-info">
+                <div class="info-1">
+                  <span>업체시간</span>
+                  <input type="text" placeholder="12:00 ~ 13:00" />
+                  <button>수정</button>
+                </div>
+                <div class="info-2">
+                  <span>전화번호</span>
+                  <input type="tel" placeholder="113401203" />
+                  <button>수정</button>
+                </div>
+                <div class="info-3">
+                  <span>주소</span>
+                  <input
+                    type="text"
+                    placeholder="서울특별시 관악구 신림동 150"
+                  />
+                  <button>수정</button>
+                </div>
+              </form>
+            </div>
+            <div>
+              <h2>배달 상태</h2>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+          <div class="middle-left-2">
+            <h2>차림표 정보</h2>
+            <form action="">
+              <div class="menu-info">
+                <div>
+                  <span>1</span>
+                  <input type="text" placeholder="메뉴 이름" />
+                  <input type="text" placeholder="가격" />
+                  <select name="상태" id="123"></select>
+                  <select name="카테고리" id="123ㄴ"></select>
+                  <button>수정</button>
+                  <button>삭제</button>
+                </div>
+                <div></div>
+                <div></div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="middle-right">
+          <div class="middle-right-1">
+            <h2>차림표 등록</h2>
+            <form action="">
+              <input type="text" placeholder="이미지url" />
+              <input type="text" placeholder="메뉴 이름" />
+              <input type="text" placeholder="가격" />
+              <input type="text" placeholder="카테고리" />
+              <input type="text" placeholder="메뉴 설명" />
+              <button type="submit">등록</button>
+            </form>
+          </div>
+          <div class="middle-right-2">
+            <span>예정</span>
+          </div>
+          <!-- <div class="middle-right-3"> <span>RIGHT3 (380 x 170) <br /> #99E000;</span> </div> -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
