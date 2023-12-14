@@ -1,13 +1,31 @@
 import { prisma } from "../utils/prisma/index.js";
 
 export class RestaurantsRepository {
-  // 식당 목록 조회
-  findAllRestaurants = async () => {
+  // // 식당 목록 조회
+  // findAllRestaurants = async () => {
+  //   const restaurants = await prisma.restaurants.findMany({
+  //     orderBy: { createdAt: "desc" },
+  //   });
+
+  //   return restaurants;
+  // };
+  // 카테고리별 식당 목록 조회
+  findAllRestaurants = async (category) => {
     const restaurants = await prisma.restaurants.findMany({
+      where: { category: +category },
       orderBy: { createdAt: "desc" },
     });
 
     return restaurants;
+  };
+
+  // 오너 - 식당 상세 조회
+
+  findRestaurantByUserId = async (userId) => {
+    const restaurant = await prisma.restaurants.findMany({
+      where: { UserId: +userId },
+    });
+    return restaurant;
   };
 
   // 식당 등록
