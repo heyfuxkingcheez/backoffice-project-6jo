@@ -35,14 +35,13 @@ export class RestaurantsService {
       return {
         restaurantId: restaurant.restaurantId,
         userId: restaurant.UserId,
+        image:restaurant.image,
         category: restaurant.category,
         name: restaurant.name,
         address: restaurant.address,
         introduce: restaurant.introduce,
         businessHours: restaurant.businessHours,
         phoneNumber: restaurant.phoneNumber,
-        // createdAt: restaurant.createdAt,
-        // updatedAt: restaurant.updatedAt,
       };
     });
   };
@@ -59,6 +58,7 @@ export class RestaurantsService {
       return {
         restaurantId: restaurant.restaurantId,
         userId: restaurant.UserId,
+        image:restaurant.image,
         category: restaurant.category,
         name: restaurant.name,
         address: restaurant.address,
@@ -74,6 +74,7 @@ export class RestaurantsService {
   // 식당 등록
   createRestaurant = async (
     userId,
+    image,
     category,
     name,
     address,
@@ -83,6 +84,7 @@ export class RestaurantsService {
   ) => {
     const createdRestaurant = await this.restaurantsRepository.createRestaurant(
       userId,
+      image,
       category,
       name,
       address,
@@ -93,6 +95,7 @@ export class RestaurantsService {
 
     return {
       userId: createdRestaurant.UserId,
+      image:createdRestaurant.image,
       category: createdRestaurant.category,
       name: createdRestaurant.name,
       address: createdRestaurant.address,
@@ -115,6 +118,7 @@ export class RestaurantsService {
   updateRestaurant = async (
     restaurantId,
     userId,
+    image,
     category,
     name,
     address,
@@ -131,6 +135,7 @@ export class RestaurantsService {
     if (restaurantId) {
       await this.restaurantsRepository.updateRestaurant(
         restaurantId,
+        image,
         category,
         name,
         address,
@@ -143,6 +148,7 @@ export class RestaurantsService {
       return {
         restaurantId: updatedRestaurant.restaurantId,
         userId: updatedRestaurant.userId,
+        image: updatedRestaurant.image,
         category: updatedRestaurant.category,
         name: updatedRestaurant.name,
         address: updatedRestaurant.address,
