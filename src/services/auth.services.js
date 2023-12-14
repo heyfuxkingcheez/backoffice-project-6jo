@@ -8,7 +8,6 @@ const tokenKey = process.env.TOKENKEY;
 export class AuthService {
   authRepository = new AuthRepository();
 
-  // 로그인
   logIn = async (email, password) => {
     if (!Object.keys({ email, password }).length) {
       throw new Error("데이터 형식이 올바르지 않습니다.");
