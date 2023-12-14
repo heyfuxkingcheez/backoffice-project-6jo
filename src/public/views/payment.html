@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>임금님밥상</title>
+    <link rel="stylesheet" href="./payment.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src=""></script>
+  </head>
+  <body>
+    <div class="nav1">
+      <div class="btn-box">
+        <button id="cart"><img src="../views/" /></button>
+        <button id="my-page"><img src="./image/user.png" /></button>
+        <button id="join">회원가입</button>
+        <button id="login">로그인</button>
+      </div>
+    </div>
+    <div class="nav2">
+      <div class="logo-image"><img src="./image/logo.png" /></div>
+    </div>
+
+    <div class="cart-container">
+      <h2>장바구니</h2>
+      <div id="cart-items">
+        <div class="cart-item">
+          <img src="메뉴의 아이디를 참조해서 메뉴에 조인한 사진" alt="상품 1">
+          <div class="item-info">
+          <p>상품 1 (수량: 1)</p>
+          <p>가격: 10000원</p>
+        </div>
+      </div>
+    </div>
+      <p>총 가격: <span id="total-price">Orders.totalPrice</span>원</p>
+      <button id="checkout-btn">결제하기</button>
+    </div>
+    <script>
+      // 샘플 장바구니 데이터 
+      const cartItems = [
+        { id: 1, name: "예시 1", price: 10000, quantity: 2, image: "product1.jpg" },
+        { id: 2, name: "예시 2", price: 15000, quantity: 1, image: "product2.jpg" },
+        // 필요에 따라 더 많은 상품을 추가하세요
+      ];
+
+      const cartContainer = document.querySelector('.cart-container');
+      const cartItemsContainer = document.getElementById('cart-items');
+      const totalPriceElement = document.getElementById('total-price');
+
+      // 장바구니 아이템을 렌더링하는 함수
+      function renderCart() {
+        cartItemsContainer.innerHTML = '';
+        let totalPrice = 0;
+
+        cartItems.forEach(item => {
+          const itemBlock = document.createElement('div');
+          itemBlock.className = 'cart-item';
+
+          const itemImage = document.createElement('img');
+          itemImage.src = item.image;
+          itemImage.alt = item.name;
+          itemBlock.appendChild(itemImage);
+
+          const itemInfo = document.createElement('div');
+          itemInfo.className = 'item-info';
+          itemInfo.innerHTML = `
+            <p>${item.name} (수량: ${item.quantity})</p>
+            <p>가격: ${item.price * item.quantity}원</p>
+          `;
+          itemBlock.appendChild(itemInfo);
+
+          cartItemsContainer.appendChild(itemBlock);
+          totalPrice += item.price * item.quantity;
+        });
+
+        totalPriceElement.textContent = totalPrice;
+      }
+
+      renderCart();
+
+      // 결제 버튼 클릭 이벤트 처리 (실제 결제 로직으로 교체하세요)
+      const checkoutBtn = document.getElementById('checkout-btn');
+      checkoutBtn.addEventListener('click', () => {
+        alert('여기에 실제 결제 로직을 구현하세요!');
+      });
+    </script>
+
+  </body>
+</html>
