@@ -5,6 +5,7 @@ export class OrderController {
   // 잔고 확인
   checkPoint = async (req, res, next) => {
     const { userId } = res.locals.user;
+    console.log("userId: ", userId);
     await this.orderService.checkPoint(userId);
   };
 
