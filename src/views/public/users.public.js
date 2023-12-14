@@ -15,7 +15,7 @@ document
         nickname: nickname,
         password: password,
         passwordConfirm: passwordConfirm,
-        role: true,
+        role: false,
       });
       alert("등록완료!");
     } catch (error) {

@@ -132,3 +132,45 @@ button > img {
   height: 100%;
   border-radius: 15px;
 }
+
+.main-box {
+  width: 1200px;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.restaurant-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 45%;
+  height: 200px;
+  margin-bottom: 50px;
+  box-sizing: border-box;
+  border: 1px solid #353434;
+  border-radius: 15px;
+}
+.restaurant-img {
+  width: 30%;
+  margin-left: 20px;
+  margin-right: 40px;
+}
+
+.introduce {
+  width: 60%;
+}
+.restaurant-img > img {
+  width: 100%;
+
+  border: 1px solid #353434;
+  border-radius: 15px;
+}

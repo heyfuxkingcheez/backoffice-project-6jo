@@ -24,15 +24,7 @@ for (let i = 0; i < elements.length; i++) {
 
 // 서버로부터 데이터를 로드하는 함수
 async function loadRestaurants(category) {
-  await axios
-    .get(`/api/suragan?category=${category}`)
-    .then((response) => {
-      const restaurants = response.data.data[0];
-      // 상세페이지로 이동하면서 데이터도 함께 전달
-      const queryString = `?category=${category}&data=${JSON.stringify(
-        restaurants
-      )}`;
-      window.location.href = `restaurants-list.html${queryString}`;
-    })
-    .catch((error) => console.error("Error fetching posts", error));
+  // 해당 카테고리 페이지로 이동하면서 데이터도 함께 전달
+  const queryString = `?category=${category}`;
+  window.location.href = `restaurants-list.html${queryString}`;
 }

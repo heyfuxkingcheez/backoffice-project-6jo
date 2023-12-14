@@ -6,8 +6,7 @@
     <title>수라간 리스트</title>
     <link rel="stylesheet" href="./restaurants-list.css"" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <!-- <script defer src="./public/restaurant.public.js"></script> -->
-    <script defer src="./public/index.public.js"></script>
+    <script defer src="./public/restaurant.list.public.js"></script>
   </head>
   <body>
     <div class="nav1">
@@ -17,7 +16,7 @@
         <button id="join">회원가입</button>
       </div>
     </div>
-    <div class="nav2">
+    <div class="nav2" id="gohome">
       <div class="logo-image"><img src="../image/logo.png" /></div>
     </div>
     <div class="main-image">
@@ -31,23 +30,33 @@
       </div>
     </div>
     <div class="category-list">
-      <div class="category"><button>전체보기</button></div>
-      <div class="category"><button>1인분</button></div>
-      <div class="category"><button>치킨</button></div>
-      <div class="category"><button>중국집</button></div>
-      <div class="category"><button>한식</button></div>
-      <div class="category"><button>피자 / 양식</button></div>
-      <div class="category"><button>야식</button></div>
-      <div class="category"><button>일식 / 돈까스</button></div>
-      <div class="category"><button>족발 / 보쌈</button></div>
-      <div class="category"><button>카페 / 디저트</button></div>
-      <div class="category"><button>편의점 / 마트</button></div>
-      <div class="category"><button>패스트푸드</button></div>
+      <div class="category" data-categories="all">
+        <button>전체보기</button>
+      </div>
+      <div class="category" data-categories="1"><button>1인분</button></div>
+      <div class="category" data-categories="2"><button>치킨</button></div>
+      <div class="category" data-categories="3"><button>중국집</button></div>
+      <div class="category" data-categories="4"><button>한식</button></div>
+      <div class="category" data-categories="5">
+        <button>피자 / 양식</button>
+      </div>
+      <div class="category" data-categories="6"><button>야식</button></div>
+      <div class="category" data-categories="7">
+        <button>일식 / 돈까스</button>
+      </div>
+      <div class="category" data-categories="8">
+        <button>족발 / 보쌈</button>
+      </div>
+      <div class="category" data-categories="9">
+        <button>카페 / 디저트</button>
+      </div>
+      <div class="category" data-categories="10">
+        <button>편의점 / 마트</button>
+      </div>
+      <div class="category" data-categories="11">
+        <button>패스트푸드</button>
+      </div>
     </div>
-
-    <script>
-      const receivedData = location.href.split("?");
-      console.log(JSON.stringify(receivedData));
-    </script>
+    <div id="restaurants-list" class="main-box"></div>
   </body>
 </html>
