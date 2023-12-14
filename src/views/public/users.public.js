@@ -9,14 +9,13 @@ document
       const nickname = document.getElementById("nickname").value;
       const password = document.getElementById("password").value;
       const passwordConfirm = document.getElementById("passwordConfirm").value;
-      const role = document.getElementById("role").value;
 
       await axios.post("/api/users/signup", {
         email: email,
         nickname: nickname,
         password: password,
         passwordConfirm: passwordConfirm,
-        role: Boolean(role),
+        role: false,
       });
       alert("등록완료!");
     } catch (error) {

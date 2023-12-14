@@ -9,7 +9,6 @@ document.getElementById("submit").addEventListener("click", async function () {
     const phoneNumber = document.getElementById("phoneNumber").value;
 
     createRestaurant = await axios.post("/api/suragan", {
-      userId: 1,
       category: Number(category),
       name,
       address,
@@ -17,9 +16,9 @@ document.getElementById("submit").addEventListener("click", async function () {
       businessHours,
       phoneNumber,
     });
-
     console.log(createRestaurant);
     alert("등록 완료!");
+    window.location.href = "index.html";
   } catch (error) {
     console.error("Error fetching post:", error.message);
   }
