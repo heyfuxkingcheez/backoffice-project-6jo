@@ -12,8 +12,15 @@ restaurantsRouter.post(
   restaurantsController.createRestaurant
 );
 
-// 식당 목록 조회 API
+// 식당 목록  카테고리별 조회 API
 restaurantsRouter.get("/", restaurantsController.findAllRestaurants);
+
+// 오너 - 식당 조회 API
+restaurantsRouter.get(
+  "/owner",
+  auth_middleware,
+  restaurantsController.findRestaurantByUserId
+);
 
 // 식당 상세 조회 API
 restaurantsRouter.get(

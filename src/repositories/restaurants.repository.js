@@ -19,6 +19,15 @@ export class RestaurantsRepository {
     return restaurants;
   };
 
+  // 오너 - 식당 상세 조회
+
+  findRestaurantByUserId = async (userId) => {
+    const restaurant = await prisma.restaurants.findMany({
+      where: { UserId: +userId },
+    });
+    return restaurant;
+  };
+
   // 식당 등록
   createRestaurant = async (
     userId,
