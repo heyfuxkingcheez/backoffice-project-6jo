@@ -4,6 +4,7 @@ async function getOwnerInfo() {
     const result = await axios.get(`/api/suragan/owner`);
     const restaurant = result.data.data[0];
 
+    document.getElementById("image").value = restaurant.image;
     document.getElementById("category").value = restaurant.category;
     document.getElementById("name").value = restaurant.name;
     document.getElementById("address").value = restaurant.address;
@@ -15,6 +16,7 @@ async function getOwnerInfo() {
       .getElementById("restaurant-update-btn")
       .addEventListener("click", async function () {
         const restaurantId = restaurant.restaurantId;
+        const image = document.getElementById("image").value;
         const category = document.getElementById("category").value;
         const name = document.getElementById("name").value;
         const address = document.getElementById("address").value;
@@ -25,6 +27,7 @@ async function getOwnerInfo() {
         const updateRestaurant = await axios.put(
           `/api/suragan/${restaurantId}`,
           {
+            image,
             category: Number(category),
             name,
             address,

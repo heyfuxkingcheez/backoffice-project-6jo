@@ -31,6 +31,7 @@ export class RestaurantsRepository {
   // 식당 등록
   createRestaurant = async (
     userId,
+    image,
     category,
     name,
     address,
@@ -38,9 +39,12 @@ export class RestaurantsRepository {
     businessHours,
     phoneNumber
   ) => {
+    console.log("dfdfdfd", name);
+    console.log("dfdfdfdfdfdf", image);
     const createdRestaurant = await prisma.restaurants.create({
       data: {
         UserId: userId,
+        image,
         category,
         name,
         address,
@@ -65,6 +69,7 @@ export class RestaurantsRepository {
   // 식당 수정
   updateRestaurant = async (
     restaurantId,
+    image,
     category,
     name,
     address,
@@ -75,6 +80,7 @@ export class RestaurantsRepository {
     const updatedRestaurant = await prisma.restaurants.update({
       where: { restaurantId: +restaurantId },
       data: {
+        image,
         category,
         name,
         address,
