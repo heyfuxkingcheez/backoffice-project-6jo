@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>임금님밥상</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script type="module" defer src=""></script>
+  <link rel="stylesheet" href="./payment.css" />
+</head>
+
+<body class="bg-gray-50">
+  <div class="nav1">
+    <div class="btn-box">
+      <button id="cart"><img src="../views/" /></button>
+      <button id="my-page"><img src="./image/user.png" /></button>
+      <button id="join">회원가입</button>
+      <button id="login">로그인</button>
+    </div>
+  </div>
+  <div class="nav2">
+    <div class="logo-image"><img src="./image/logo.png" /></div>
+  </div>
+  <div class="max-w-5xl mx-auto my-10 p-8 bg-white shadow-lg rounded-lg main-box">
+    <div class="cart-container">
+      <h2>장바구니</h2>
+      <div id="cart-items">
+        <div class="cart-item">
+          <button class="remove-btn">×</button>
+          <img src="./image/china.png" alt="상품 1">
+          <div class="item-info">
+            <p>상품 1</p>
+            <p>상품 1 설명</p>
+          </div>
+          <div class="item-description">
+            <div class="quantity-control">
+              <p>상품 1 (
+                <button class="quantity-btn">-</button>
+                <span class="quantity">2</span>
+                <button class="quantity-btn">+</button>
+                )
+              </p>
+            </div>
+            <p>가격: 10000원</p>
+          </div>
+        </div>
+        <div class="cart-item">
+          <button class="remove-btn">×</button>
+          <img src="./image/chicken.png" alt="상품 1">
+          <div class="item-info">
+            <p>상품 2</p>
+            <p>상품 2 설명</p>
+          </div>
+          <div class="item-description">
+            <div class="quantity-control">
+              <p>상품 2 (
+                <button class="quantity-btn">-</button>
+                <span class="quantity">1</span>
+                <button class="quantity-btn">+</button>
+                )
+              </p>
+            </div>
+            <p>가격: 15000원</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="input">
+      <p>배달 주소</p>
+      <input type="text" id="address" placeholder="주소 입력" class="w-1/2 h-10 p-4 border border-gray-300 rounded-md" />
+    </div>
+    <div class="input">
+      <p>요청사항</p>
+      <input type="text" id="reqToShop" placeholder="요청 사항" class="w-1/2 h-10 p-4 border border-gray-300 rounded-md" />
+    </div>
+    <p>총 가격: <span id="total-price">25000</span>원</p>
+    <p>현재 잔액: <span id="balance">Point.balance</span>원</p>
+    <p>결제 후 예상 잔액: <span id="balanceLeft">Point.balance - Orders.totalPrice</span>원</p>
+    <button id="submit">결제하기</button>
+  </div>
+
+</body>
+
+</html>
