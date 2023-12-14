@@ -32,7 +32,7 @@ model Point {
   UserId Int @map("UserId")
   income Int @map("income") // 입금
   expense Int @map("expense") // 출금
-  balance Int @map("balance") @default(1000000) // 잔액 //기본값 1,000,000만원
+  balance Int @map("balance") @default(1000000)// 잔액 //기본값 1,000,000만원
 
   createdAt DateTime @default(now()) @map("createdAt") // 거래날짜
 

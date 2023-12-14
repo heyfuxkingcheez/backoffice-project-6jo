@@ -5,8 +5,8 @@ POST http://localhost:3333/api/users/signup
 Content-Type: application/json
 
 {
-	"email": "example10@gmail.com",
-	"nickname": "정기욱",
+	"email": "example11@gmail.com",
+	"nickname": "김범석",
 	"password": "aaaa1111",
 	"passwordConfirm": "aaaa1111"
 
@@ -19,7 +19,7 @@ POST http://localhost:3333/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "example10@gmail.com",
+  "email": "example11@gmail.com",
   "password": "aaaa1111"
 }
 
@@ -77,7 +77,7 @@ Content-Type: application/json
 DELETE http://localhost:3333/api/suragan/4/charimpyo/10
 
 # 주문 결제
-###
+### 
 POST http://localhost:3333/api/suragan/8/order
 Content-Type: application/json
 
