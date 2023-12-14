@@ -3,9 +3,32 @@ import { RestaurantsRepository } from "../repositories/restaurants.repository.js
 export class RestaurantsService {
   restaurantsRepository = new RestaurantsRepository();
 
-  // 식당 목록 조회
-  findAllRestaurants = async () => {
-    const restaurants = await this.restaurantsRepository.findAllRestaurants();
+  // // 식당 목록 조회
+  // findAllRestaurants = async () => {
+  //   const restaurants = await this.restaurantsRepository.findAllRestaurants();
+  //   if (restaurants.length === 0) throw new Error("조회되는 식당이 없어요");
+
+  //   return restaurants.map((restaurant) => {
+  //     return {
+  //       restaurantId: restaurant.restaurantId,
+  //       userId: restaurant.UserId,
+  //       category: restaurant.category,
+  //       name: restaurant.name,
+  //       address: restaurant.address,
+  //       introduce: restaurant.introduce,
+  //       businessHours: restaurant.businessHours,
+  //       phoneNumber: restaurant.phoneNumber,
+  //       // createdAt: restaurant.createdAt,
+  //       // updatedAt: restaurant.updatedAt,
+  //     };
+  //   });
+  // };
+
+  // 카테고리별 식당 목록 조회
+  findAllRestaurants = async (category) => {
+    const restaurants = await this.restaurantsRepository.findAllRestaurants(
+      category
+    );
     if (restaurants.length === 0) throw new Error("조회되는 식당이 없어요");
 
     return restaurants.map((restaurant) => {
@@ -78,7 +101,9 @@ export class RestaurantsService {
     const restaurant = await this.restaurantsRepository.findRestaurantById(
       restaurantId
     );
-    if (!restaurant) throw new Error("존재하는 식당이 아니에요! ");
+    if (!restaurant) throw new Error("존재하는 수라간이 아니옵니다!");
+    if (userId !== restaurant.UserId)
+      throw new Error("수라간 주인장만 수정 가능하시옵니다!");
     if (restaurantId) {
       await this.restaurantsRepository.updateRestaurant(
         restaurantId,
@@ -107,11 +132,13 @@ export class RestaurantsService {
   };
 
   // 식당 삭제
-  deleteRestaurant = async (restaurantId) => {
+  deleteRestaurant = async (restaurantId, userId) => {
     const restaurant = await this.restaurantsRepository.findRestaurantById(
       restaurantId
     );
-    if (!restaurant) throw new Error("존재하는 식당이 아니에요!");
+    if (!restaurant) throw new Error("존재하는 수라간이 아니옵니다!");
+    if (userId !== restaurant.UserId)
+      throw new Error("수라간 주인장만 삭제 가능하시옵니다!");
 
     await this.restaurantsRepository.deleteRestaurant(restaurantId);
   };
