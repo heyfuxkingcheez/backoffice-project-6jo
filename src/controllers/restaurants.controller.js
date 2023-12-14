@@ -2,14 +2,31 @@ import { RestaurantsService } from "../services/restaurants.service.js";
 
 export class RestaurantsController {
   restaurantsService = new RestaurantsService();
-  // 식당 목록 조회
+  // // 식당 목록 조회
+  // findAllRestaurants = async (req, res, next) => {
+  //   try {
+  //     const category = req.query.category
+  //     const restaurants = await this.restaurantsService.findAllRestaurants(category);
+
+  //     return res.status(200).json({
+  //       success: true,
+  //       message: "식당 목록 조회 성공!",
+  //       data: restaurants,
+  //     });
+  //   } catch (err) {
+  //     next(err);
+  //   }
+  // };
+
+    // 식당 목록 조회
   findAllRestaurants = async (req, res, next) => {
     try {
-      const restaurants = await this.restaurantsService.findAllRestaurants();
+      const category = req.query.category
+      const restaurants = await this.restaurantsService.findAllRestaurants(category);
 
       return res.status(200).json({
         success: true,
-        message: "식당 목록 조회 성공!",
+        message: "카테고리별 식당 목록 조회 성공!",
         data: restaurants,
       });
     } catch (err) {
@@ -20,9 +37,8 @@ export class RestaurantsController {
   // 식당 등록
   createRestaurant = async (req, res, next) => {
     try {
-      // const userId = res.locals.user.userId;
+      const userId = res.locals.user.userId;
       const {
-        userId,
         category,
         name,
         address,
@@ -72,7 +88,6 @@ export class RestaurantsController {
   updateRestaurant = async (req, res, next) => {
     try {
       const { restaurantId } = req.params;
-      console.log(restaurantId);
       const userId = res.locals.user.userId;
       const { category, name, address, introduce, businessHours, phoneNumber } =
         await req.body;
@@ -100,7 +115,8 @@ export class RestaurantsController {
   deleteRestaurant = async (req, res, next) => {
     try {
       const { restaurantId } = req.params;
-      await this.restaurantsService.deleteRestaurant(restaurantId);
+      const userId = res.locals.user.userId;
+      await this.restaurantsService.deleteRestaurant(restaurantId,userId);
 
       return res.status(200).json({
         success: true,

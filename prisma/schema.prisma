@@ -13,7 +13,7 @@ datasource db {
 
 model Users {
   userId   Int @id @default(autoincrement()) @map("userId")
-  role Boolean @default(true) @map("role") // 사업자 false 손님 true
+  role Boolean @default(true) @map("role") // 사업자 0 손님 1
   email String  @unique @map("email") // 이메일
   nickname String @map("nickname") // 닉네임
   password String @map("password") // 비번
