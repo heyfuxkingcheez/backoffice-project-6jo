@@ -4,6 +4,7 @@ export class MenuRepository {
   // 메뉴 목록 조회
   findAllMenus = async () => {
     const menus = await prisma.menu.findMany({
+      where: { RestaurantId: +restaurantId },
       orderBy: { createdAt: "desc" },
     });
 

@@ -1,3 +1,8 @@
+// 홈으로 이동
+document.getElementById("gohome").addEventListener("click", function () {
+  window.location.href = "index.html";
+});
+
 // 메뉴 카테고리
 let menuCategory = {
   1: "메인메뉴",
