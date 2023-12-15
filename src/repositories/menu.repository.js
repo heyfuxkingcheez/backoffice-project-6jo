@@ -2,8 +2,9 @@ import { prisma } from "../utils/prisma/index.js";
 
 export class MenuRepository {
   // 메뉴 목록 조회
-  findAllMenus = async () => {
+  findAllMenus = async (restaurantId) => {
     const menus = await prisma.menu.findMany({
+      where: { RestaurantId: +restaurantId },
       orderBy: { createdAt: "desc" },
     });
 
