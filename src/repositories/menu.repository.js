@@ -2,7 +2,7 @@ import { prisma } from "../utils/prisma/index.js";
 
 export class MenuRepository {
   // 메뉴 목록 조회
-  findAllMenus = async () => {
+  findAllMenus = async (restaurantId) => {
     const menus = await prisma.menu.findMany({
       where: { RestaurantId: +restaurantId },
       orderBy: { createdAt: "desc" },
@@ -21,6 +21,14 @@ export class MenuRepository {
   };
 
   // 메뉴 등록
+  isOwner = async (userId) => {
+    const isOwner = await prisma.restaurants.findUnique({
+      where: { UserId: userId },
+    });
+    console.log("isOwner: ", isOwner);
+
+    return isOwner;
+  };
 
   createMenu = async (
     category,

@@ -3,9 +3,9 @@ import { MenuRepository } from "../repositories/menu.repository.js";
 export class MenuService {
   menuRepository = new MenuRepository();
 
-  // 메뉴 목록 조회
-  findAllMenus = async () => {
-    const menus = await this.menuRepository.findAllMenus();
+  // 가게별 메뉴 목록 조회
+  findAllMenus = async (restaurantId) => {
+    const menus = await this.menuRepository.findAllMenus(restaurantId);
     if (menus.length === 0) throw new Error("메뉴가 없어요");
 
     return menus.map((menu) => {
@@ -48,11 +48,13 @@ export class MenuService {
     introduce,
     price,
     image,
-    role
+    userId
   ) => {
     if (role !== true) throw new Error("권한이 없습니다.");
 
-    console.log("image: ", image);
+    if (!isOwner) throw new Error("권한이 없습니다1.");
+    if (isOwner.restaurantId !== +restaurantId)
+      throw new Error("권한이 없습니다2.");
 
     const createdMenu = await this.menuRepository.createMenu(
       category,
@@ -120,8 +122,8 @@ export class MenuService {
     const menu = await this.menuRepository.findOneMenu(menuId);
     if (!menu) throw new Error("메뉴가 없어요");
 
-    const isOWoner = await this.menuRepository.findOwnerRestaurant(userId);
-    if (menu.RestaurantId !== isOWoner.Restaurants.restaurantId)
+    const isOwner = await this.menuRepository.findOwnerRestaurant(userId);
+    if (menu.RestaurantId !== isOwner.Restaurants.restaurantId)
       throw new Error("권한이 없습니다");
 
     await this.menuRepository.deleteMenu(menuId);
