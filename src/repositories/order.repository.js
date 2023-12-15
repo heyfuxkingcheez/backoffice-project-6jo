@@ -1,4 +1,3 @@
-import { PrismaClientValidationError } from "@prisma/client/runtime/library.js";
 import { prisma } from "../utils/prisma/index.js";
 
 export class OrderRepository {
@@ -27,7 +26,7 @@ export class OrderRepository {
             RestaurantId: +restaurantId,
           },
         });
-        if (!checkedMenu) throw new Error("비정상적인 접근");
+        if (!checkedMenu) throw new Error("불일치(메뉴,가게)");
         const checkedPoint = await tx.point.findMany({
           where: { UserId: userId },
           orderBy: { createdAt: "desc" },
