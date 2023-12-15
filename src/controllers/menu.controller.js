@@ -6,7 +6,10 @@ export class MenuController {
   // 메뉴 목록 조회
   getMenus = async (req, res, next) => {
     try {
-      const menus = await this.menuService.findAllMenus();
+      const { restaurantId } = req.params;
+      console.log("restaurantId: ", restaurantId);
+
+      const menus = await this.menuService.findAllMenus(restaurantId);
 
       return res.status(200).json({
         success: true,
