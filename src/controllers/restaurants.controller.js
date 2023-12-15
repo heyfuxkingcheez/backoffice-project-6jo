@@ -59,11 +59,19 @@ export class RestaurantsController {
   createRestaurant = async (req, res, next) => {
     try {
       const userId = res.locals.user.userId;
-      const { category, name, address, introduce, businessHours, phoneNumber } =
-        await req.body;
-      console.log(req.body);
+      const {
+        image,
+        category,
+        name,
+        address,
+        introduce,
+        businessHours,
+        phoneNumber,
+      } = await req.body;
+      console.log(image);
       const createdRestaurant = await this.restaurantsService.createRestaurant(
         userId,
+        image,
         category,
         name,
         address,
@@ -104,11 +112,19 @@ export class RestaurantsController {
     try {
       const { restaurantId } = req.params;
       const userId = res.locals.user.userId;
-      const { category, name, address, introduce, businessHours, phoneNumber } =
-        await req.body;
+      const {
+        image,
+        category,
+        name,
+        address,
+        introduce,
+        businessHours,
+        phoneNumber,
+      } = await req.body;
       const updatedRestaurant = await this.restaurantsService.updateRestaurant(
         restaurantId,
         userId,
+        image,
         category,
         name,
         address,

@@ -12,7 +12,7 @@ async function loadRestaurants(category) {
     restaurants.forEach((data) => {
       let restaurantsList = `
         <div class="restaurant-box" data-id=${data.restaurantId}>
-          <div class="restaurant-img"><img src="./image/kingdragon.jpg" /></div>
+          <div class="restaurant-img"><img src="${data.image}"/></div>
           <div class="introduce">
             <h3>${data.name}</h3>
             <p><span>별점</span> | <span>리뷰</span></p>
@@ -41,7 +41,7 @@ async function loadRestaurants(category) {
   }
 }
 
-const receivedCategoryData = location.href.split("?")[1];
+const receivedCategoryData = location.href.split("=")[1];
 loadRestaurants(receivedCategoryData);
 
 // 여러 요소에 대한 클릭 이벤트 처리
@@ -62,7 +62,7 @@ async function loadRestaurants(category) {
     restaurants.forEach((data) => {
       let restaurantsList = `
         <div class="restaurant-box">
-          <div class="restaurant-img"><img src="./image/kingdragon.jpg" /></div>
+          <div class="restaurant-img"><img src="${data.image}" /></div>
           <div class="introduce">
             <h3>${data.name}</h3>
             <p><span>별점</span> | <span>리뷰</span></p>

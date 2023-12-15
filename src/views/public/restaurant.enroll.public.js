@@ -1,6 +1,6 @@
 document.getElementById("submit").addEventListener("click", async function () {
   try {
-    // const userId ; // 쿠키에서 받은 사용자 정보
+    const image = document.getElementById("image").value;
     const category = document.getElementById("category").value;
     const name = document.getElementById("name").value;
     const address = document.getElementById("address").value;
@@ -9,6 +9,7 @@ document.getElementById("submit").addEventListener("click", async function () {
     const phoneNumber = document.getElementById("phoneNumber").value;
 
     createRestaurant = await axios.post("/api/suragan", {
+      image,
       category: Number(category),
       name,
       address,
@@ -17,8 +18,9 @@ document.getElementById("submit").addEventListener("click", async function () {
       phoneNumber,
     });
     console.log(createRestaurant);
+    console.log(image);
     alert("등록 완료!");
-    window.location.href = "index.html";
+    // window.location.href = "index.html";
   } catch (error) {
     console.error("Error fetching post:", error.message);
   }
