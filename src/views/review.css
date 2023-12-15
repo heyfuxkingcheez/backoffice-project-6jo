@@ -1,0 +1,137 @@
+.nav1 {
+    height: 40px;
+    background-color: #df5536;
+  }
+  
+  .nav2 {
+    display: flex;
+    height: 180px;
+    background-color: #df5536;
+    position: relative;
+  }
+  
+  .logo-image {
+    width: 17%;
+    margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .logo-image > img {
+    width: 100%;
+  }
+  
+  .btn-box {
+    float: right;
+  }
+  
+  button > img {
+    width: 100%;
+  }
+  
+  #join {
+    background-color: white;
+    width: 80px;
+    height: 27px;
+  
+    color: rgb(40, 39, 39);
+    border: none;
+    border-radius: 5px;
+  
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+  
+  #cart {
+    background-color: white;
+    width: 27px;
+    height: 27px;
+    border: none;
+    border-radius: 5px;
+  
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+  
+  #my-page {
+    background-color: white;
+    width: 27px;
+    height: 27px;
+    border: none;
+    border-radius: 5px;
+  
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+
+  .tab-content {
+    display: none;
+  }
+
+  .active-tab {
+    display: block;
+  }
+
+  .tab-box {
+    border: 1px solid #ccc;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tabs {
+    display: flex;
+  }
+
+  .tab {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px;
+  }
+
+  .header-box {
+    border: 1px solid #ccc;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .header-left {
+    text-align: left;
+    align-items: center;
+  }
+
+  .header-right {
+    text-align: right;
+    align-items: center;
+  }
+  
+  .header-title {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+
+  .header-image {
+    max-height: 60%;
+    max-width: 60%;
+    margin-bottom: 20px;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  

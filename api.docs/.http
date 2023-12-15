@@ -1,15 +1,15 @@
 #회원가입
 ###
 
-POST http://localhost:4000/api/users/signup
+POST http://localhost:3333/api/users/signup
 Content-Type: application/json
 
 {
-	"email": "example4@gmail.com",
-	"nickname": "김효진3",
+	"email": "example11@gmail.com",
+	"nickname": "김범석",
 	"password": "aaaa1111",
-	"passwordConfirm": "aaaa1111",
-	"role": true
+	"passwordConfirm": "aaaa1111"
+
 }
 
 #로그인
@@ -19,7 +19,7 @@ POST http://localhost:3333/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "example2@gmail.com",
+  "email": "example11@gmail.com",
   "password": "aaaa1111"
 }
 
@@ -52,7 +52,7 @@ GET http://localhost:3333/api/suragan/4/charimpyo/5
 
 # 메뉴 등록
 ###
-POST http://localhost:3333/api/suragan/4/charimpyo
+POST http://localhost:3333/api/suragan/10/charimpyo
 Content-Type: application/json
 
 {
@@ -76,6 +76,16 @@ Content-Type: application/json
 ###
 DELETE http://localhost:3333/api/suragan/4/charimpyo/10
 
+# 주문 결제
+### 
+POST http://localhost:3333/api/suragan/8/order
+Content-Type: application/json
+
+{
+"MenuId": 19,
+"orderDetails":[{"페퍼로니 피자":2}],
+"totalPrice": 50000
+}
 
 
 
