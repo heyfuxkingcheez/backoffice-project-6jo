@@ -1,24 +1,29 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url = env("DATABASE_URL")
 }
 
-model Users {
-  userId      Int          @id @default(autoincrement()) @map("userId")
-  role        Boolean      @default(true) @map("role")
-  email       String       @unique @map("email")
-  nickname    String       @map("nickname")
-  password    String       @map("password")
-  createdAt   DateTime     @default(now()) @map("createdAt")
-  updatedAt   DateTime     @updatedAt @map("updatedAt")
-  orders      Orders[]
-  points      Point[]
-  Restaurants Restaurants?
 
+model Users {
+  userId   Int @id @default(autoincrement()) @map("userId")
+  role Boolean @default(true) @map("role") //  손님 false, 사업자 ture
+  email String  @unique @map("email") // 이메일
+  nickname String @map("nickname") // 닉네임
+  password String @map("password") // 비번
+
+  createdAt DateTime @default(now()) @map("createdAt") // 가입일
+  updatedAt DateTime @updatedAt @map("updatedAt") // 정보 수정일
+
+  points Point[] // User 테이블과 Point 테이블이 1:N 관계 (사용자는 포인트 레코드를 여러개 가질 수 있음)
+  Restaurants Restaurants? // Users 테이블과 Restaurants 테이블이 1:1 관계 (식당은 있을수도 없을수도 있음) 
+  orders Orders[] // Users 테이블과 Orders 테이블이 1:N 관계 (사용자는 Orders를 여러개 가질 수 있음)
   @@map("Users")
 }
 
@@ -29,26 +34,28 @@ model Point {
   expense Int @map("expense") // 출금
   balance Int @map("balance") @default(1000000)// 잔액 //기본값 1,000,000만원
 
-  @@index([UserId], map: "Point_UserId_fkey")
-  @@map("Point")
+  createdAt DateTime @default(now()) @map("createdAt") // 거래날짜
+
+  User Users @relation(fields: [UserId], references: [userId], onDelete: Cascade)
+
+  @@map("Point") 
 }
 
 model Restaurants {
-  restaurantId Int @id @default(autoincrement()) @map("restaurantId")
-  UserId Int @map("UserId") @unique
-  category Int @map("category") // 음식점 카테고리(한식,중식 등)
-  name String @map("name") // 가게이름
-  address String @map("address") // 가게주소
-  introduce String @db.Text @map("introduce") // 가게소개
-  businessHours String @map("businessHours") // 가게 영업시간
-  phoneNumber String @map("phoneNumber") // 가게 전화번호
+  restaurantId  Int      @id @default(autoincrement()) @map("restaurantId")
+  UserId        Int      @unique @map("UserId")
+  image         String   @map("image") @db.Text
+  category      Int      @map("category")
+  name          String   @map("name")
+  address       String   @map("address")
+  introduce     String   @map("introduce") @db.Text
+  businessHours String   @map("businessHours")
+  phoneNumber   String   @map("phoneNumber")
+  createdAt     DateTime @default(now()) @map("createdAt")
+  updatedAt     DateTime @updatedAt @map("updatedAt")
+  menu          Menu[]
+  User          Users    @relation(fields: [UserId], references: [userId], onDelete: Cascade)
 
-  createdAt DateTime @default(now()) @map("createdAt")
-  updatedAt DateTime @updatedAt @map("updatedAt")
-
-  User Users @relation(fields: [UserId], references: [userId], onDelete: Cascade)
-  menu Menu[] // Restaurants 테이블과 Menu 테이블이 1:N 관계 (식당은 Menu를 여러개 가질 수 있음)
-  orders Orders[]
   @@map("Restaurants")
 }
 
@@ -59,11 +66,12 @@ model Menu {
   name         String      @map("name")
   introduce    String      @map("introduce") @db.Text
   price        Int         @map("price")
-  image        String      @map("image")
+  image        String      @map("image") @db.Text
   createdAt    DateTime    @default(now()) @map("createdAt")
   updatedAt    DateTime    @updatedAt @map("updatedAt")
   Restaurant   Restaurants @relation(fields: [RestaurantId], references: [restaurantId], onDelete: Cascade)
-  orders       Orders[]    @relation("MenuToOrders")
+
+//  orders       Orders[]    @relation("MenuToOrders")
 
   @@unique([RestaurantId, name])
   @@map("Menu")
@@ -88,13 +96,15 @@ model Orders {
 }
 
 model Reviews {
-  reviewId  Int      @id @default(autoincrement()) @map("reviewId")
-  OrderId   Int      @unique @map("OrderId")
-  star      Int      @map("star")
-  review    String   @map("review") @db.Text
+  reviewId Int @id @default(autoincrement()) @map("reviewId")
+  OrderId Int @map("OrderId") @unique
+  star Int @map("star") // 별점
+  review String @db.Text @map("review") // 리뷰 내용
+
   createdAt DateTime @default(now()) @map("createdAt")
   updatedAt DateTime @updatedAt @map("updatedAt")
-  Order     Orders   @relation(fields: [OrderId], references: [orderId], onDelete: Cascade)
 
+  Order Orders @relation(fields: [OrderId], references: [orderId], onDelete: Cascade) // 사용자 하나를 가질 수 있음
+  
   @@map("Reviews")
 }
