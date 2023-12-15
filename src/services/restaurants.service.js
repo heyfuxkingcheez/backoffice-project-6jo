@@ -3,39 +3,38 @@ import { RestaurantsRepository } from "../repositories/restaurants.repository.js
 export class RestaurantsService {
   restaurantsRepository = new RestaurantsRepository();
 
-  // // 식당 목록 조회
-  // findAllRestaurants = async () => {
-  //   const restaurants = await this.restaurantsRepository.findAllRestaurants();
-  //   if (restaurants.length === 0) throw new Error("조회되는 식당이 없어요");
-
-  //   return restaurants.map((restaurant) => {
-  //     return {
-  //       restaurantId: restaurant.restaurantId,
-  //       userId: restaurant.UserId,
-  //       category: restaurant.category,
-  //       name: restaurant.name,
-  //       address: restaurant.address,
-  //       introduce: restaurant.introduce,
-  //       businessHours: restaurant.businessHours,
-  //       phoneNumber: restaurant.phoneNumber,
-  //       // createdAt: restaurant.createdAt,
-  //       // updatedAt: restaurant.updatedAt,
-  //     };
-  //   });
-  // };
-
-  // 카테고리별 식당 목록 조회
-  findAllRestaurants = async (category) => {
-    const restaurants = await this.restaurantsRepository.findAllRestaurants(
-      category
-    );
+  // 식당 목록 조회
+  findAllRestaurants = async () => {
+    const restaurants = await this.restaurantsRepository.findAllRestaurants();
     if (restaurants.length === 0) throw new Error("조회되는 식당이 없어요");
 
     return restaurants.map((restaurant) => {
       return {
         restaurantId: restaurant.restaurantId,
         userId: restaurant.UserId,
-        image:restaurant.image,
+        category: restaurant.category,
+        name: restaurant.name,
+        address: restaurant.address,
+        introduce: restaurant.introduce,
+        businessHours: restaurant.businessHours,
+        phoneNumber: restaurant.phoneNumber,
+        // createdAt: restaurant.createdAt,
+        // updatedAt: restaurant.updatedAt,
+      };
+    });
+  };
+
+  // 카테고리별 식당 목록 조회
+  findCategoryRestaurants = async (category) => {
+    const restaurants =
+      await this.restaurantsRepository.findCategoryRestaurants(category);
+    if (restaurants.length === 0) throw new Error("조회되는 식당이 없어요");
+
+    return restaurants.map((restaurant) => {
+      return {
+        restaurantId: restaurant.restaurantId,
+        userId: restaurant.UserId,
+        image: restaurant.image,
         category: restaurant.category,
         name: restaurant.name,
         address: restaurant.address,
@@ -58,7 +57,7 @@ export class RestaurantsService {
       return {
         restaurantId: restaurant.restaurantId,
         userId: restaurant.UserId,
-        image:restaurant.image,
+        image: restaurant.image,
         category: restaurant.category,
         name: restaurant.name,
         address: restaurant.address,
@@ -95,7 +94,7 @@ export class RestaurantsService {
 
     return {
       userId: createdRestaurant.UserId,
-      image:createdRestaurant.image,
+      image: createdRestaurant.image,
       category: createdRestaurant.category,
       name: createdRestaurant.name,
       address: createdRestaurant.address,
