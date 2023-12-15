@@ -39,19 +39,22 @@ model Users {
 }
 
 model Restaurants {
-  restaurantId  Int      @id @default(autoincrement()) @map("restaurantId")
-  UserId        Int      @unique @map("UserId")
-  image         String   @map("image") @db.Text
-  category      Int      @map("category")
-  name          String   @map("name")
-  address       String   @map("address")
-  introduce     String   @map("introduce") @db.Text
-  businessHours String   @map("businessHours")
-  phoneNumber   String   @map("phoneNumber")
-  createdAt     DateTime @default(now()) @map("createdAt")
-  updatedAt     DateTime @updatedAt @map("updatedAt")
-  menu          Menu[]
-  User          Users    @relation(fields: [UserId], references: [userId], onDelete: Cascade)
+
+  restaurantId Int @id @default(autoincrement()) @map("restaurantId")
+  UserId Int @map("UserId") @unique
+  category Int @map("category") // 음식점 카테고리(한식,중식 등)
+  name String @map("name") // 가게이름
+  address String @map("address") // 가게주소
+  introduce String @db.Text @map("introduce") // 가게소개
+  businessHours String @map("businessHours") // 가게 영업시간
+  phoneNumber String @map("phoneNumber") // 가게 전화번호
+
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+
+  User Users @relation(fields: [UserId], references: [userId], onDelete: Cascade)
+  menu Menu[] // Restaurants 테이블과 Menu 테이블이 1:N 관계 (식당은 Menu를 여러개 가질 수 있음)
+  orders Orders[]
 
   @@map("Restaurants")
 }
@@ -77,6 +80,7 @@ model Menu {
   orderId Int @id @default(autoincrement()) @map("orderId")
   UserId Int @map("UserId")
   MenuId Int @map("MenuId")
+  RestaurantId Int @map("RestaurantId")
   orderDetails Json @map("orderDetails") // 주문한 음식 / 품목별 수량을 json 형태로 받음 [{메뉴이름 : 수량}, {메뉴이름 : 수량}]
   totalPrice Int @map("totalPrice") // 주문한 내역 총 가격
   isCompleted Boolean @map("isCompleted") @default(false)// 처리중 false / 배달완료 true
@@ -86,7 +90,7 @@ model Menu {
   menu Menu[] // 메뉴에 대해 n:m 관계
   User Users @relation(fields: [UserId], references: [userId], onDelete: Cascade) // 사용자 하나를 가질 수 있음
   Reviews Reviews? // Orders 테이블과 Reviews 테이블이 1:1 관계 (리뷰는 있을수도 없을수도 있음) 
-
+  Restaurant Restaurants @relation(fields: [RestaurantId], references: [restaurantId], onDelete: Cascade)
   @@map("Orders")
 }
 

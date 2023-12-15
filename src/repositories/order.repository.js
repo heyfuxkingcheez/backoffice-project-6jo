@@ -12,39 +12,14 @@ export class OrderRepository {
     return checkedPoint;
   };
 
-  //------------------------------------------------------------
-  // // 잔고 수정
-  // createPoint = async (userId, totalPrice) => {
-  //   const checkedPoint = await prisma.point.findMany({
-  //     where: { UserId: userId },
-  //     orderBy: { createdAt: "desc" },
-  //     take: 1,
-  //   });
-  //   console.log("checkedPoint: ", checkedPoint[0].balance);
-  //   const createdPoint = await prisma.point.create({
-  //     data: {
-  //       UserId: userId,
-  //       income: 0,
-  //       expense: totalPrice,
-  //       balance: checkedPoint[0].balance - totalPrice,
-  //     },
-  //   });
-  //   return createdPoint;
-  // };
-
-  // // 주문 생성
-  // createOrder = async (userId, MenuId, orderDetails, totalPrice) => {
-  //   console.log("MenuId: ", MenuId);
-  //   console.log("userId: ", userId);
-  //   const createdOrder = await prisma.orders.createMany({
-  //     data: { MenuId, UserId: userId, orderDetails, totalPrice },
-  //   });
-  //   return createdOrder;
-  // };
-  //-----------------------------------------------------------
-
   // 주문 결제 Transaction 적용
-  orderPayment = async (userId, MenuId, orderDetails, totalPrice) => {
+  orderPayment = async (
+    userId,
+    MenuId,
+    restaurantId,
+    orderDetails,
+    totalPrice
+  ) => {
     const [createdPoint, createdOrder] = await prisma.$transaction(
       async (tx) => {
         const checkedPoint = await tx.point.findMany({
@@ -65,12 +40,67 @@ export class OrderRepository {
         });
 
         const createdOrder = await tx.orders.create({
-          data: { MenuId, UserId: userId, orderDetails, totalPrice },
+          data: {
+            MenuId,
+            UserId: userId,
+            RestaurantId: +restaurantId,
+            orderDetails,
+            totalPrice,
+          },
         });
         return [createdPoint, createdOrder];
       }
     );
 
     return [createdPoint, createdOrder];
+  };
+
+  // 주문 목록 조회 API (사장)
+  getOrders = async (restaurantId) => {
+    const getOrders = await prisma.orders.findMany({
+      where: { RestaurantId: +restaurantId },
+      select: {
+        orderId: true,
+        orderDetails: true,
+        totalPrice: true,
+        isCompleted: true,
+        createdAt: true,
+      },
+    });
+
+    console.log("getOrders: ", getOrders);
+    return getOrders;
+  };
+
+  // 배달 완료 API (사장)
+  completeOrder = async (orderId) => {
+    const [updateOrderStatus, createPointOfOnwer] = await prisma.$transaction(
+      async (tx) => {
+        const updateOrderStatus = await tx.orders.update({
+          where: { orderId: +orderId },
+          data: {
+            isCompleted: true,
+          },
+        });
+        const checkedPoint = await tx.point.findMany({
+          where: { UserId: updateOrderStatus.UserId },
+          orderBy: { createdAt: "desc" },
+          take: 1,
+        });
+        console.log("checkedPoint: ", checkedPoint);
+
+        console.log("updateOrderStatus: ", updateOrderStatus);
+        const createPointOfOnwer = await tx.point.create({
+          data: {
+            UserId: updateOrderStatus.UserId,
+            income: updateOrderStatus.totalPrice,
+            expense: 0,
+            balance: checkedPoint[0].balance + updateOrderStatus.totalPrice,
+          },
+        });
+        return [updateOrderStatus, createPointOfOnwer];
+      }
+    );
+    return [updateOrderStatus, createPointOfOnwer];
   };
 }
