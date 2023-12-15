@@ -9,7 +9,7 @@ const orderController = new OrderController();
 orderRouter.post(
   "/:restaurantId/order",
   auth_middleware,
-  orderController.createOrder
+  orderController.orderPayment
 );
 // // 주문 조회 API (사장)
 // orderRouter.get("/:restaurantId/order", auth_middleware, orderController);
