@@ -61,8 +61,6 @@ async function loadMenus() {
         const introduce = menuInfo.querySelector(".menu-introduce").value;
         const price = menuInfo.querySelector(".menu-price").value;
 
-        console.log(image, category, name, introduce, price);
-
         // 메뉴 정보 수정
         const updateMenu = await axios.patch(
           `/api/suragan/${restaurantId}/charimpyo/${menuId}`,
@@ -177,16 +175,61 @@ async function getOwnerInfo() {
             }
           );
 
-          console.log(createRestaurant);
-          console.log(image);
           alert("등록 완료!");
           // window.location.href = "index.html";
         } catch (error) {
           console.error("Error fetching post:", error.message);
         }
       });
-
     loadMenus();
+
+    // 주문 배달 확인
+    const restaurantId = restaurant.restaurantId;
+    async function getOrders(restaurantId) {
+      try {
+        const orderResult = await axios.get(
+          `/api/suragan/${restaurantId}/order`
+        );
+        const orderData = orderResult.data.data;
+
+        // console.log(orderData[0].orderDetails.dfd);
+        orderData.forEach((order) => {
+          let orderList = `
+          <tr class="delivery-table-td" data-orderId="${order.orderId}"> 
+          <td>${order.orderId}</td>
+          <td>${JSON.stringify(order.orderDetails).replace(/["{}]/g, "")}</td>
+          <td>${order.totalPrice}</td>
+          <td><button class="delivery-complete">배달완료</button></td>
+        </tr>
+            `;
+          document
+            .querySelector("#delivery-body")
+            .insertAdjacentHTML("beforeend", orderList);
+        });
+
+        // 배달 완료 버튼 클릭 시 실행
+        const deliveryComplete =
+          document.querySelectorAll(".delivery-complete");
+
+        for (let i = 0; i < deliveryComplete.length; i++) {
+          deliveryComplete[i].addEventListener("click", async function (event) {
+            const orderInfo = event.target.parentElement.parentElement;
+            let orderId = orderInfo.getAttribute("data-orderId");
+            
+            // 배달 완료로 변경
+            const deliveryCompleted = await axios.patch(
+              `/api/suragan/${restaurantId}/order/${orderId}`
+            );
+            console.log(deliveryCompleted);
+            alert("배달 정보 업데이트 완료!");
+            location.reload();
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching posts", error);
+      }
+    }
+    getOrders(restaurantId);
   } catch (error) {
     console.error("Error fetching post:", error.message);
   }

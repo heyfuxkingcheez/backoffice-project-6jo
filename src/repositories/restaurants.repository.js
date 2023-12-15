@@ -39,8 +39,6 @@ export class RestaurantsRepository {
     businessHours,
     phoneNumber
   ) => {
-    console.log("dfdfdfd", name);
-    console.log("dfdfdfdfdfdf", image);
     const createdRestaurant = await prisma.restaurants.create({
       data: {
         UserId: userId,

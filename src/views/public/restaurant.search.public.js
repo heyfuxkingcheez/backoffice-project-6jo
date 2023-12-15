@@ -13,13 +13,18 @@ async function loadRestaurants() {
       //가져온 레스토랑의 정보를 저장
     }
 
-    const searchInput = document.querySelector(".search-input").value.toLowerCase();
+    const searchInput = document
+      .querySelector(".search-input")
+      .value.toLowerCase();
     // 검색 조건에 따라 필터링된 레스토랑만 사용
     const filteredRestaurants = searchInput
-    ? cachedRestaurants.filter(data => data.name.toLowerCase().includes(searchInput.toLowerCase()))
-    : cachedRestaurants; 
+      ? cachedRestaurants.filter((data) =>
+          data.name.toLowerCase().includes(searchInput.toLowerCase())
+        )
+      : cachedRestaurants;
 
-    const restaurantsListContainer = document.querySelector("#restaurants-list");
+    const restaurantsListContainer =
+      document.querySelector("#restaurants-list");
     restaurantsListContainer.innerHTML = ""; // 초기화
 
     console.log(cachedRestaurants);
@@ -35,7 +40,7 @@ async function loadRestaurants() {
             </div>
           </div>
         `;
-        restaurantsListContainer.insertAdjacentHTML("beforeend", restaurantsList);
+      restaurantsListContainer.insertAdjacentHTML("beforeend", restaurantsList);
     });
     // 클릭시 해당하는 restaurantId 리턴
     const elements = document.getElementsByClassName("restaurant-box");
@@ -51,7 +56,7 @@ async function loadRestaurants() {
 }
 
 document.getElementById("search-btn").addEventListener("click", function () {
-    loadRestaurants(); // 검색 버튼을 누를 때마다 데이터를 로드하고 화면을 갱신
-  });
+  loadRestaurants(); // 검색 버튼을 누를 때마다 데이터를 로드하고 화면을 갱신
+});
 
 loadRestaurants();

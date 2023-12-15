@@ -29,7 +29,7 @@ async function loadMenu(restaurantId) {
 let menuId;
 // 장바구니 메뉴 중복 제거를 위한 아이디값 배열
 let cartMenuId = [];
-// 실제 장바구니 데이터 담을 배열
+// 수량
 let count = 0;
 // 메뉴 이름
 let orderDetail = [];
@@ -49,48 +49,39 @@ document.querySelectorAll(".cartBtn").forEach((btn) => {
     let result = await axios.get(
       `/api/suragan/${restaurantId.split[0]}/charimpyo/${menuId}`
     );
-    // let menuInfo = result.data.data;
+    let menuInfo = result.data.data;
 
-    // cartMenuId.push(menuInfo.menuId);
-    // cartMenu.push(menuInfo);
-    // let menuName = menuInfo.name;
-    // orderDetail.push({ menuName, count });
-    // // 담기 버튼 클릭 시 해당 메뉴의 price 를 totalPrice 에 합산
-    // totalPrice += Number(menuInfo.price);
+    cartMenuId.push(menuInfo.menuId);
+    cartMenu.push(menuInfo);
+    let menuName = menuInfo.name;
+    orderDetail.push({ menuName, count });
+    // 담기 버튼 클릭 시 해당 메뉴의 price 를 totalPrice 에 합산
+    totalPrice += Number(menuInfo.price);
 
-    // cartMenu.forEach((menu) => {
-    //   let cartList = `
-    //   <p class="item-list-section item-list-section01">${menu.name}</p>
-    //   <div class="item-list-section item-list-section02">
-    //     <i class="material-icons icon-set02">cancel</i>${menu.price}원
-    //     <div
-    //       class="btn-group item-count"
-    //       role="group"
-    //       aria-label="Basic example"
-    //     >
-    //       <button class="bt bt01 up">-</button>
-    //       <button class="bt bt-count">1</button>
-    //       <button class="bt bt02 down">+</button>
-    //     </div>
-    //   </div>
-    //   `;
-    //   document
-    //     .querySelector(".list01")
-    //     .insertAdjacentHTML("beforeend", cartList);
-    //   document.querySelector("#totalPrice").innerHTML = totalPrice;
-    // });
-    // console.log(cartMenuId);
-    // console.log(orderDetail);
-    // console.log(totalPrice);
+    cartMenu.forEach((menu) => {
+      let cartList = `
+      <p class="item-list-section item-list-section01">${menu.name}</p>
+      <div class="item-list-section item-list-section02">
+        <i class="material-icons icon-set02">cancel</i>${menu.price}원
+        <div
+          class="btn-group item-count"
+          role="group"
+          aria-label="Basic example"
+        >
+          <button class="bt bt01 up">-</button>
+          <button class="bt bt-count">1</button>
+          <button class="bt bt02 down">+</button>
+        </div>
+      </div>
+      `;
+      document
+        .querySelector(".list01")
+        .insertAdjacentHTML("beforeend", cartList);
+      document.querySelector("#totalPrice").innerHTML = totalPrice;
+    });
+    console.log(cartMenuId);
+    console.log(orderDetail);
+    console.log(totalPrice);
   });
 });
 
-document.getElementById("payBtn").addEventListener("click", async function () {
-  createOrder = await axios.post(`/api/suragan/1/order`, {
-    MenuIds: [1, 2, 3],
-    orderDetails: { dfd: 1, dfdf: 2 },
-    totalPrice: 30000,
-  });
-  console.log(createOrder);
-  alert("등록 완료!");
-});
