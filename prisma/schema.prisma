@@ -32,7 +32,7 @@ model Point {
   UserId Int @map("UserId")
   income Int @map("income") // 입금
   expense Int @map("expense") // 출금
-  balance Int @map("balance") @default(1000000) // 잔액 //기본값 1,000,000만원
+  balance Int @map("balance") @default(1000000)// 잔액 //기본값 1,000,000만원
 
   createdAt DateTime @default(now()) @map("createdAt") // 거래날짜
 
@@ -45,7 +45,6 @@ model Point {
 model Restaurants {
   restaurantId Int @id @default(autoincrement()) @map("restaurantId")
   UserId Int @map("UserId") @unique
-  
   category Int @map("category") // 음식점 카테고리(한식,중식 등)
   name String @map("name") // 가게이름
   address String @map("address") // 가게주소
@@ -58,7 +57,7 @@ model Restaurants {
 
   User Users @relation(fields: [UserId], references: [userId], onDelete: Cascade)
   menu Menu[] // Restaurants 테이블과 Menu 테이블이 1:N 관계 (식당은 Menu를 여러개 가질 수 있음)
-
+  orders Orders[]
   @@map("Restaurants")
 }
 
@@ -86,6 +85,7 @@ model Orders {
   orderId Int @id @default(autoincrement()) @map("orderId")
   UserId Int @map("UserId")
   MenuId Int @map("MenuId")
+  RestaurantId Int @map("RestaurantId")
   orderDetails Json @map("orderDetails") // 주문한 음식 / 품목별 수량을 json 형태로 받음 [{메뉴이름 : 수량}, {메뉴이름 : 수량}]
   totalPrice Int @map("totalPrice") // 주문한 내역 총 가격
   isCompleted Boolean @map("isCompleted") @default(false)// 처리중 false / 배달완료 true
@@ -95,7 +95,7 @@ model Orders {
   menu Menu[] // 메뉴에 대해 n:m 관계
   User Users @relation(fields: [UserId], references: [userId], onDelete: Cascade) // 사용자 하나를 가질 수 있음
   Reviews Reviews? // Orders 테이블과 Reviews 테이블이 1:1 관계 (리뷰는 있을수도 없을수도 있음) 
-
+  Restaurant Restaurants @relation(fields: [RestaurantId], references: [restaurantId], onDelete: Cascade)
   @@map("Orders")
 }
 

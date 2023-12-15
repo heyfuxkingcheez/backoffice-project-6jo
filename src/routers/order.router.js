@@ -9,11 +9,19 @@ const orderController = new OrderController();
 orderRouter.post(
   "/:restaurantId/order",
   auth_middleware,
-  orderController.createOrder
+  orderController.orderPayment
 );
-// // 주문 조회 API (사장)
-// orderRouter.get("/:restaurantId/order", auth_middleware, orderController);
+//  주문 조회 API (사장)
+orderRouter.get(
+  "/:restaurantId/order",
+  auth_middleware,
+  orderController.getOrders
+);
 // // 주문 상태 수정 API(배달 완료) (사장)
-// orderRouter.patch("/:restaurantId/order", auth_middleware, orderController);
+orderRouter.patch(
+  "/:restaurantId/order/:orderId",
+  auth_middleware,
+  orderController.completeOrder
+);
 
 export { orderRouter };

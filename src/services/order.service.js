@@ -7,35 +7,41 @@ export class OrderService {
   checkPoint = async (userId) => {
     const point = await this.orderRepository.checkPoint(userId);
     return {
-      userId: point.userId,
+      userId: point.UserId,
       balance: point.balance,
     };
   };
 
-  // 주문 생성
-  createOrder = async (userId, MenuId, orderDetails, totalPrice) => {
-    const point = await this.orderRepository.checkPoint(userId);
-
-    if (point.balance < totalPrice) throw new Error("잔액이 부족합니다.");
-
-    const createdOrder = await this.orderRepository.createOrder(
+  // 주문 결제
+  orderPayment = async (
+    userId,
+    MenuId,
+    restaurantId,
+    orderDetails,
+    totalPrice
+  ) => {
+    const orderPayment = await this.orderRepository.orderPayment(
       userId,
       MenuId,
+      restaurantId,
       orderDetails,
       totalPrice
     );
-    const createdPoint = await this.orderRepository.createPoint(
-      userId,
-      totalPrice,
-      point.pointId
-    );
 
-    return {
-      userId: createdOrder.userId,
-      MenuId: createdOrder.MenuId,
-      orderDetails: createdOrder.orderDetails,
-      totalPrice: createdOrder.totalPrice,
-      balance: createdPoint.balance,
-    };
+    return orderPayment;
+  };
+
+  // 주문 조회 API (사장)
+  getOrders = async (restaurantId) => {
+    const getOrders = await this.orderRepository.getOrders(restaurantId);
+
+    return getOrders;
+  };
+
+  // 배달 완료 API (사장)
+  completeOrder = async (orderId) => {
+    const completedOrder = await this.orderRepository.completeOrder(orderId);
+
+    return completedOrder;
   };
 }
