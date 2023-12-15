@@ -13,7 +13,7 @@ datasource db {
 
 model Users {
   userId   Int @id @default(autoincrement()) @map("userId")
-  role Boolean @default(true) @map("role") // 사업자 0 손님 1
+  role Boolean @default(false) @map("role") // 손님 0 사업자 1
   email String  @unique @map("email") // 이메일
   nickname String @map("nickname") // 닉네임
   password String @map("password") // 비번
@@ -45,6 +45,7 @@ model Point {
 model Restaurants {
   restaurantId Int @id @default(autoincrement()) @map("restaurantId")
   UserId Int @map("UserId") @unique
+  image         String   @map("image") @db.Text
   category Int @map("category") // 음식점 카테고리(한식,중식 등)
   name String @map("name") // 가게이름
   address String @map("address") // 가게주소
@@ -69,7 +70,7 @@ model Menu {
   name String @map("name") // 메뉴이름
   introduce String @db.Text @map("introduce") // 메뉴 소개
   price Int @map("price") // 메뉴 가격
-  image String @map("image") // 메뉴 이미지
+  image        String      @map("image") @db.Text
 
   createdAt DateTime @default(now()) @map("createdAt")
   updatedAt DateTime @updatedAt @map("updatedAt")
