@@ -50,11 +50,11 @@ export class MenuService {
     image,
     userId
   ) => {
-    if (role !== true) throw new Error("권한이 없습니다.");
+    // if (role !== true) throw new Error("권한이 없습니다.");
 
-    if (!isOwner) throw new Error("권한이 없습니다1.");
-    if (isOwner.restaurantId !== +restaurantId)
-      throw new Error("권한이 없습니다2.");
+    // if (!isOwner) throw new Error("권한이 없습니다1.");
+    // if (isOwner.restaurantId !== +restaurantId)
+    //   throw new Error("권한이 없습니다2.");
 
     const createdMenu = await this.menuRepository.createMenu(
       category,
