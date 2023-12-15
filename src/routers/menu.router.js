@@ -10,7 +10,7 @@ const menusController = new MenuController();
 menusRouter.post(
   "/:restaurantId/charimpyo",
   auth_middleware,
-  // auth_owner_middleware,
+  auth_owner_middleware,
   menusController.createMenu
 );
 

@@ -87,7 +87,7 @@ document.querySelectorAll(".cartBtn").forEach((btn) => {
 
 document.getElementById("payBtn").addEventListener("click", async function () {
   createOrder = await axios.post(`/api/suragan/1/order`, {
-    MenuId: [1, 2, 3],
+    MenuIds: [1, 2, 3],
     orderDetails: { dfd: 1, dfdf: 2 },
     totalPrice: 30000,
   });

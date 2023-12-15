@@ -33,7 +33,8 @@ Content-Type: application/json
 	"address":"신림동",
 	"introduce":"레전드피자",
 	"businessHours":"9:00~19:00",
-	"phoneNumber":"010-2234-5566"
+	"phoneNumber":"010-2234-5566",
+	"image":"url"
 }
 
 # 식당 조회
@@ -57,12 +58,12 @@ GET http://localhost:3333/api/suragan/4/charimpyo/5
 
 # 메뉴 등록
 ###
-POST http://localhost:3333/api/suragan/18/charimpyo
+POST http://localhost:3333/api/suragan/1/charimpyo
 Content-Type: application/json
 
 {
 	"category": 1,
-	"name": "페퍼로니 피자10",
+	"name": "페퍼로니 피자13",
 	"introduce": "존맛",
 	"price": 25000,
 	"image": "url"
@@ -83,12 +84,12 @@ DELETE http://localhost:3333/api/suragan/4/charimpyo/10
 
 # 주문 결제
 ###
-POST http://localhost:3333/api/suragan/15/order
+POST http://localhost:3333/api/suragan/1/order
 Content-Type: application/json
 
 {
-"MenuId": 30,
-"orderDetails":[{"페퍼로니 피자":2}],
+"MenuId": [8, 10, 11],
+"orderDetails":[{"페퍼로니 피자":2,"페퍼로니 피자":2,"페퍼로니 피자":2}],
 "totalPrice": 50000
 }
 
