@@ -47,7 +47,7 @@ export class MenuService {
     image,
     role
   ) => {
-    if (!role === true) throw new Error("권한이 없습니다.");
+    if (role !== true) throw new Error("권한이 없습니다.");
 
     console.log("image: ", image);
 
@@ -84,10 +84,10 @@ export class MenuService {
     const menu = await this.menuRepository.findOneMenu(menuId);
     const isOwner = await this.menuRepository.findOwnerRestaurant(userId);
 
-    if (restaurantId !== isOwner.Restaurants.restaurantId)
-      throw new Error("권한이 없습니다.");
+    // if (restaurantId !== isOwner.Restaurants.restaurantId)
+    //   throw new Error("권한이 없습니다.");
 
-    if (!menu) throw new Error("메뉴가 없어요");
+    // if (!menu) throw new Error("메뉴가 없어요");
 
     if (menuId) {
       await this.menuRepository.updateMenu(

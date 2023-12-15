@@ -1,4 +1,99 @@
-// 업장 정보 조회
+// 메뉴 카테고리
+let menuCategory = {
+  1: "메인메뉴",
+  2: "사이드메뉴",
+  3: "음료",
+  4: "기타",
+};
+// 메뉴 정보 조회
+async function loadMenus() {
+  try {
+    const result = await axios.get(`/api/suragan/owner`);
+    const restaurant = result.data.data[0];
+    const restaurantId = restaurant.restaurantId;
+
+    const response = await axios.get(`/api/suragan/${restaurantId}/charimpyo`);
+    const menus = response.data.data;
+    console.log(menus);
+    menus.forEach((data) => {
+      let menuList = `
+        <div class="menu-info" data-menuId="${data.menuId}">
+         <select class="menu-category" name="menu-category">
+           <option selected disabled>${menuCategory[data.category]}</option>
+           <option value="1">메인메뉴</option>
+           <option value="2">사이드메뉴</option>
+           <option value="3">음료</option>
+           <option value="4">기타</option>
+         </select>
+         <input type="text" class="menu-image" value="${data.image}" />
+         <input type="text" class="menu-name" value="${data.name}" />
+         <input type="text" class="menu-introduce" value="${data.introduce}" />
+         <input type="text" class="menu-price" value="${data.price}" />
+         <div class="btns">
+           <button class="menu-update-btn">수정</button>
+           <button class="menu-delete-btn">삭제</button>
+         </div>
+       </div> 
+          `;
+      document
+        .querySelector(".middle-left-2")
+        .insertAdjacentHTML("beforeend", menuList);
+    });
+
+    // 메뉴 수정
+    const elements = document.querySelectorAll(".menu-update-btn");
+    let menuId;
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].addEventListener("click", async function (event) {
+        menuId =
+          event.target.parentElement.parentElement.getAttribute("data-menuId");
+        // menuId = event.target.parentElement.getAttribute("data.menuId");
+        const image = document.querySelector(".menu-image").value;
+        const category = document.querySelector(
+          `.menu-category :nth-child(2)`
+        ).value;
+        const name = document.querySelector(".menu-name").value;
+        const introduce = document.querySelector(".menu-introduce").value;
+        const price = document.querySelector(".menu-price").value;
+
+        console.log(image, category, name, introduce, price);
+
+        // 메뉴 정보 수정
+        const updateMenu = await axios.patch(
+          `/api/suragan/${restaurantId}/charimpyo/${menuId}`,
+          {
+            category: Number(category),
+            name,
+            introduce,
+            price: Number(price),
+            image,
+          }
+        );
+        console.log(updateMenu);
+        alert("메뉴 정보 업데이트 완료!");
+      });
+    }
+
+    // 메뉴 삭제
+    const delBtn = document.getElementsByClassName("menu-delete-btn");
+    for (let i = 0; i < delBtn.length; i++) {
+      delBtn[i].addEventListener("click", async function (event) {
+        // 메뉴 아이디 조회
+        const menuId =
+          event.target.parentElement.parentElement.getAttribute("data-menuId");
+        // 메뉴 정보 삭제
+        const deleteMenu = await axios.delete(
+          `/api/suragan/${restaurantId}/charimpyo/${menuId}`
+        );
+        console.log(deleteMenu);
+        alert("수라간 정보 삭제 완료!");
+      });
+    }
+  } catch (error) {
+    console.error("Error fetching posts", error);
+  }
+}
+
 async function getOwnerInfo() {
   try {
     const result = await axios.get(`/api/suragan/owner`);
@@ -24,6 +119,7 @@ async function getOwnerInfo() {
         const businessHours = document.getElementById("businessHours").value;
         const phoneNumber = document.getElementById("phoneNumber").value;
 
+        // 업장 정보 수정
         const updateRestaurant = await axios.put(
           `/api/suragan/${restaurantId}`,
           {
@@ -40,6 +136,7 @@ async function getOwnerInfo() {
         alert("수라간 정보 업데이트 완료!");
       });
 
+    // 업장 정보 삭제
     document
       .getElementById("restaurant-delete-btn")
       .addEventListener("click", async function () {
@@ -50,6 +147,41 @@ async function getOwnerInfo() {
         console.log(deleteRestaurant);
         alert("수라간 삭제 완료!");
       });
+
+    // 메뉴 등록
+    document
+      .getElementById("create-btn")
+      .addEventListener("click", async function () {
+        try {
+          const restaurantId = restaurant.restaurantId;
+
+          const image = document.getElementById("create-img").value;
+          const name = document.getElementById("create-name").value;
+          const price = document.getElementById("create-price").value;
+          const category = document.getElementById("create-category").value;
+          const introduce = document.getElementById("create-introduce").value;
+
+          createRestaurant = await axios.post(
+            `/api/suragan/${restaurantId}/charimpyo`,
+            {
+              category: Number(category),
+              name,
+              introduce,
+              price: Number(price),
+              image,
+            }
+          );
+
+          console.log(createRestaurant);
+          console.log(image);
+          alert("등록 완료!");
+          // window.location.href = "index.html";
+        } catch (error) {
+          console.error("Error fetching post:", error.message);
+        }
+      });
+
+    loadMenus();
   } catch (error) {
     console.error("Error fetching post:", error.message);
   }

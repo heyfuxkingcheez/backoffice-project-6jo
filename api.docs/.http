@@ -111,7 +111,7 @@ GET http://localhost:3333/api/suragan/4/charimpyo
 
 # 메뉴 상세 조회
 ###
-GET http://localhost:3333/api/suragan/4/charimpyo/5
+GET http://localhost:4000/api/suragan/2/charimpyo/1
 
 # 메뉴 등록
 ###
@@ -128,7 +128,7 @@ Content-Type: application/json
 
 # 메뉴 수정
 ###
-PATCH http://localhost:3333/api/suragan/4/charimpyo/10
+PATCH http://localhost:3333/api/suragan/2/charimpyo/10
 Content-Type: application/json
 
 {

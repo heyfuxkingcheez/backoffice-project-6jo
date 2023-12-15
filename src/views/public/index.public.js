@@ -13,7 +13,7 @@ document.getElementById("join-owner").addEventListener("click", function () {
   window.location.href = "restaurant-enroll.html";
 });
 
-// 여러 요소에 대한 클릭 이벤트 처리
+// 클릭하면 해당하는 카테고리 리턴 및 데이터 조회됨
 const elements = document.getElementsByClassName("row-box");
 for (let i = 0; i < elements.length; i++) {
   elements[i].addEventListener("click", function (event) {

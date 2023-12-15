@@ -60,7 +60,7 @@ model Menu {
   name         String      @map("name")
   introduce    String      @map("introduce") @db.Text
   price        Int         @map("price")
-  image        String      @map("image")
+  image        String      @map("image") @db.Text
   createdAt    DateTime    @default(now()) @map("createdAt")
   updatedAt    DateTime    @updatedAt @map("updatedAt")
   Restaurant   Restaurants @relation(fields: [RestaurantId], references: [restaurantId], onDelete: Cascade)

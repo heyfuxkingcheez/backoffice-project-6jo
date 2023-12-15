@@ -249,6 +249,19 @@ select {
   width: 20%;
 }
 
+.menu-img {
+  width: 200px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.menu-img > img {
+  width: 100%;
+  height: 200px;
+  border: 1px solid black;
+  border-radius: 15px;
+}
+
 .create-btn {
   margin-left: auto;
   margin-right: auto;
@@ -291,4 +304,21 @@ select {
   color: white;
   margin-left: auto;
   margin-right: auto;
+}
+
+#introduce {
+  width: 200px;
+}
+
+input {
+  padding-left: 10px;
+}
+
+.menu-update-btn,
+.menu-delete-btn {
+  width: 100px;
+  height: 30px;
+  background-color: #df5536;
+  border: none;
+  color: white;
 }
