@@ -13,7 +13,7 @@ datasource db {
 
 model Users {
   userId   Int @id @default(autoincrement()) @map("userId")
-  role Boolean @default(false) @map("role") // 손님 0 사업자 1
+  role Boolean @default(true) @map("role") //  손님 false, 사업자 ture
   email String  @unique @map("email") // 이메일
   nickname String @map("nickname") // 닉네임
   password String @map("password") // 비번
@@ -41,44 +41,41 @@ model Point {
   @@map("Point") 
 }
 
-
 model Restaurants {
-  restaurantId Int @id @default(autoincrement()) @map("restaurantId")
-  UserId Int @map("UserId") @unique
+  restaurantId  Int      @id @default(autoincrement()) @map("restaurantId")
+  UserId        Int      @unique @map("UserId")
   image         String   @map("image") @db.Text
-  category Int @map("category") // 음식점 카테고리(한식,중식 등)
-  name String @map("name") // 가게이름
-  address String @map("address") // 가게주소
-  introduce String @db.Text @map("introduce") // 가게소개
-  businessHours String @map("businessHours") // 가게 영업시간
-  phoneNumber String @map("phoneNumber") // 가게 전화번호
+  category      Int      @map("category")
+  name          String   @map("name")
+  address       String   @map("address")
+  introduce     String   @map("introduce") @db.Text
+  businessHours String   @map("businessHours")
+  phoneNumber   String   @map("phoneNumber")
+  createdAt     DateTime @default(now()) @map("createdAt")
+  updatedAt     DateTime @updatedAt @map("updatedAt")
 
-  createdAt DateTime @default(now()) @map("createdAt")
-  updatedAt DateTime @updatedAt @map("updatedAt")
-
-  User Users @relation(fields: [UserId], references: [userId], onDelete: Cascade)
-  menu Menu[] // Restaurants 테이블과 Menu 테이블이 1:N 관계 (식당은 Menu를 여러개 가질 수 있음)
+  User          Users    @relation(fields: [UserId], references: [userId], onDelete: Cascade)
+  menu          Menu[]
   orders Orders[]
+
   @@map("Restaurants")
 }
 
 model Menu {
-
-  menuId Int @id @default(autoincrement()) @map("menuId")
-  RestaurantId Int @map("RestaurantId")
-  category Int @map("category") // 음식 카테고리(메인메뉴, 사이드메뉴, 음료, 기타 등)
-  name String @map("name") // 메뉴이름
-  introduce String @db.Text @map("introduce") // 메뉴 소개
-  price Int @map("price") // 메뉴 가격
+  menuId       Int         @id @default(autoincrement()) @map("menuId")
+  RestaurantId Int         @map("RestaurantId")
+  category     Int         @map("category")
+  name         String      @map("name")
+  introduce    String      @map("introduce") @db.Text
+  price        Int         @map("price")
   image        String      @map("image") @db.Text
+  createdAt    DateTime    @default(now()) @map("createdAt")
+  updatedAt    DateTime    @updatedAt @map("updatedAt")
 
-  createdAt DateTime @default(now()) @map("createdAt")
-  updatedAt DateTime @updatedAt @map("updatedAt")
-
-  orders Orders[] // order에 대해 n:m 관계
+  orders       Orders[]    @relation("MenuToOrders")
   Restaurant Restaurants @relation(fields: [RestaurantId], references: [restaurantId], onDelete: Cascade)
 
-  @@unique([RestaurantId, name]) // 같은 아이디의 식당에서는 똑같은 이름의 메뉴 중복등록 불가
+  @@unique([RestaurantId, name])
   @@map("Menu")
 }
 
