@@ -17,7 +17,7 @@ export class OrderRepository {
     MenuId,
     restaurantId,
     orderDetails,
-    totalPrice
+    totalPrice  
   ) => {
     const [createdPoint, createdOrder] = await prisma.$transaction(
       async (tx) => {

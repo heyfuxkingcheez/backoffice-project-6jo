@@ -48,7 +48,6 @@ export class MenuService {
     price,
     image
   ) => {
-
     const createdMenu = await this.menuRepository.createMenu(
       category,
       restaurantId,
