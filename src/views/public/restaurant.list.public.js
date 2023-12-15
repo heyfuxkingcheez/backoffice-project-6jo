@@ -89,7 +89,6 @@ async function loadRestaurants(category) {
     console.error("Error fetching posts", error);
   }
 }
-
 // 식당 상세 페이지 이동하는 함수
 async function loadDetailRestaurant(restaurantId) {
   // 해당 카테고리 페이지로 이동하면서 데이터도 함께 전달

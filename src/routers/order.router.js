@@ -16,14 +16,14 @@ orderRouter.post(
 orderRouter.get(
   "/:restaurantId/order",
   auth_middleware,
-  auth_owner_middleware,
+  // auth_owner_middleware,
   orderController.getOrders
 );
 // // 주문 상태 수정 API(배달 완료) (사장)
 orderRouter.patch(
   "/:restaurantId/order/:orderId",
   auth_middleware,
-  auth_owner_middleware,
+  // auth_owner_middleware,
   orderController.completeOrder
 );
 

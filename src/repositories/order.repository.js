@@ -69,7 +69,7 @@ export class OrderRepository {
   // 주문 목록 조회 API (사장)
   getOrders = async (restaurantId) => {
     const getOrders = await prisma.orders.findMany({
-      where: { RestaurantId: +restaurantId },
+      where: { RestaurantId: +restaurantId, isCompleted: false },
       select: {
         orderId: true,
         orderDetails: true,
