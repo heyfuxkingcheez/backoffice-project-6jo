@@ -11,7 +11,6 @@ export class OrderRepository {
     });
     return checkedPoint;
   };
-
   // 주문 결제 Transaction 적용
   orderPayment = async (
     userId,
@@ -22,6 +21,13 @@ export class OrderRepository {
   ) => {
     const [createdPoint, createdOrder] = await prisma.$transaction(
       async (tx) => {
+        const checkedMenu = await tx.menu.findUnique({
+          where: {
+            menuId: MenuId,
+            RestaurantId: +restaurantId,
+          },
+        });
+        if (!checkedMenu) throw new Error("비정상적인 접근");
         const checkedPoint = await tx.point.findMany({
           where: { UserId: userId },
           orderBy: { createdAt: "desc" },
