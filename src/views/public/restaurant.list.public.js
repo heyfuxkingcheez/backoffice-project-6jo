@@ -60,8 +60,9 @@ async function loadRestaurants(category) {
     const response = await axios.get(`/api/suragan?category=${category}`);
     const restaurants = response.data.data;
     restaurants.forEach((data) => {
+      console.log(data);
       let restaurantsList = `
-        <div class="restaurant-box">
+        <div class="restaurant-box" data-restaurant-id="${data.restaurantId}">
           <div class="restaurant-img"><img src="${data.image}" /></div>
           <div class="introduce">
             <h3>${data.name}</h3>
