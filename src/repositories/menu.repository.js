@@ -20,15 +20,6 @@ export class MenuRepository {
   };
 
   // 메뉴 등록
-  isOwner = async (userId) => {
-    const isOwner = await prisma.restaurants.findUnique({
-      where: { UserId: userId },
-    });
-    console.log("isOwner: ", isOwner);
-
-    return isOwner;
-  };
-
   createMenu = async (
     category,
     restaurantId,

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { RestaurantsController } from "../controllers/restaurants.controller.js";
 import { auth_middleware } from "../middlewares/auth.middleware.js";
+import { auth_owner_middleware } from "../middlewares/auth.owner.middleware.js";
 
 const restaurantsRouter = Router();
 const restaurantsController = new RestaurantsController();
@@ -41,6 +42,7 @@ restaurantsRouter.get(
 restaurantsRouter.put(
   "/:restaurantId",
   auth_middleware,
+  auth_owner_middleware,
   restaurantsController.updateRestaurant
 );
 
@@ -48,6 +50,7 @@ restaurantsRouter.put(
 restaurantsRouter.delete(
   "/:restaurantId",
   auth_middleware,
+  auth_owner_middleware,
   restaurantsController.deleteRestaurant
 );
 
