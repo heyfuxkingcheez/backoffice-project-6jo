@@ -22,6 +22,7 @@ export class OrderRepository {
     for (const MenuId of MenuIds) {
       const result = MenuId;
       console.log("result", result);
+
       const [createdPoint, createdOrder] = await prisma.$transaction(
         async (tx) => {
           const checkedMenu = await tx.menu.findUnique({
