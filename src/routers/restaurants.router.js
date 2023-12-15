@@ -13,7 +13,10 @@ restaurantsRouter.post(
 );
 
 // 식당 목록  카테고리별 조회 API
-restaurantsRouter.get("/", restaurantsController.findAllRestaurants);
+restaurantsRouter.get("/", restaurantsController.findCategoryRestaurants);
+
+// 식당 전체 목록 조회 API
+restaurantsRouter.get("/all", restaurantsController.findAllRestaurants);
 
 // 오너 - 식당 조회 API
 restaurantsRouter.get(
