@@ -40,9 +40,9 @@ export class MenuController {
   // 메뉴 등록
   createMenu = async (req, res, next) => {
     try {
-      const { role } = res.locals.user;
       const { restaurantId } = req.params;
       const { category, name, introduce, price, image } = await req.body;
+      const { userId } = res.locals.user;
 
       const createdMenu = await this.menuService.createMenu(
         category,
@@ -51,7 +51,7 @@ export class MenuController {
         introduce,
         price,
         image,
-        role
+        userId
       );
 
       return res
