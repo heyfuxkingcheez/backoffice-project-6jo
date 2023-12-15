@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/x-icon" href="./image/king.png">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+   
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <link rel="stylesheet" href="./review.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script defer src="./public/restaurant.list.public.js"></script>
+    <title>수라간 상차림</title>
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <div class="nav1">
+      <div class="btn-box">
+        <button id="cart"><img src="../image/cart.png" /></button>
+        <button id="my-page"><img src="../image/user.png" /></button>
+        <button id="join">회원가입</button>
+      </div>
+    </div>
+    <div class="nav2" id="gohome">
+      <div class="logo-image"><img src="../image/logo.png" /></div>
+    </div>
+    <div class="container-custom">
+    <div class="item-content-set01 row">
+        <div class="item-main">
+            <div class="item-card row ">
+              <div class="item-card-main">
+                  <img src="./image/chicken.png" width="70">
+              </div>
+              <div class="item-card-info">
+                  <p class="item-title pblack"><strong>HTML 참 못하는 집</strong></p>
+                  <p class="item-score"><i class="material-icons item-icon">star_rate</i><strong class="pblack">5.0</strong> 최근리뷰 1 | 최근사장님댓글 0</p>
+                  <p class="pay-way"><span class="pblack">결제방법</span> 바로결제, 만나서 결제</p>
+                  <p class="minimum-pay"><span class="pblack"> 최소주문금액</span> 13,000원</p>
+              </div>
+            </div>
+            
+            <div class="item-list row">
+                <a href="menu.html"><div class="item-menu item-set01">메뉴</div></a>
+                <a href="info.html"><div class="item-info item-set01">정보</div></a>
+                <div class="item-review item-set01">리뷰</div>
+            </div>
+            <div class="item-content">
+                <!-- 이곳에 콘텐츠를 작성하시오 -->
+                <div class="review-write-align">
+                    <button type="button" class="btn btn-info review-write">리뷰 작성</button>
+                </div>
+                <div class="review-align">
+                    <h5>총 <strong><span class="td1">1</span></strong>개의 리뷰가 작성되었습니다.</h5>
+                    <p><a href="#"><strong>작성순</strong></a><a href="#"><span class="span-gray"> | 도움순</span></a></p>
+                </div>
+                <div class="review-set review01 row">
+                    <div class="review-img-grid">
+                        <img src="./image/i15285167857.png" width="50">
+                    </div>
+                    <div class="review-info-grid">
+                        <h6>꺾인 김할배</h6>
+                        <p class="review-stars"><img src="./image/stars.png" width="80" class="review-stars-png"><span class="td2">2023-12-15</span></p>
+                        <p class="review-text">왜 중간으로 안가는거지?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item-side">
+            <div class="basket">
+                <div class="basket-header"><strong>장바구니</strong></div>
+                <div class="basket-body">
+                   <div class="list01">
+                       <p class="item-list-section item-list-section01">후라이드 치킨</p>
+                       <div class="item-list-section item-list-section02">
+                          <i class="material-icons icon-set02">cancel</i>14,000원
+                           <div class="btn-group item-count" role="group" aria-label="Basic example">
+                            <button class="bt bt01 up">-</button>
+                            <button class="bt bt-count">1</button>
+                            <button class="bt bt02 down">+</button>
+                          </div>
+                       </div>
+                       <p class="item-list-section item-list-section01">양념 치킨</p>
+                       <div class="item-list-section item-list-section02">
+                          <i class="material-icons icon-set02">cancel</i>16,000원
+                           <div class="btn-group item-count" role="group" aria-label="Basic example">
+                            <button class="bt bt01 up">-</button>
+                            <button class="bt bt-count">1</button>
+                            <button class="bt bt02 down">+</button>
+                          </div>
+                       </div>
+                   </div>
+                </div>
+                <div class="basket-sum"><p><strong>합계 : 가격얼마여</strong></p></div>
+                <div class="pay-btn"><button type="button" class="btn btn-outline-success btn-set01" data-toggle="modal" data-target="#exampleModal">결재하기</button></div>    
+            </div>
+  
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Pay Section</h5>
+                      <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button> -->
+                    </div>
+                    <div class="modal-body">
+                      <h5>배달정보</h5>
+                      <p class="pay-position">여긴 주소 확인 칸이여</p>
+                      <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">전화번호</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                      <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">배달시 요청사항</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                      
+                      <h5>결제금액</h5>
+                      <div class="alert alert-info" role="alert">
+                        30,000원 <span class="alert-second">주문금액 30,000원</span>
+                      </div>
+                      
+                      <div class="input-group mb-3">
+                        <select class="custom-select" id="inputGroupSelect01">
+                          <option selected>Choose...</option>
+                          <option value="1">카카오페이</option>
+                          <option value="2">네이버페이</option>
+                          <option value="3">배민페이</option>
+                          <option value="4">배민페이 계좌이체</option>
+                          <option value="5">카드결제</option>
+                          <option value="6">휴대폰결제</option>
+                          <option value="7">페이코</option>
+                        </select>
+                      </div>
+                      
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+                      <button type="button" class="btn btn-success">주문하기</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal End -->
+        </div>
+</div>
+  </body>
+</html>
