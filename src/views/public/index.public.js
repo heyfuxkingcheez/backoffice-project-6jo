@@ -13,6 +13,11 @@ document.getElementById("join-owner").addEventListener("click", function () {
   window.location.href = "restaurant-enroll.html";
 });
 
+// 사장님 페이지 이동
+document.getElementById("owner-page").addEventListener("click", function () {
+  window.location.href = "mypage-owner.html";
+});
+
 // 여러 요소에 대한 클릭 이벤트 처리
 const elements = document.getElementsByClassName("row-box");
 for (let i = 0; i < elements.length; i++) {

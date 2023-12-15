@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE `Users` (
     `userId` INTEGER NOT NULL AUTO_INCREMENT,
-    `role` BOOLEAN NOT NULL DEFAULT true,
+    `role` BOOLEAN NOT NULL DEFAULT false,
     `email` VARCHAR(191) NOT NULL,
     `nickname` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
@@ -18,10 +18,9 @@ CREATE TABLE `Point` (
     `UserId` INTEGER NOT NULL,
     `income` INTEGER NOT NULL,
     `expense` INTEGER NOT NULL,
-    `balance` INTEGER NOT NULL,
+    `balance` INTEGER NOT NULL DEFAULT 1000000,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
-    INDEX `Point_UserId_fkey`(`UserId`),
     PRIMARY KEY (`pointId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -29,7 +28,7 @@ CREATE TABLE `Point` (
 CREATE TABLE `Restaurants` (
     `restaurantId` INTEGER NOT NULL AUTO_INCREMENT,
     `UserId` INTEGER NOT NULL,
-    `image` VARCHAR(191) NOT NULL,
+    `image` TEXT NOT NULL,
     `category` INTEGER NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `address` VARCHAR(191) NOT NULL,
@@ -51,7 +50,7 @@ CREATE TABLE `Menu` (
     `name` VARCHAR(191) NOT NULL,
     `introduce` TEXT NOT NULL,
     `price` INTEGER NOT NULL,
-    `image` VARCHAR(191) NOT NULL,
+    `image` TEXT NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
@@ -63,13 +62,13 @@ CREATE TABLE `Menu` (
 CREATE TABLE `Orders` (
     `orderId` INTEGER NOT NULL AUTO_INCREMENT,
     `UserId` INTEGER NOT NULL,
-    `MenuId` INTEGER NOT NULL,
+    `MenuId` JSON NOT NULL,
+    `RestaurantId` INTEGER NOT NULL,
     `orderDetails` JSON NOT NULL,
     `totalPrice` INTEGER NOT NULL,
-    `isCompleted` BOOLEAN NOT NULL,
+    `isCompleted` BOOLEAN NOT NULL DEFAULT false,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
-    INDEX `Orders_UserId_fkey`(`UserId`),
     PRIMARY KEY (`orderId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -106,6 +105,9 @@ ALTER TABLE `Menu` ADD CONSTRAINT `Menu_RestaurantId_fkey` FOREIGN KEY (`Restaur
 
 -- AddForeignKey
 ALTER TABLE `Orders` ADD CONSTRAINT `Orders_UserId_fkey` FOREIGN KEY (`UserId`) REFERENCES `Users`(`userId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Orders` ADD CONSTRAINT `Orders_RestaurantId_fkey` FOREIGN KEY (`RestaurantId`) REFERENCES `Restaurants`(`restaurantId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Reviews` ADD CONSTRAINT `Reviews_OrderId_fkey` FOREIGN KEY (`OrderId`) REFERENCES `Orders`(`orderId`) ON DELETE CASCADE ON UPDATE CASCADE;

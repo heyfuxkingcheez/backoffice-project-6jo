@@ -44,7 +44,7 @@ async function loadRestaurants(category) {
 const receivedCategoryData = location.href.split("=")[1];
 loadRestaurants(receivedCategoryData);
 
-// 여러 요소에 대한 클릭 이벤트 처리
+// 다른 카테고리 클릭 시
 const elements = document.getElementsByClassName("category");
 for (let i = 0; i < elements.length; i++) {
   elements[i].addEventListener("click", function (event) {
@@ -62,7 +62,7 @@ async function loadRestaurants(category) {
     restaurants.forEach((data) => {
       console.log(data);
       let restaurantsList = `
-        <div class="restaurant-box" data-restaurant-id="${data.restaurantId}">
+        <div class="restaurant-box" data-id=${data.restaurantId}>
           <div class="restaurant-img"><img src="${data.image}" /></div>
           <div class="introduce">
             <h3>${data.name}</h3>
@@ -76,7 +76,24 @@ async function loadRestaurants(category) {
         .querySelector("#restaurants-list")
         .insertAdjacentHTML("beforeend", restaurantsList);
     });
+
+    // 식당 클릭 시 식당 아이디 값 리턴
+    const restaurantBox = document.getElementsByClassName("restaurant-box");
+    for (let i = 0; i < elements.length; i++) {
+      restaurantBox[i].addEventListener("click", function (event) {
+        const restaurantId = event.currentTarget.getAttribute("data-id");
+
+        loadDetailRestaurant(restaurantId);
+      });
+    }
   } catch (error) {
     console.error("Error fetching posts", error);
   }
+}
+
+// 식당 상세 페이지 이동하는 함수
+async function loadDetailRestaurant(restaurantId) {
+  // 해당 카테고리 페이지로 이동하면서 데이터도 함께 전달
+
+  window.location.href = `menu.html?${restaurantId}`;
 }
