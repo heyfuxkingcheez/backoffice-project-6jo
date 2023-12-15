@@ -26,6 +26,12 @@ restaurantsRouter.get(
   restaurantsController.findRestaurantByUserId
 );
 
+// // 손님 - 식당 조회 API
+// restaurantsRouter.get(
+//   "/detail",
+//   restaurantsController.findRestaurantById
+// );
+
 // 식당 상세 조회 API
 restaurantsRouter.get(
   "/:restaurantId",

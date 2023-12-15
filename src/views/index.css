@@ -57,6 +57,20 @@ button > img {
   margin-right: 10px;
 }
 
+#owner-page {
+  background-color: white;
+  width: 80px;
+  height: 27px;
+
+  color: rgb(40, 39, 39);
+  border: none;
+  border-radius: 5px;
+
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
 #login {
   background-color: white;
   width: 80px;

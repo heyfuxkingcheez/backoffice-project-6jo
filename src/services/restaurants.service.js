@@ -12,14 +12,13 @@ export class RestaurantsService {
       return {
         restaurantId: restaurant.restaurantId,
         userId: restaurant.UserId,
+        image:restaurant.image,
         category: restaurant.category,
         name: restaurant.name,
         address: restaurant.address,
         introduce: restaurant.introduce,
         businessHours: restaurant.businessHours,
         phoneNumber: restaurant.phoneNumber,
-        // createdAt: restaurant.createdAt,
-        // updatedAt: restaurant.updatedAt,
       };
     });
   };

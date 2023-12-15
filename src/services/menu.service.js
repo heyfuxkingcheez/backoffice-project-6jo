@@ -12,8 +12,10 @@ export class MenuService {
       return {
         menuId: menu.menuId,
         category: menu.category,
+        image: menu.image,
         name: menu.name,
         price: menu.price,
+        introduce: menu.introduce,
         createdAt: menu.createdAt,
         updatedAt: menu.updatedAt,
       };
@@ -28,6 +30,7 @@ export class MenuService {
     return {
       menuId: menu.menuId,
       category: menu.category,
+      image: menu.image,
       name: menu.name,
       introduce: menu.introduce,
       price: menu.price,
@@ -45,6 +48,7 @@ export class MenuService {
     price,
     image
   ) => {
+
     const createdMenu = await this.menuRepository.createMenu(
       category,
       restaurantId,
@@ -78,8 +82,8 @@ export class MenuService {
     const menu = await this.menuRepository.findOneMenu(menuId);
     const isOwner = await this.menuRepository.findOwnerRestaurant(userId);
 
-    if (restaurantId !== isOwner.Restaurants.restaurantId)
-      throw new Error("권한이 없습니다.");
+    // if (restaurantId !== isOwner.Restaurants.restaurantId)
+    //   throw new Error("권한이 없습니다.");
 
     if (!menu) throw new Error("메뉴가 없어요");
 
