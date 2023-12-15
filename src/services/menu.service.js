@@ -37,24 +37,14 @@ export class MenuService {
   };
 
   // 메뉴 등록
-
   createMenu = async (
     category,
     restaurantId,
     name,
     introduce,
     price,
-    image,
-    userId
+    image
   ) => {
-    const isOwner = await this.menuRepository.isOwner(userId);
-    console.log("isOwner: ", isOwner.restaurantId);
-    console.log("restaurantId: ", +restaurantId);
-
-    if (!isOwner) throw new Error("권한이 없습니다1.");
-    if (isOwner.restaurantId !== +restaurantId)
-      throw new Error("권한이 없습니다2.");
-
     const createdMenu = await this.menuRepository.createMenu(
       category,
       restaurantId,

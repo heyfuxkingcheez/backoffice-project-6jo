@@ -42,7 +42,6 @@ export class MenuController {
     try {
       const { restaurantId } = req.params;
       const { category, name, introduce, price, image } = await req.body;
-      const { userId } = res.locals.user;
 
       const createdMenu = await this.menuService.createMenu(
         category,
@@ -50,8 +49,7 @@ export class MenuController {
         name,
         introduce,
         price,
-        image,
-        userId
+        image
       );
 
       return res
