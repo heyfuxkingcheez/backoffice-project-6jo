@@ -3,7 +3,7 @@ import { MenuService } from "../services/menu.service.js";
 export class MenuController {
   menuService = new MenuService();
 
-  // 메뉴 목록 조회
+  // 식당별 메뉴 전체 목록 조회
   getMenus = async (req, res, next) => {
     try {
       const { restaurantId } = req.params;

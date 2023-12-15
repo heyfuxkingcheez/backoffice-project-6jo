@@ -5,12 +5,11 @@ export class MenuRepository {
   findAllMenus = async (restaurantId) => {
     const menus = await prisma.menu.findMany({
       where: { RestaurantId: +restaurantId },
-      orderBy: { createdAt: "desc" },
+      orderBy: { category: "asc" },
     });
 
     return menus;
   };
-
   // 메뉴 상세 조회
   findOneMenu = async (menuId) => {
     const menu = await prisma.menu.findUnique({
