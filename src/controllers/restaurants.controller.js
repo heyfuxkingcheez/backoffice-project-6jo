@@ -2,27 +2,28 @@ import { RestaurantsService } from "../services/restaurants.service.js";
 
 export class RestaurantsController {
   restaurantsService = new RestaurantsService();
-  // // 식당 목록 조회
-  // findAllRestaurants = async (req, res, next) => {
-  //   try {
-  //     const category = req.query.category
-  //     const restaurants = await this.restaurantsService.findAllRestaurants(category);
-
-  //     return res.status(200).json({
-  //       success: true,
-  //       message: "식당 목록 조회 성공!",
-  //       data: restaurants,
-  //     });
-  //   } catch (err) {
-  //     next(err);
-  //   }
-  // };
-
   // 식당 목록 조회
   findAllRestaurants = async (req, res, next) => {
     try {
+      const restaurants = await this.restaurantsService.findAllRestaurants();
+
+      return res.status(200).json({
+        success: true,
+        message: "식당 목록 조회 성공!",
+        data: restaurants,
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  // 식당 목록 조회
+  findCategoryRestaurants = async (req, res, next) => {
+    try {
       const category = req.query.category;
-      const restaurants = await this.restaurantsService.findAllRestaurants(
+      console.log("category: ", category);
+
+      const restaurants = await this.restaurantsService.findCategoryRestaurants(
         category
       );
 
