@@ -43,6 +43,20 @@ button > img {
   margin-right: 10px;
 }
 
+#logout {
+  background-color: white;
+  width: 80px;
+  height: 27px;
+
+  color: rgb(40, 39, 39);
+  border: none;
+  border-radius: 5px;
+
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
 #join-owner {
   background-color: white;
   width: 80px;
@@ -107,6 +121,18 @@ button > img {
   float: right;
   margin-top: 10px;
   margin-right: 10px;
+}
+
+#join:hover,
+#logout:hover,
+#join-owner:hover,
+#owner-page:hover,
+#login:hover,
+#cart:hover,
+#my-page:hover {
+  background-color: #af391e;
+  color: white;
+  cursor: pointer;
 }
 
 .main-image {
@@ -192,4 +218,23 @@ button > img {
 .category-img > img {
   width: 95px;
   height: 95px;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+.outer-wrqpper {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

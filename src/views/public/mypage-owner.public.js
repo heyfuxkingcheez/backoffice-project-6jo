@@ -100,7 +100,9 @@ async function loadMenus() {
 async function getOwnerInfo() {
   try {
     const result = await axios.get(`/api/suragan/owner`);
+    console.log("result: ", result);
     const restaurant = result.data.data[0];
+    console.log("restaurant: ", restaurant);
 
     document.getElementById("image").value = restaurant.image;
     document.getElementById("category").value = restaurant.category;
@@ -147,8 +149,13 @@ async function getOwnerInfo() {
         const deleteRestaurant = await axios.delete(
           `/api/suragan/${restaurantId}`
         );
-        console.log(deleteRestaurant);
-        alert("수라간 삭제 완료!");
+        if (confirm("정말 삭제 하시겠습니까?")) {
+          console.log(deleteRestaurant);
+
+          alert("수라간 삭제 완료!");
+        } else {
+          alert("삭제를 취소합니다.");
+        }
       });
 
     // 메뉴 등록
@@ -215,7 +222,7 @@ async function getOwnerInfo() {
           deliveryComplete[i].addEventListener("click", async function (event) {
             const orderInfo = event.target.parentElement.parentElement;
             let orderId = orderInfo.getAttribute("data-orderId");
-            
+
             // 배달 완료로 변경
             const deliveryCompleted = await axios.patch(
               `/api/suragan/${restaurantId}/order/${orderId}`

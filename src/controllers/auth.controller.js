@@ -13,12 +13,13 @@ export class AuthController {
       const token = user.token;
       const name = user.nickname;
       let expires = new Date(Date.now() + 1440 * 60000);
+      res.cookie("role", user.role);
       res.cookie("authorization", `Bearer ${token}`, {
         expires: expires,
       });
       res
         .status(200)
-        .json({ success: true, message: "로그인 성공", name: name });
+        .json({ success: true, message: "로그인 성공", data: user });
     } catch (err) {
       console.log(err);
       res.status(401).json({ success: false, message: err.message });
@@ -29,6 +30,7 @@ export class AuthController {
   LogOut = async (req, res) => {
     try {
       res.clearCookie("authorization");
+      res.clearCookie("role");
       res.status(200).json({ success: true, message: "로그아웃 성공" });
     } catch (err) {
       res.status(401).json({ success: false, message: err.message });

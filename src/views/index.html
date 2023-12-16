@@ -1,93 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>임금님밥상</title>
-    <link rel="stylesheet" href="./index.css" />
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script defer src="./public/index.public.js"></script>
-  </head>
 
-  <body>
-    <div class="nav1">
-      <div class="btn-box">
-        <button id="cart"><img src="./image/cart.png" /></button>
-        <button id="my-page"><img src="./image/user.png" /></button>
-        <button id="join">회원가입</button>
-        <button id="join-owner">수라간등록</button>
-        <button id="owner-page">마이수라간</button>
-        <button id="login">로그인</button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>임금님밥상</title>
+  <link rel="stylesheet" href="./index.css" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script defer src="./public/index.public.js"></script>
+</head>
+
+<body>
+  <div class="nav1">
+    <div class="btn-box">
+      <button id="cart" style="display: none;"><img src="./image/cart.png" /></button>
+      <button id="my-page" style="display: none;"><img src="./image/user.png" /></button>
+      <button id="join-owner" style="display: none;">수라간등록</button>
+      <button id="owner-page" style="display: none;">마이수라간</button>
+      <button id="logout" style="display: none;">로그아웃</button>
+      <button id="login">로그인</button>
+
+    </div>
+  </div>
+  <div class="nav2">
+    <div class="logo-image"><img src="./image/logo.png" /></div>
+  </div>
+  <div class="main-image">
+    <input class="search-input" type="text" placeholder="수라간 / 차림메뉴 검색" />
+    <div class="search-btn">
+      <button><img src="./image/search.png" /></button>
+    </div>
+  </div>
+  <div class="outer-wrqpper">
+    <div class="col-box">
+      <div class="row-box" data-categories="all">
+        <div class="category-name">전체보기</div>
+        <div class="category-img"><img src="./image/king.png" /></div>
+      </div>
+      <div class="row-box" data-categories="2">
+        <div class="category-name">치킨</div>
+        <div class="category-img"><img src="./image/chicken.png" /></div>
+      </div>
+      <div class="row-box" data-categories="1">
+        <div class="category-name">1인분</div>
+        <div class="category-img"><img src="./image/1 serving.png" /></div>
+      </div>
+      <div class="row-box" data-categories="4">
+        <div class="category-name">한식</div>
+        <div class="category-img"><img src="./image/bibimbob.png" /></div>
       </div>
     </div>
-    <div class="nav2">
-      <div class="logo-image"><img src="./image/logo.png" /></div>
-    </div>
-    <div class="main-image">
-      <input
-        class="search-input"
-        type="text"
-        placeholder="수라간 / 차림메뉴 검색"
-      />
-      <div class="search-btn">
-        <button><img src="./image/search.png" /></button>
+    <div class="col-box">
+      <div class="row-box" data-categories="3">
+        <div class="category-name">중국집</div>
+        <div class="category-img"><img src="./image/china.png" /></div>
+      </div>
+      <div class="row-box" data-categories="7">
+        <div class="category-name">일식 / 돈까스</div>
+        <div class="category-img"><img src="./image/sushi.png" /></div>
+      </div>
+      <div class="row-box" data-categories="6">
+        <div class="category-name">야식</div>
+        <div class="category-img"><img src="./image/yasik.png" /></div>
+      </div>
+      <div class="row-box" data-categories="8">
+        <div class="category-name">족발 / 보쌈</div>
+        <div class="category-img"><img src="./image/pig.png" /></div>
       </div>
     </div>
-    <div class="outer-wrqpper">
-      <div class="col-box">
-        <div class="row-box" data-categories="all">
-          <div class="category-name">전체보기</div>
-          <div class="category-img"><img src="./image/king.png" /></div>
-        </div>
-        <div class="row-box" data-categories="2">
-          <div class="category-name">치킨</div>
-          <div class="category-img"><img src="./image/chicken.png" /></div>
-        </div>
-        <div class="row-box" data-categories="1">
-          <div class="category-name">1인분</div>
-          <div class="category-img"><img src="./image/1 serving.png" /></div>
-        </div>
-        <div class="row-box" data-categories="4">
-          <div class="category-name">한식</div>
-          <div class="category-img"><img src="./image/bibimbob.png" /></div>
-        </div>
+    <div class="col-box">
+      <div class="row-box" data-categories="9">
+        <div class="category-name">카페 / 디저트</div>
+        <div class="category-img"><img src="./image/dessert.png" /></div>
       </div>
-      <div class="col-box">
-        <div class="row-box" data-categories="3">
-          <div class="category-name">중국집</div>
-          <div class="category-img"><img src="./image/china.png" /></div>
-        </div>
-        <div class="row-box" data-categories="7">
-          <div class="category-name">일식 / 돈까스</div>
-          <div class="category-img"><img src="./image/sushi.png" /></div>
-        </div>
-        <div class="row-box" data-categories="6">
-          <div class="category-name">야식</div>
-          <div class="category-img"><img src="./image/yasik.png" /></div>
-        </div>
-        <div class="row-box" data-categories="8">
-          <div class="category-name">족발 / 보쌈</div>
-          <div class="category-img"><img src="./image/pig.png" /></div>
-        </div>
+      <div class="row-box" data-categories="10">
+        <div class="category-name">편의점 / 마트</div>
+        <div class="category-img"><img src="./image/bag.png" /></div>
       </div>
-      <div class="col-box">
-        <div class="row-box" data-categories="9">
-          <div class="category-name">카페 / 디저트</div>
-          <div class="category-img"><img src="./image/dessert.png" /></div>
-        </div>
-        <div class="row-box" data-categories="10">
-          <div class="category-name">편의점 / 마트</div>
-          <div class="category-img"><img src="./image/bag.png" /></div>
-        </div>
-        <div class="row-box" data-categories="5">
-          <div class="category-name">피자 / 양식</div>
-          <div class="category-img"><img src="./image/pizza.png" /></div>
-        </div>
-        <div class="row-box" data-categories="11">
-          <div class="category-name">패스트푸드</div>
-          <div class="category-img"><img src="./image/hamburger.png" /></div>
-        </div>
+      <div class="row-box" data-categories="5">
+        <div class="category-name">피자 / 양식</div>
+        <div class="category-img"><img src="./image/pizza.png" /></div>
+      </div>
+      <div class="row-box" data-categories="11">
+        <div class="category-name">패스트푸드</div>
+        <div class="category-img"><img src="./image/hamburger.png" /></div>
       </div>
     </div>
-  </body>
+  </div>
+
+</body>
+
 </html>

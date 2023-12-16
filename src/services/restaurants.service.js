@@ -12,7 +12,7 @@ export class RestaurantsService {
       return {
         restaurantId: restaurant.restaurantId,
         userId: restaurant.UserId,
-        image:restaurant.image,
+        image: restaurant.image,
         category: restaurant.category,
         name: restaurant.name,
         address: restaurant.address,
@@ -162,7 +162,8 @@ export class RestaurantsService {
   // 식당 삭제
   deleteRestaurant = async (restaurantId, userId) => {
     const restaurant = await this.restaurantsRepository.findRestaurantById(
-      restaurantId
+      restaurantId,
+      userId
     );
     if (!restaurant) throw new Error("존재하는 수라간이 아니옵니다!");
     if (userId !== restaurant.UserId)

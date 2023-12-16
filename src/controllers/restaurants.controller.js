@@ -81,6 +81,9 @@ export class RestaurantsController {
         phoneNumber
       );
 
+      res.clearCookie("role");
+      await res.cookie("role", "true");
+
       return res.status(200).json({
         success: true,
         message: "식당 등록 성공!",
@@ -150,6 +153,7 @@ export class RestaurantsController {
       const userId = res.locals.user.userId;
       await this.restaurantsService.deleteRestaurant(restaurantId, userId);
 
+      res.clearCookie("role");
       return res.status(200).json({
         success: true,
         message: "식당 삭제 성공!",
