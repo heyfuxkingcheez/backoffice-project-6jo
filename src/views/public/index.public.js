@@ -36,26 +36,35 @@ document.getElementById("owner-page").addEventListener("click", function () {
   window.location.href = "mypage-owner.html";
 });
 
-// 로그인 상태일 때 버튼 숨김
-const cookie = document.cookie.split(";");
+//로그인 상태일 때 버튼 숨김
 
-console.log(cookie);
+const roleCookie = document.cookie
+  .split(";")
+  .find((cookie) => cookie.trim().endsWith("true"));
+const tokenCookie = document.cookie
+  .split(";")
+  .find((cookie) => cookie.trim().startsWith("authorization"));
+
+console.log(document.cookie.split(";"));
+console.log(roleCookie);
+console.log(tokenCookie);
 
 // 로그인 상태 확인
-if (cookie[1]) {
+if (tokenCookie) {
   // 사업자 상태 확인
-  if (cookie[0] === "role=true") {
+  if (roleCookie) {
     document.getElementById("logout").style.display = "block";
     document.getElementById("owner-page").style.display = "block";
     document.getElementById("cart").style.display = "block";
     document.getElementById("my-page").style.display = "block";
     document.getElementById("login").style.display = "none";
-  } else {
+  } else if (!roleCookie) {
     document.getElementById("logout").style.display = "block";
     document.getElementById("join-owner").style.display = "block";
     document.getElementById("cart").style.display = "block";
     document.getElementById("my-page").style.display = "block";
     document.getElementById("login").style.display = "none";
+  } else {
   }
 }
 

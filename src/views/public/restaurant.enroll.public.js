@@ -20,7 +20,7 @@ document.getElementById("submit").addEventListener("click", async function () {
     console.log(createRestaurant);
     console.log(image);
     alert("등록 완료!");
-    // window.location.href = "index.html";
+    window.location.href = "index.html";
   } catch (error) {
     console.error("Error fetching post:", error.message);
   }

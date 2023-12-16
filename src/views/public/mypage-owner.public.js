@@ -149,8 +149,13 @@ async function getOwnerInfo() {
         const deleteRestaurant = await axios.delete(
           `/api/suragan/${restaurantId}`
         );
-        console.log(deleteRestaurant);
-        alert("수라간 삭제 완료!");
+        if (confirm("정말 삭제 하시겠습니까?")) {
+          console.log(deleteRestaurant);
+
+          alert("수라간 삭제 완료!");
+        } else {
+          alert("삭제를 취소합니다.");
+        }
       });
 
     // 메뉴 등록

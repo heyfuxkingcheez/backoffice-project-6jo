@@ -51,6 +51,12 @@ export class RestaurantsRepository {
         phoneNumber,
       },
     });
+    await prisma.users.update({
+      where: { userId },
+      data: {
+        role: true,
+      },
+    });
 
     return createdRestaurant;
   };
@@ -91,9 +97,15 @@ export class RestaurantsRepository {
   };
 
   // 식당 삭제
-  deleteRestaurant = async (restaurantId) => {
+  deleteRestaurant = async (restaurantId, userId) => {
     const deletedRestaurant = await prisma.restaurants.delete({
       where: { restaurantId: +restaurantId },
+    });
+    await prisma.users.update({
+      where: { userId },
+      data: {
+        role: false,
+      },
     });
 
     return deletedRestaurant;
