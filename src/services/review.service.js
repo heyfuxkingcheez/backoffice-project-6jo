@@ -12,7 +12,7 @@ export class ReviewService {
         result.push(existReview);
       }
     }
-    console.log("리뷰있는애들", result);
+    if (result.length === 0) throw new Error("리뷰가 존재하지 않습니다.");
 
     return result;
   };

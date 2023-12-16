@@ -53,12 +53,12 @@ GET http://localhost:3333/api/suragan/4/charimpyo/5
 
 # 메뉴 등록
 ###
-POST http://localhost:3333/api/suragan/1/charimpyo
+POST http://localhost:3333/api/suragan/2/charimpyo
 Content-Type: application/json
 
 {
 	"category": 1,
-	"name": "페퍼로니 피자13",
+	"name": "페퍼로니 피자3",
 	"introduce": "존맛",
 	"price": 25000,
 	"image": "url"
@@ -79,12 +79,12 @@ DELETE http://localhost:3333/api/suragan/4/charimpyo/10
 
 # 주문 결제
 ###
-POST http://localhost:3333/api/suragan/1/order
+POST http://localhost:3333/api/suragan/2/order
 Content-Type: application/json
 
 {
-"MenuId": [8, 10, 11],
-"orderDetails":[{"페퍼로니 피자1":2,"페퍼로니 피자2":2,"페퍼로니 피자3":2}],
+"MenuId": [12, 13],
+"orderDetails":[{"페퍼로니 피자1":2,"페퍼로니 피자2":2}],
 "totalPrice": 50000
 }
 
@@ -102,7 +102,7 @@ GET http://localhost:3333/api/suragan/1/order/review
 
 # 리뷰 작성
 ###
-POST http://localhost:3333/api/suragan/1/order/review/10
+POST http://localhost:3333/api/suragan/1/order/review/4
 Content-Type: application/json
 
 {

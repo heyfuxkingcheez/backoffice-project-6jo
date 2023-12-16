@@ -100,7 +100,9 @@ async function loadMenus() {
 async function getOwnerInfo() {
   try {
     const result = await axios.get(`/api/suragan/owner`);
+    console.log("result: ", result);
     const restaurant = result.data.data[0];
+    console.log("restaurant: ", restaurant);
 
     document.getElementById("image").value = restaurant.image;
     document.getElementById("category").value = restaurant.category;
@@ -215,7 +217,7 @@ async function getOwnerInfo() {
           deliveryComplete[i].addEventListener("click", async function (event) {
             const orderInfo = event.target.parentElement.parentElement;
             let orderId = orderInfo.getAttribute("data-orderId");
-            
+
             // 배달 완료로 변경
             const deliveryCompleted = await axios.patch(
               `/api/suragan/${restaurantId}/order/${orderId}`
