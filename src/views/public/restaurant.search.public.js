@@ -3,6 +3,39 @@ document.getElementById("gohome").addEventListener("click", function () {
   window.location.href = "index.html";
 });
 
+// 로그인 이동
+document.getElementById("login").addEventListener("click", function () {
+  window.location.href = "login.html";
+});
+
+// 로그아웃 이동
+document.getElementById("logout").addEventListener("click", async () => {
+  try {
+    // Use Axios to make a GET request to /api/auth/logout
+    const response = await axios.get("/api/auth/logout");
+
+    // Handle the response data if needed
+    alert("로그아웃 성공!");
+
+    // Reload the window after successful logout
+    window.location.reload();
+  } catch (error) {
+    // Handle errors
+    console.error("Logout failed:", error.message);
+  }
+  console.log("로그아웃");
+});
+
+// 사장님 등록 이동
+document.getElementById("join-owner").addEventListener("click", function () {
+  window.location.href = "restaurant-enroll.html";
+});
+
+// 사장님 페이지 이동
+document.getElementById("owner-page").addEventListener("click", function () {
+  window.location.href = "mypage-owner.html";
+});
+
 let cachedRestaurants = null;
 
 async function loadRestaurants() {

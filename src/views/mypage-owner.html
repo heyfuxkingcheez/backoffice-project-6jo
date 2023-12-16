@@ -1,56 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>임금님밥상</title>
-    <link rel="stylesheet" href="./mypage-owner.css" />
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script defer src="./public/mypage-owner.public.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-  </head>
 
-  <body>
-    <div class="nav1">
-      <div class="btn-box">
-        <button id="cart"><img src="./image/cart.png" /></button>
-        <button id="my-page"><img src="./image/user.png" /></button>
-        <button id="logout">로그아웃</button>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>임금님밥상</title>
+  <link rel="stylesheet" href="./mypage-owner.css" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script defer src="./public/mypage-owner.public.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+
+<body>
+  <div class="nav1">
+    <div class="btn-box">
+      <button id="cart"><img src="./image/cart.png" /></button>
+      <button id="my-page"><img src="./image/user.png" /></button>
+      <button id="logout">로그아웃</button>
     </div>
-    <div class="nav2" id="gohome">
-      <div class="logo-image"><img src="./image/logo.png" /></div>
-    </div>
-    <div class="container">
-      <div class="middle">
-        <div class="middle-left">
-          <div class="middle-left-1">
-            <div class="restaurant-info"">
+  </div>
+  <div class="nav2" id="gohome">
+    <div class="logo-image"><img src="./image/logo.png" /></div>
+  </div>
+  <div class="container">
+    <div class="middle">
+      <div class="middle-left">
+        <div class="middle-left-1">
+          <div class="restaurant-info"">
             <h2>수라간 정보</h2>
 
             <select
-              id="category"
-              class="w-1/2 h-10 p-2 border border-gray-300 rounded-md"
-              name="category"
-            >
-              <option selected disabled>업종</option>
-              <option value="1">1인분</option>
-              <option value="2">치킨</option>
-              <option value="3">중국집</option>
-              <option value="4">한식</option>
-              <option value="5">피자 / 양식</option>
-              <option value="6">야식</option>
-              <option value="7">일식 / 돈까스</option>
-              <option value="8">족발 / 보쌈</option>
-              <option value="9">카페 / 디저트</option>
-              <option value="10">편의점 / 마트</option>
-              <option value="11">패스트푸드</option>
-              <!-- 필요한 만큼 옵션을 추가할 수 있습니다 -->
+            id=" category" class="w-1/2 h-10 p-2 border border-gray-300 rounded-md" name="category">
+            <option selected disabled>업종</option>
+            <option value="1">1인분</option>
+            <option value="2">치킨</option>
+            <option value="3">중국집</option>
+            <option value="4">한식</option>
+            <option value="5">피자 / 양식</option>
+            <option value="6">야식</option>
+            <option value="7">일식 / 돈까스</option>
+            <option value="8">족발 / 보쌈</option>
+            <option value="9">카페 / 디저트</option>
+            <option value="10">편의점 / 마트</option>
+            <option value="11">패스트푸드</option>
+            <!-- 필요한 만큼 옵션을 추가할 수 있습니다 -->
             </select>
-
+            <img id="image-view" src="" style="width: 80%;">
             <input id="image" type="text" />
             <input id="name" type="text" />
 
@@ -109,5 +104,6 @@
         </div>
       </div>
     </div>
-  </body>
+</body>
+
 </html>

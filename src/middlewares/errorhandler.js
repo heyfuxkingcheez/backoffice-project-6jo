@@ -17,6 +17,17 @@ const ErrorHandler = (err, req, res, next) => {
   if (err.message === "배달 미완료 주문입니다.") {
     return res.status(401).json({ errorMessage: "배달 미완료 주문입니다." });
   }
+  if (err.message === "메뉴가 없어요") {
+    return res.status(400).json({ errorMessage: "조회 할 메뉴가 없습니다." });
+  }
+  if (err.message === "존재하는 수라간이 아니옵니다!") {
+    return res
+      .status(400)
+      .json({ errorMessage: "존재하는 수라간이 아니옵니다!" });
+  }
+  if (err.message === "조회되는 식당이 없어요") {
+    return res.status(400).json({ errorMessage: "조회 할 수라간이 없습니다." });
+  }
 };
 
 export { ErrorHandler };

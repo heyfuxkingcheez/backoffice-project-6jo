@@ -6,7 +6,6 @@ export class MenuService {
   // 가게별 메뉴 목록 조회
   findAllMenus = async (restaurantId) => {
     const menus = await this.menuRepository.findAllMenus(restaurantId);
-    if (menus.length === 0) throw new Error("메뉴가 없어요");
 
     return menus.map((menu) => {
       return {

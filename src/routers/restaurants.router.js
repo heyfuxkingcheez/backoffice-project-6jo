@@ -39,7 +39,7 @@ restaurantsRouter.get(
 );
 
 // 식당 수정 API
-restaurantsRouter.put(
+restaurantsRouter.patch(
   "/:restaurantId",
   auth_middleware,
   auth_owner_middleware,

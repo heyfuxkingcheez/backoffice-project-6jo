@@ -1,4 +1,72 @@
 const restaurantId = location.href.split("?")[1];
+console.log(restaurantId);
+
+// 로그인 이동
+document.getElementById("login").addEventListener("click", function () {
+  window.location.href = "login.html";
+});
+
+// 로그아웃 이동
+document.getElementById("logout").addEventListener("click", async () => {
+  try {
+    // Use Axios to make a GET request to /api/auth/logout
+    const response = await axios.get("/api/auth/logout");
+
+    // Handle the response data if needed
+    alert("로그아웃 성공!");
+
+    // Reload the window after successful logout
+    window.location.reload();
+  } catch (error) {
+    // Handle errors
+    console.error("Logout failed:", error.message);
+  }
+  console.log("로그아웃");
+});
+
+// 사장님 등록 이동
+document.getElementById("join-owner").addEventListener("click", function () {
+  window.location.href = "restaurant-enroll.html";
+});
+
+// 사장님 페이지 이동
+document.getElementById("owner-page").addEventListener("click", function () {
+  window.location.href = "mypage-owner.html";
+});
+
+// let roleCookie = document.cookie
+//   .split(";")
+//   .find((cookie) => cookie.trim().endsWith("true"));
+// let tokenCookie = document.cookie
+//   .split(";")
+//   .find((cookie) => cookie.trim().startsWith("authorization"));
+
+// 로그인 상태 확인
+if (
+  document.cookie
+    .split(";")
+    .find((cookie) => cookie.trim().startsWith("authorization"))
+) {
+  // 사업자 상태 확인
+  if (
+    document.cookie.split(";").find((cookie) => cookie.trim().endsWith("true"))
+  ) {
+    document.getElementById("logout").style.display = "block";
+    document.getElementById("owner-page").style.display = "block";
+    document.getElementById("cart").style.display = "block";
+    document.getElementById("my-page").style.display = "block";
+    document.getElementById("login").style.display = "none";
+  } else if (
+    !document.cookie.split(";").find((cookie) => cookie.trim().endsWith("true"))
+  ) {
+    document.getElementById("logout").style.display = "block";
+    document.getElementById("join-owner").style.display = "block";
+    document.getElementById("cart").style.display = "block";
+    document.getElementById("my-page").style.display = "block";
+    document.getElementById("login").style.display = "none";
+  } else {
+  }
+}
 
 // 식당 정보 데이터를 로드하는 함수
 loadRestaurantInfo(restaurantId);
@@ -84,4 +152,3 @@ document.querySelectorAll(".cartBtn").forEach((btn) => {
     console.log(totalPrice);
   });
 });
-

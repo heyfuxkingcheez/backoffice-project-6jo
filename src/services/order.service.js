@@ -39,8 +39,11 @@ export class OrderService {
   };
 
   // 배달 완료 API (사장)
-  completeOrder = async (orderId) => {
-    const completedOrder = await this.orderRepository.completeOrder(orderId);
+  completeOrder = async (orderId, UserId) => {
+    const completedOrder = await this.orderRepository.completeOrder(
+      orderId,
+      UserId
+    );
 
     return completedOrder;
   };

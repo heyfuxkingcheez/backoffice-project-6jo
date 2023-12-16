@@ -4,8 +4,8 @@ POST http://localhost:3333/api/users/signup
 Content-Type: application/json
 
 {
-	"email": "example11@gmail.com",
-	"nickname": "최수영",
+	"email": "example14@gmail.com",
+	"nickname": "이하늘",
 	"password": "aaaa1111",
 	"passwordConfirm": "aaaa1111"
 }
@@ -79,11 +79,11 @@ DELETE http://localhost:3333/api/suragan/4/charimpyo/10
 
 # 주문 결제
 ###
-POST http://localhost:3333/api/suragan/2/order
+POST http://localhost:3333/api/suragan/30/order
 Content-Type: application/json
 
 {
-"MenuId": [12, 13],
+"MenuId": [29, 30],
 "orderDetails":[{"페퍼로니 피자1":2,"페퍼로니 피자2":2}],
 "totalPrice": 50000
 }
@@ -139,7 +139,7 @@ Content-Type: application/json
 
 # 식당 삭제
 ###
-DELETE  http://localhost:4000/api/suragan/9
+DELETE  http://localhost:3333/api/suragan/23
 Content-Type: application/json
 
 # 메뉴 목록 조회

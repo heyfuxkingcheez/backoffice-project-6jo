@@ -8,7 +8,7 @@ document.getElementById("submit").addEventListener("click", async function () {
     const businessHours = document.getElementById("businessHours").value;
     const phoneNumber = document.getElementById("phoneNumber").value;
 
-    createRestaurant = await axios.post("/api/suragan", {
+    const createRestaurant = await axios.post("/api/suragan", {
       image,
       category: Number(category),
       name,

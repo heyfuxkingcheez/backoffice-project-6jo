@@ -165,10 +165,10 @@ export class RestaurantsService {
       restaurantId,
       userId
     );
-    if (!restaurant) throw new Error("존재하는 수라간이 아니옵니다!");
-    if (userId !== restaurant.UserId)
-      throw new Error("수라간 주인장만 삭제 가능하시옵니다!");
+    // if (!restaurant) throw new Error("존재하는 수라간이 아니옵니다!");
+    // if (userId !== restaurant.UserId)
+    //   throw new Error("수라간 주인장만 삭제 가능하시옵니다!");
 
-    await this.restaurantsRepository.deleteRestaurant(restaurantId);
+    await this.restaurantsRepository.deleteRestaurant(restaurantId, userId);
   };
 }

@@ -5,7 +5,7 @@
 
 .nav2 {
   display: flex;
-  height: 180px;
+  height: 140px;
   background-color: #df5536;
   position: relative;
 }
@@ -43,6 +43,62 @@ button > img {
   margin-right: 10px;
 }
 
+#logout {
+  background-color: white;
+  width: 80px;
+  height: 27px;
+
+  color: rgb(40, 39, 39);
+  border: none;
+  border-radius: 5px;
+
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+#join-owner {
+  background-color: white;
+  width: 80px;
+  height: 27px;
+
+  color: rgb(40, 39, 39);
+  border: none;
+  border-radius: 5px;
+
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+#owner-page {
+  background-color: white;
+  width: 80px;
+  height: 27px;
+
+  color: rgb(40, 39, 39);
+  border: none;
+  border-radius: 5px;
+
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+#login {
+  background-color: white;
+  width: 80px;
+  height: 27px;
+
+  color: rgb(40, 39, 39);
+  border: none;
+  border-radius: 5px;
+
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
 #cart {
   background-color: white;
   width: 27px;
@@ -65,6 +121,18 @@ button > img {
   float: right;
   margin-top: 10px;
   margin-right: 10px;
+}
+
+#join:hover,
+#logout:hover,
+#join-owner:hover,
+#owner-page:hover,
+#login:hover,
+#cart:hover,
+#my-page:hover {
+  background-color: #af391e;
+  color: white;
+  cursor: pointer;
 }
 
 .main-box {
@@ -146,8 +214,8 @@ button > img {
 }
 
 .cart-item img {
-  width: 200px; 
-  margin-right: 10px; 
+  width: 200px;
+  margin-right: 10px;
 }
 
 .item-info {
@@ -156,8 +224,8 @@ button > img {
 
 .item-description {
   position: absolute;
-  bottom: 0; 
-  right: 0; 
+  bottom: 0;
+  right: 0;
   text-align: right;
 }
 
@@ -177,4 +245,10 @@ button > img {
   top: 10px;
   right: 10px;
   cursor: pointer;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
 }

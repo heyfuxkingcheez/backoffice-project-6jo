@@ -3,6 +3,55 @@ document.getElementById("gohome").addEventListener("click", function () {
   window.location.href = "index.html";
 });
 
+// 로그인 이동
+document.getElementById("login").addEventListener("click", function () {
+  window.location.href = "login.html";
+});
+
+// 로그아웃 이동
+document.getElementById("logout").addEventListener("click", async () => {
+  try {
+    // Use Axios to make a GET request to /api/auth/logout
+    const response = await axios.get("/api/auth/logout");
+
+    // Handle the response data if needed
+    alert("로그아웃 성공!");
+
+    // Reload the window after successful logout
+    window.location.reload();
+  } catch (error) {
+    // Handle errors
+    console.error("Logout failed:", error.message);
+  }
+  console.log("로그아웃");
+});
+
+const roleCookie = document.cookie
+  .split(";")
+  .find((cookie) => cookie.trim().endsWith("true"));
+const tokenCookie = document.cookie
+  .split(";")
+  .find((cookie) => cookie.trim().startsWith("authorization"));
+
+// 로그인 상태 확인
+if (tokenCookie) {
+  // 사업자 상태 확인
+  if (roleCookie) {
+    document.getElementById("logout").style.display = "block";
+    document.getElementById("owner-page").style.display = "block";
+    document.getElementById("cart").style.display = "block";
+    document.getElementById("my-page").style.display = "block";
+    document.getElementById("login").style.display = "none";
+  } else if (!roleCookie) {
+    document.getElementById("logout").style.display = "block";
+    document.getElementById("join-owner").style.display = "block";
+    document.getElementById("cart").style.display = "block";
+    document.getElementById("my-page").style.display = "block";
+    document.getElementById("login").style.display = "none";
+  } else {
+  }
+}
+
 // 메뉴 카테고리
 let menuCategory = {
   1: "메인메뉴",
@@ -104,8 +153,9 @@ async function getOwnerInfo() {
     const restaurant = result.data.data[0];
     console.log("restaurant: ", restaurant);
 
+    document.getElementById("image-view").setAttribute("src", restaurant.image);
     document.getElementById("image").value = restaurant.image;
-    document.getElementById("category").value = restaurant.category;
+    // document.getElementById("category").value = restaurant.category;
     document.getElementById("name").value = restaurant.name;
     document.getElementById("address").value = restaurant.address;
     document.getElementById("introduce").value = restaurant.introduce;
@@ -117,7 +167,7 @@ async function getOwnerInfo() {
       .addEventListener("click", async function () {
         const restaurantId = restaurant.restaurantId;
         const image = document.getElementById("image").value;
-        const category = document.getElementById("category").value;
+        // const category = document.getElementById("category").value;
         const name = document.getElementById("name").value;
         const address = document.getElementById("address").value;
         const introduce = document.getElementById("introduce").value;
@@ -125,11 +175,11 @@ async function getOwnerInfo() {
         const phoneNumber = document.getElementById("phoneNumber").value;
 
         // 업장 정보 수정
-        const updateRestaurant = await axios.put(
+        const updateRestaurant = await axios.patch(
           `/api/suragan/${restaurantId}`,
           {
             image,
-            category: Number(category),
+            // category: Number(category),
             name,
             address,
             introduce,
@@ -139,22 +189,24 @@ async function getOwnerInfo() {
         );
         console.log(updateRestaurant);
         alert("수라간 정보 업데이트 완료!");
+        window.location.reload();
       });
 
     // 업장 정보 삭제
     document
       .getElementById("restaurant-delete-btn")
       .addEventListener("click", async function () {
-        const restaurantId = restaurant.restaurantId;
-        const deleteRestaurant = await axios.delete(
-          `/api/suragan/${restaurantId}`
-        );
-        if (confirm("정말 삭제 하시겠습니까?")) {
-          console.log(deleteRestaurant);
-
-          alert("수라간 삭제 완료!");
-        } else {
-          alert("삭제를 취소합니다.");
+        try {
+          const restaurantId = restaurant.restaurantId;
+          await axios.delete(`/api/suragan/${restaurantId}`);
+          if (confirm("정말 삭제 하시겠습니까?")) {
+            alert("삭제 완료!");
+            window.location.href = "index.html";
+          } else {
+            alert("취소합니다.");
+          }
+        } catch (error) {
+          console.error("Error fetching post:", error.message);
         }
       });
 
@@ -183,6 +235,7 @@ async function getOwnerInfo() {
           );
 
           alert("등록 완료!");
+          window.location.reload();
           // window.location.href = "index.html";
         } catch (error) {
           console.error("Error fetching post:", error.message);
@@ -211,12 +264,12 @@ async function getOwnerInfo() {
             `;
           document
             .querySelector("#delivery-body")
-            .insertAdjacentHTML("beforeend", orderList);
+            .insertAdjacentHTML?.("beforeend", orderList);
         });
 
         // 배달 완료 버튼 클릭 시 실행
         const deliveryComplete =
-          document.querySelectorAll(".delivery-complete");
+          document.querySelectorAll?.(".delivery-complete");
 
         for (let i = 0; i < deliveryComplete.length; i++) {
           deliveryComplete[i].addEventListener("click", async function (event) {

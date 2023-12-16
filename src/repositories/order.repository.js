@@ -84,26 +84,30 @@ export class OrderRepository {
   };
 
   // 배달 완료 API (사장)
-  completeOrder = async (orderId) => {
+  completeOrder = async (orderId, UserId) => {
     const [updateOrderStatus, createPointOfOnwer] = await prisma.$transaction(
       async (tx) => {
+        // 사장님 지갑
+        const restaurantOwner = await tx.users.findUnique({
+          where: { userId: UserId },
+        });
+
+        const checkedPoint = await tx.point.findMany({
+          where: { UserId: restaurantOwner.userId },
+          orderBy: { createdAt: "desc" },
+          take: 1,
+        });
+
         const updateOrderStatus = await tx.orders.update({
           where: { orderId: +orderId },
           data: {
             isCompleted: true,
           },
         });
-        const checkedPoint = await tx.point.findMany({
-          where: { UserId: updateOrderStatus.UserId },
-          orderBy: { createdAt: "desc" },
-          take: 1,
-        });
-        console.log("checkedPoint: ", checkedPoint);
 
-        console.log("updateOrderStatus: ", updateOrderStatus);
         const createPointOfOnwer = await tx.point.create({
           data: {
-            UserId: updateOrderStatus.UserId,
+            UserId: restaurantOwner.userId,
             income: updateOrderStatus.totalPrice,
             expense: 0,
             balance: checkedPoint[0].balance + updateOrderStatus.totalPrice,

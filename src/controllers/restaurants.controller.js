@@ -150,10 +150,11 @@ export class RestaurantsController {
   deleteRestaurant = async (req, res, next) => {
     try {
       const { restaurantId } = req.params;
-      const userId = res.locals.user.userId;
+      const { userId } = res.locals.user;
+      console.log("식당 삭제 컨트롤러 userId", userId);
       await this.restaurantsService.deleteRestaurant(restaurantId, userId);
 
-      res.clearCookie("role");
+      res.cookie("role", "false");
       return res.status(200).json({
         success: true,
         message: "식당 삭제 성공!",

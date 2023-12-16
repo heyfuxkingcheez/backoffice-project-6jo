@@ -62,8 +62,13 @@ export class OrderController {
   completeOrder = async (req, res, next) => {
     try {
       const { orderId } = req.params;
+      const { UserId } = res.locals.owner;
+      console.log("UserId 주인장 id: ", UserId);
 
-      const completedOrder = await this.orderService.completeOrder(orderId);
+      const completedOrder = await this.orderService.completeOrder(
+        orderId,
+        UserId
+      );
 
       return res.status(200).json({
         success: true,

@@ -71,3 +71,9 @@
   border-radius: 7px;
   margin-left: 5px;
 }
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}

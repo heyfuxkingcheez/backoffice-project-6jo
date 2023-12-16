@@ -37,7 +37,6 @@ document.getElementById("owner-page").addEventListener("click", function () {
 });
 
 //로그인 상태일 때 버튼 숨김
-
 const roleCookie = document.cookie
   .split(";")
   .find((cookie) => cookie.trim().endsWith("true"));

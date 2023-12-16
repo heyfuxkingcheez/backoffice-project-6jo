@@ -101,6 +101,7 @@ export class RestaurantsRepository {
     const deletedRestaurant = await prisma.restaurants.delete({
       where: { restaurantId: +restaurantId },
     });
+    console.log(userId);
     await prisma.users.update({
       where: { userId },
       data: {
