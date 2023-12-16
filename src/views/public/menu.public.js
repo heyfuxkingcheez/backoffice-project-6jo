@@ -3,38 +3,49 @@ document.getElementById("gohome").addEventListener("click", function () {
   window.location.href = "index.html";
 });
 
-//메뉴 목록 조회
+/// 주소에서 id값 가져오는 함수
+async function getUrl() {
+  const queryParams = new URLSearchParams(window.location.search);
+  const restaurantId = queryParams.get("restaurantId");
+  console.log(restaurantId);
+
+  return restaurantId;
+}
+
+// 메뉴 목록 조회
 async function loadMenus() {
   try {
-    const result = await axios.get(`/api/suragan/${restaurantId}/charimpyo`);
+    const restaurantId = await getUrl();
     console.log("들어옴?", restaurantId);
-    const restaurant = result.data.data;
-    const restaurantId = restaurant.restaurantId;
 
+    const result = await axios.get(`/api/suragan/${restaurantId}/charimpyo`);
+    const restaurant = result.data.data;
     const response = await axios.get(
       `/api/suragan/${restaurantId}/charimpyo/${manuId}`
     );
     const menus = response.data.data;
+
     console.log("메뉴상세정보나옴?", menus);
+
     menus.forEach((data) => {
       console.log("데이터", data);
       let menuList = `
-            <div class="item-content">
-            <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-action">
-                ${data.name}&nbsp;&nbsp;<span class="pset01">${data.price}</span
-                ><span class="food-image-set"
-                  ><img src="${data.image}" width="80"
-                /></span>
-              </a>
-            </div>
+        <div class="item-content">
+          <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action">
+              ${data.name}&nbsp;&nbsp;<span class="pset01">${data.price}</span>
+              <span class="food-image-set"><img src="${data.image}" width="80" /></span>
+            </a>
           </div>
-            `;
-      document.querySelector(".item-main");
-      console.log.insertAdjacentHTML("beforeend", menuList);
+        </div>
+      `;
+      document
+        .querySelector(".item-main")
+        .insertAdjacentHTML("beforeend", menuList);
     });
   } catch (error) {
-    console.error("그래 맞아, 놀랍게도 에러야", error);
+    console.error("에러 발생", error);
   }
 }
-loadMenus;
+
+loadMenus();
