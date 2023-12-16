@@ -1,7 +1,7 @@
-// 회원가입 이동
-document.getElementById("join").addEventListener("click", function () {
-  window.location.href = "user-page.html";
-});
+// // 회원가입 이동
+// document.getElementById("join").addEventListener("click", function () {
+//   window.location.href = "user-page.html";
+// });
 
 // 로그인 이동
 document.getElementById("login").addEventListener("click", function () {
@@ -35,6 +35,29 @@ document.getElementById("join-owner").addEventListener("click", function () {
 document.getElementById("owner-page").addEventListener("click", function () {
   window.location.href = "mypage-owner.html";
 });
+
+// 로그인 상태일 때 버튼 숨김
+const cookie = document.cookie.split(";");
+
+console.log(cookie);
+
+// 로그인 상태 확인
+if (cookie[1]) {
+  // 사업자 상태 확인
+  if (cookie[0] === "role=true") {
+    document.getElementById("logout").style.display = "block";
+    document.getElementById("owner-page").style.display = "block";
+    document.getElementById("cart").style.display = "block";
+    document.getElementById("my-page").style.display = "block";
+    document.getElementById("login").style.display = "none";
+  } else {
+    document.getElementById("logout").style.display = "block";
+    document.getElementById("join-owner").style.display = "block";
+    document.getElementById("cart").style.display = "block";
+    document.getElementById("my-page").style.display = "block";
+    document.getElementById("login").style.display = "none";
+  }
+}
 
 // 여러 요소에 대한 클릭 이벤트 처리
 const elements = document.getElementsByClassName("row-box");

@@ -130,7 +130,8 @@ button > img {
 #login:hover,
 #cart:hover,
 #my-page:hover {
-  background-color: #ebbaa6; /* Adjust the color as needed */
+  background-color: #af391e;
+  color: white;
   cursor: pointer;
 }
 

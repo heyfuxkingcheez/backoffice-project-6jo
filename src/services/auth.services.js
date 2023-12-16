@@ -22,6 +22,8 @@ export class AuthService {
       throw new Error("이메일 또는 비밀번호가 다릅니다.");
     }
 
+    const role = user.role;
+
     const token = jwt.sign(
       {
         userId: user.userId,
@@ -30,6 +32,6 @@ export class AuthService {
       { expiresIn: "24h" }
     );
     const userName = user.nickname;
-    return { userName, token };
+    return { userName, token, role };
   };
 }
