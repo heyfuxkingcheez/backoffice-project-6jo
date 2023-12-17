@@ -237,8 +237,7 @@ button > img {
   width: 60%;
 }
 .restaurant-img > img {
-  width: 100%;
-
+  width: 80%;
   border: 1px solid #353434;
   border-radius: 15px;
 }
