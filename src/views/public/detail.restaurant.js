@@ -6,6 +6,19 @@ document.getElementById("gohome").addEventListener("click", function () {
   window.location.href = "index.html";
 });
 
+// 담기 클릭 시 장바구니에 담김
+let menuId;
+// 장바구니 메뉴 중복 제거를 위한 아이디값 배열
+let cartMenuId = [];
+// 수량
+// let count = 0;
+// 메뉴 이름
+let orderDetail = [];
+// 수량
+let cartMenu = [];
+// 총가격
+let totalPrice = 0;
+
 // 로그인 이동
 document.getElementById("login").addEventListener("click", function () {
   window.location.href = "login.html";
@@ -75,6 +88,11 @@ async function loadRestaurantInfo(restaurantId) {
   try {
     const response = await axios.get(`/api/suragan/${restaurantId}`);
     const restaurant = response.data.data;
+    document.querySelector(".item-title").innerHTML = restaurant.name;
+    const imageElement = document.querySelector(".item-card-main img");
+    const newImagePath = restaurant.image;
+    imageElement.src = newImagePath;
+    console.log(restaurant);
     console.log(restaurant);
   } catch (error) {
     console.error("Error fetching posts", error);
@@ -105,12 +123,12 @@ async function loadMenu(restaurantId) {
       console.log("데이터", data);
       let menuList = `
         <div class="item-content">
-
+          <div class="list-group">
             <a class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modal${data.menuId}">
               ${data.name}&nbsp;&nbsp;<span class="pset01">${data.price}원</span>
-              <div class="food-image-set"><img src="${data.image}" width="80" /></div>
+              <span class="food-image-set"><img src="${data.image}" width="80" /></span>
             </a>
-   
+          </div>
         </div>
       `;
       document
@@ -151,26 +169,9 @@ async function loadMenu(restaurantId) {
         .querySelector(".menu-lists")
         .insertAdjacentHTML("beforeend", menuListModal);
     });
-
-    // 담기 클릭 시 장바구니에 담김
-    let menuId;
-    // 장바구니 메뉴 중복 제거를 위한 아이디값 배열
-    let cartMenuId = [];
-    // 수량
-    let count = 0;
-    // 메뉴 이름
-    let orderDetail = [];
-    // 수량
-    let cartMenu = [];
-    // 총가격
-    let totalPrice = 0;
-
     document.querySelectorAll(".cartBtn").forEach((btn) => {
       btn.addEventListener("click", async function (e) {
         document.querySelector(".list01").innerHTML = "";
-
-        // 주소
-
         menuId = e.target.getAttribute("data-id");
         console.log(menuId);
         if (cartMenuId.includes(Number(menuId)))
@@ -186,56 +187,80 @@ async function loadMenu(restaurantId) {
         cartMenu.push(menuInfo);
         let menuName = menuInfo.name;
         let menuPrice = menuInfo.price;
-        orderDetail.push({ menuName, menuPrice, count: 1 });
+        orderDetail.push({ menuName, menuPrice, count: 1, menuId });
         // 담기 버튼 클릭 시 해당 메뉴의 price 를 totalPrice 에 합산
         totalPrice += Number(menuInfo.price);
 
-        cartMenu.forEach((menu, index) => {
-          let cartList = `
+        let cartList = `
           <div class="item-list-container">
-            <p class="item-list-section item-list-section01">${menu.name}</p>
+            <p class="item-list-section item-list-section01">${menuInfo.name}</p>
             <div class="item-list-section item-list-section02">
-              <i class="material-icons icon-set02">cancel</i>${menu.price}원
+              <i class="material-icons icon-set02" data-id="${menuInfo.menuId}">cancel</i>${menuInfo.price}원
               <div
                 class="btn-group item-count"
                 role="group"
                 aria-label="Basic example"
               >
-                <button class="bt bt01 up" data-index="${index}">-</button>
+                <button class="bt bt01 up" data-id="${menuInfo.menuId}">-</button>
                 <button class="bt bt-count">1</button>
-                <button class="bt bt02 down" data-index="${index}">+</button>
+                <button class="bt bt02 down" data-id="${menuInfo.menuId}">+</button>
               </div>
             </div>
           </div>
           `;
-          document
-            .querySelector(".list01")
-            .insertAdjacentHTML("beforeend", cartList);
-          document.querySelector("#totalPrice").innerHTML = totalPrice;
-        });
+        document
+          .querySelector(".list01")
+          .insertAdjacentHTML("beforeend", cartList);
 
         document.querySelectorAll(".bt01.up").forEach((button) => {
           button.addEventListener("click", function () {
-            const index = this.getAttribute("data-index");
-            if (orderDetail[index].count === 1) {
+            const dataId = this.getAttribute("data-id");
+            const itemQuantity = orderDetail.filter(
+              (item) => item.menuId === dataId
+            );
+            if (itemQuantity[0].count === 1) {
               return alert("더 이상 감소시킬 수 없습니다.");
             }
-            orderDetail[index].count--;
+            itemQuantity[0].count--;
             const countButton = this.parentElement.querySelector(".bt-count");
-            countButton.innerText = orderDetail[index].count;
-            totalPrice -= Number(orderDetail[index].menuPrice); // 특정 가격을 뺍니다.
+            countButton.innerText = itemQuantity[0].count;
+            totalPrice -= Number(itemQuantity[0].menuPrice); // 특정 가격을 뺍니다.
             document.querySelector("#totalPrice").innerHTML = totalPrice;
             console.log(orderDetail);
           });
         });
         document.querySelectorAll(".bt02.down").forEach((button) => {
           button.addEventListener("click", function () {
-            const index = this.getAttribute("data-index");
-            orderDetail[index].count++;
+            const dataId = this.getAttribute("data-id");
+            const itemQuantity = orderDetail.filter(
+              (item) => item.menuId === dataId
+            );
+            itemQuantity[0].count++;
             const countButton = this.parentElement.querySelector(".bt-count");
-            countButton.innerText = orderDetail[index].count;
-            totalPrice += Number(orderDetail[index].menuPrice); // 특정 가격을 더합니다.
+            countButton.innerText = itemQuantity[0].count;
+            totalPrice += Number(itemQuantity[0].menuPrice); // 특정 가격을 더합니다.
             document.querySelector("#totalPrice").innerHTML = totalPrice;
+            console.log(orderDetail);
+          });
+        });
+
+        document.querySelectorAll(".material-icons").forEach((button) => {
+          button.addEventListener("click", function () {
+            const dataId = this.getAttribute("data-id");
+            const itemQuantity = orderDetail.filter(
+              (item) => item.menuId === dataId
+            );
+            const countButton = this.closest(
+              ".item-list-section02"
+            ).querySelector(".bt-count").innerText;
+            console.log(countButton);
+            totalPrice -= Number(itemQuantity[0].menuPrice * countButton); // 특정 가격을 더합니다.
+            document.querySelector("#totalPrice").innerHTML = totalPrice;
+            cartMenuId = cartMenuId.filter((item) => item !== Number(dataId));
+            orderDetail = orderDetail.filter((item) => item.menuId !== dataId);
+            const cartListItem = this.closest(".item-list-container");
+            cartListItem.remove();
+            console.log(cartMenuId);
             console.log(orderDetail);
           });
         });
