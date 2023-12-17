@@ -16,7 +16,7 @@ export class OrderController {
   // 주문 결제
   orderPayment = async (req, res, next) => {
     try {
-      const { MenuId, orderDetails, totalPrice } = await req.body;
+      const { MenuId, orderDetails, totalPrice, orderPlace } = await req.body;
       const { userId } = res.locals.user;
       const { restaurantId } = req.params;
       console.log("userId: ", userId);
@@ -26,7 +26,8 @@ export class OrderController {
         MenuId,
         restaurantId,
         orderDetails,
-        totalPrice
+        totalPrice,
+        orderPlace
       );
       console.log("orderPayment: ", orderPayment);
 

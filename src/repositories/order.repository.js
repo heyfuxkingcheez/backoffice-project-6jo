@@ -16,7 +16,8 @@ export class OrderRepository {
     MenuIds,
     restaurantId,
     orderDetails,
-    totalPrice
+    totalPrice,
+    orderPlace
   ) => {
     const createdOrders = [];
     for (const MenuId of MenuIds) {
@@ -56,6 +57,7 @@ export class OrderRepository {
               RestaurantId: +restaurantId,
               orderDetails,
               totalPrice,
+              orderPlace,
             },
           });
           return [createdPoint, createdOrder];
@@ -74,6 +76,7 @@ export class OrderRepository {
         orderId: true,
         orderDetails: true,
         totalPrice: true,
+        orderPlace: true,
         isCompleted: true,
         createdAt: true,
       },
