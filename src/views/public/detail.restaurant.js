@@ -1,7 +1,6 @@
 const restaurantId = location.href.split("?")[1];
 console.log(restaurantId);
 
-
 // 홈으로 이동
 document.getElementById("gohome").addEventListener("click", function () {
   window.location.href = "index.html";
@@ -19,7 +18,6 @@ let orderDetail = [];
 let cartMenu = [];
 // 총가격
 let totalPrice = 0;
-
 
 // 로그인 이동
 document.getElementById("login").addEventListener("click", function () {
@@ -97,6 +95,11 @@ async function loadRestaurantInfo(restaurantId) {
   try {
     const response = await axios.get(`/api/suragan/${restaurantId}`);
     const restaurant = response.data.data;
+    document.querySelector(".item-title").innerHTML = restaurant.name;
+    const imageElement = document.querySelector(".item-card-main img");
+    const newImagePath = restaurant.image;
+    imageElement.src = newImagePath;
+    console.log(restaurant);
     console.log(restaurant);
   } catch (error) {
     console.error("Error fetching posts", error);
@@ -180,71 +183,94 @@ async function loadMenu(restaurantId) {
         console.log(menuId);
         if (cartMenuId.includes(Number(menuId)))
           return alert("이미 담은 메뉴입니다.");
-    
+
         // 상세메뉴 조회하여 카트에 담기
         let result = await axios.get(
           `/api/suragan/${restaurantId}/charimpyo/${menuId}`
         );
         let menuInfo = result.data.data;
-    
+
         cartMenuId.push(menuInfo.menuId);
         cartMenu.push(menuInfo);
         let menuName = menuInfo.name;
         let menuPrice = menuInfo.price;
-        orderDetail.push({ menuName, menuPrice, count : 1 });
+        orderDetail.push({ menuName, menuPrice, count: 1, menuId });
         // 담기 버튼 클릭 시 해당 메뉴의 price 를 totalPrice 에 합산
         totalPrice += Number(menuInfo.price);
-    
-        cartMenu.forEach((menu, index) => {
-          let cartList = `
+
+        let cartList = `
           <div class="item-list-container">
-            <p class="item-list-section item-list-section01">${menu.name}</p>
+            <p class="item-list-section item-list-section01">${menuInfo.name}</p>
             <div class="item-list-section item-list-section02">
-              <i class="material-icons icon-set02">cancel</i>${menu.price}원
+              <i class="material-icons icon-set02" data-id="${menuInfo.menuId}">cancel</i>${menuInfo.price}원
               <div
                 class="btn-group item-count"
                 role="group"
                 aria-label="Basic example"
               >
-                <button class="bt bt01 up" data-index="${index}">-</button>
+                <button class="bt bt01 up" data-id="${menuInfo.menuId}">-</button>
                 <button class="bt bt-count">1</button>
-                <button class="bt bt02 down" data-index="${index}">+</button>
+                <button class="bt bt02 down" data-id="${menuInfo.menuId}">+</button>
               </div>
             </div>
           </div>
           `;
-          document
-            .querySelector(".list01")
-            .insertAdjacentHTML("beforeend", cartList);
-          document.querySelector("#totalPrice").innerHTML = totalPrice;
-        });
+        document
+          .querySelector(".list01")
+          .insertAdjacentHTML("beforeend", cartList);
+        document.querySelector("#totalPrice").innerHTML = totalPrice;
 
-        document.querySelectorAll('.bt01.up').forEach(button => {
-          button.addEventListener('click', function() {
-            const index = this.getAttribute('data-index');
-            if (orderDetail[index].count === 1) {
-              return alert('더 이상 감소시킬 수 없습니다.');
+        document.querySelectorAll(".bt01.up").forEach((button) => {
+          button.addEventListener("click", function () {
+            const dataId = this.getAttribute("data-id");
+            const itemQuantity = orderDetail.filter(
+              (item) => item.menuId === dataId
+            );
+            if (itemQuantity[0].count === 1) {
+              return alert("더 이상 감소시킬 수 없습니다.");
             }
-            orderDetail[index].count--;
-            const countButton = this.parentElement.querySelector('.bt-count');            
-            countButton.innerText = orderDetail[index].count;
-            totalPrice -= Number(orderDetail[index].menuPrice); // 특정 가격을 뺍니다.
+            itemQuantity[0].count--;
+            const countButton = this.parentElement.querySelector(".bt-count");
+            countButton.innerText = itemQuantity[0].count;
+            totalPrice -= Number(itemQuantity[0].menuPrice); // 특정 가격을 뺍니다.
             document.querySelector("#totalPrice").innerHTML = totalPrice;
             console.log(orderDetail);
           });
         });
-        document.querySelectorAll('.bt02.down').forEach(button => {
-          button.addEventListener('click', function() {
-            const index = this.getAttribute('data-index');
-            orderDetail[index].count++;
-            const countButton = this.parentElement.querySelector('.bt-count');
-            countButton.innerText = orderDetail[index].count;
-            totalPrice += Number(orderDetail[index].menuPrice); // 특정 가격을 더합니다.
-            document.querySelector("#totalPrice").innerHTML = totalPrice; 
+        document.querySelectorAll(".bt02.down").forEach((button) => {
+          button.addEventListener("click", function () {
+            const dataId = this.getAttribute("data-id");
+            const itemQuantity = orderDetail.filter(
+              (item) => item.menuId === dataId
+            );
+            itemQuantity[0].count++;
+            const countButton = this.parentElement.querySelector(".bt-count");
+            countButton.innerText = itemQuantity[0].count;
+            totalPrice += Number(itemQuantity[0].menuPrice); // 특정 가격을 더합니다.
+            document.querySelector("#totalPrice").innerHTML = totalPrice;
             console.log(orderDetail);
           });
         });
-        
+
+        document.querySelectorAll(".material-icons").forEach((button) => {
+          button.addEventListener("click", function () {
+            const dataId = this.getAttribute("data-id");
+            const itemQuantity = orderDetail.filter(
+              (item) => item.menuId === dataId
+            );
+            const countButton = this.closest('.item-list-section02').querySelector('.bt-count').innerText;
+            console.log(countButton);
+            totalPrice -= Number(itemQuantity[0].menuPrice * countButton); // 특정 가격을 더합니다.
+            document.querySelector("#totalPrice").innerHTML = totalPrice;
+            cartMenuId = cartMenuId.filter((item) => item !== Number(dataId));
+            orderDetail = orderDetail.filter((item) => item.menuId !== dataId);
+            const cartListItem = this.closest(".item-list-container");
+            cartListItem.remove();
+            console.log(cartMenuId);
+            console.log(orderDetail);
+          });
+        });
+
         console.log(cartMenuId);
         console.log(orderDetail);
         console.log(totalPrice);
@@ -254,138 +280,6 @@ async function loadMenu(restaurantId) {
     console.error("Error fetching posts", error);
   }
 }
-
-
-// async function loadMenuDetail(restaurantId, menuId) {
-//   try {
-//     const response = await axios.get(`/api/suragan/${restaurantId}/charimpyo/${menuId}`);
-//     const menus = response.data.data;
-//     console.log(menus);
-//     menus.forEach((data) => {
-//       console.log("데이터", data);
-//       let menuList = `
-//       <div class="modal fade" id="modal${data.menuId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-//       aria-hidden="true">
-//       <div class="modal-dialog" role="document">
-//         <div class="modal-content">
-//           <div class="modal-header">
-//             <h5 class="modal-title" id="exampleModalLabel">
-//               상세정보
-//             </h5>
-//           </div>
-//           <div class="modal-body">
-//             <h5>배달정보</h5>
-//             <p class="pay-position">여긴 주소 확인 칸이여</p>
-//             <div class="input-group input-group-sm mb-3">
-//               <div class="input-group-prepend">
-//                 <span class="input-group-text" id="inputGroup-sizing-sm">전화번호</span>
-//               </div>
-//               <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
-//             </div>
-//             <div class="input-group input-group-sm mb-3">
-//               <div class="input-group-prepend">
-//                 <span class="input-group-text" id="inputGroup-sizing-sm">배달시 요청사항</span>
-//               </div>
-//               <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
-//             </div>
-
-//             <h5>결제금액</h5>
-//             <div class="alert alert-info" role="alert">
-//               30,000원 <span class="alert-second">주문금액 30,000원</span>
-//             </div>
-
-//             <div class="input-group mb-3">
-//               <select class="custom-select" id="inputGroupSelect01">
-//                 <option selected>Choose...</option>
-//                 <option value="1">카카오페이</option>
-//                 <option value="2">네이버페이</option>
-//                 <option value="3">배민페이</option>
-//                 <option value="4">배민페이 계좌이체</option>
-//                 <option value="5">카드결제</option>
-//                 <option value="6">휴대폰결제</option>
-//                 <option value="7">페이코</option>
-//               </select>
-//             </div>
-//           </div>
-//           <div class="modal-footer">
-//             <button type="button" class="btn btn-secondary" data-dismiss="modal">
-//               취소하기
-//             </button>
-//             <button type="button" class="btn btn-success">
-//               장바구니에 담기
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//       `;
-//       document
-//         .querySelector(".item-side")
-//         .insertAdjacentHTML("beforeend", menuList);
-//     });
-//   } catch (error) {
-//     console.error("Error fetching posts", error);
-//   }
-// }
-// 담기 클릭 시 장바구니에 담김
-let menuId;
-// 장바구니 메뉴 중복 제거를 위한 아이디값 배열
-let cartMenuId = [];
-// 수량
-let count = 0;
-// 메뉴 이름
-let orderDetail = [];
-// 수량
-let cartMenu = [];
-// 총가격
-let totalPrice = 0;
-
-document.querySelectorAll(".cartBtn").forEach((btn) => {
-  btn.addEventListener("click", async function (e) {
-    document.querySelector(".list01").innerHTML = "";
-    menuId = e.target.getAttribute("data-id");
-    if (cartMenuId.includes(Number(menuId)))
-      return alert("이미 담은 메뉴입니다.");
-
-    // 상세메뉴 조회하여 카트에 담기
-    let result = await axios.get(
-      `/api/suragan/${restaurantId.split[0]}/charimpyo/${menuId}`
-    );
-    let menuInfo = result.data.data;
-
-    cartMenuId.push(menuInfo.menuId);
-    cartMenu.push(menuInfo);
-    let menuName = menuInfo.name;
-    orderDetail.push({ menuName, count });
-    // 담기 버튼 클릭 시 해당 메뉴의 price 를 totalPrice 에 합산
-    totalPrice += Number(menuInfo.price);
-
-    cartMenu.forEach((menu) => {
-      let cartList = `
-      <p class="item-list-section item-list-section01">${menu.name}</p>
-      <div class="item-list-section item-list-section02">
-        <i class="material-icons icon-set02">cancel</i>${menu.price}원
-        <div
-          class="btn-group item-count"
-          role="group"
-          aria-label="Basic example"
-        >
-          <button class="bt bt01 up">-</button>
-          <button class="bt bt-count">1</button>
-          <button class="bt bt02 down">+</button>
-        </div>
-      </div>
-      `;
-      document
-        .querySelector(".list01")
-        .insertAdjacentHTML("beforeend", cartList);
-      document.querySelector("#totalPrice").innerHTML = totalPrice;
-    });
-    console.log(cartMenuId);
-    console.log(orderDetail);
-    console.log(totalPrice);
-  });
-});
 
 // 탭메뉴 구현
 // 메뉴정보, 업장 정보, 리뷰 구현
@@ -402,4 +296,3 @@ function openTab(evt, tabName) {
   document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
 }
-
