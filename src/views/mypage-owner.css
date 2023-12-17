@@ -15,14 +15,16 @@ body {
 }
 
 .logo-image {
-  width: 17%;
+  width: 100%;
   margin-bottom: 40px;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
 
 .logo-image > img {
-  width: 100%;
+  width: 15%;
+  margin-right: 40px;
 }
 
 .btn-box {

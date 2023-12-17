@@ -11,14 +11,16 @@
 }
 
 .logo-image {
-  width: 17%;
+  width: 100%;
   margin-bottom: 40px;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
 
 .logo-image > img {
-  width: 100%;
+  width: 15%;
+  margin-right: 40px;
 }
 
 .btn-box {
@@ -134,16 +136,23 @@ button > img {
   color: white;
   cursor: pointer;
 }
-
+.searchbox-text {
+  font-size: 40px;
+  font-weight: 900;
+  color: white;
+  text-align: center;
+}
 .main-image {
   position: relative;
   height: 235px;
-  background-image: url("https://www.yogiyo.co.kr/mobile/image/bg-top.png?v=1");
+  background-image: url("./image/searchBackground.png");
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   margin-bottom: 30px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .outer-wrqpper {
@@ -159,7 +168,7 @@ button > img {
 
 .search-input {
   text-align: center;
-  margin-top: 100px;
+  margin-top: 30px;
   width: 400px;
   height: 50px;
   border: 1px solid lightgrey;
@@ -178,7 +187,7 @@ button > img {
   border-radius: 5px;
 
   position: absolute;
-  bottom: 20%;
+  bottom: 24%;
   left: 56.5%;
 }
 .search-btn > button > img {
