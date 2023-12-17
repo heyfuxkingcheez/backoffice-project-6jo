@@ -85,8 +85,7 @@ Content-Type: application/json
 {
 "MenuId": [29, 30],
 "orderDetails":[{"페퍼로니 피자1":2,"페퍼로니 피자2":2}],
-"totalPrice": 50000,
-"orderPlace" : "서울시 성북구"
+"totalPrice": 50000
 }
 
 # 주문 목록 조회
