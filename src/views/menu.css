@@ -345,3 +345,13 @@ html {
   border: 1px solid #ccc;
   border-top: none;
 }
+
+/* 리뷰 */
+
+.review-set {
+  margin-left: 0px;
+}
+
+.review-info-grid {
+  margin-left: 10px;
+}

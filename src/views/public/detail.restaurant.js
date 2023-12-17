@@ -1,6 +1,11 @@
 const restaurantId = location.href.split("?")[1];
 console.log(restaurantId);
 
+// 홈으로 이동
+document.getElementById("gohome").addEventListener("click", function () {
+  window.location.href = "index.html";
+});
+
 // 로그인 이동
 document.getElementById("login").addEventListener("click", function () {
   window.location.href = "login.html";
