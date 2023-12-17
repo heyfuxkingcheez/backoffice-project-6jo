@@ -36,6 +36,31 @@ document.getElementById("owner-page").addEventListener("click", function () {
   window.location.href = "mypage-owner.html";
 });
 
+const roleCookie = document.cookie
+  .split(";")
+  .find((cookie) => cookie.trim().endsWith("true"));
+const tokenCookie = document.cookie
+  .split(";")
+  .find((cookie) => cookie.trim().startsWith("authorization")); // 로그인 상태 확인
+
+if (tokenCookie) {
+  // 사업자 상태 확인
+  if (roleCookie) {
+    document.getElementById("logout").style.display = "block";
+    document.getElementById("owner-page").style.display = "block";
+    document.getElementById("cart").style.display = "block";
+    document.getElementById("my-page").style.display = "block";
+    document.getElementById("login").style.display = "none";
+  } else if (!roleCookie) {
+    document.getElementById("logout").style.display = "block";
+    document.getElementById("join-owner").style.display = "block";
+    document.getElementById("cart").style.display = "block";
+    document.getElementById("my-page").style.display = "block";
+    document.getElementById("login").style.display = "none";
+  } else {
+  }
+}
+
 let cachedRestaurants = null;
 
 async function loadRestaurants() {
@@ -75,17 +100,24 @@ async function loadRestaurants() {
         `;
       restaurantsListContainer.insertAdjacentHTML("beforeend", restaurantsList);
     });
-    // 클릭시 해당하는 restaurantId 리턴
+    // 식당 클릭 시 식당 아이디 값 리턴
     const elements = document.getElementsByClassName("restaurant-box");
     for (let i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", function (event) {
         const restaurantId = event.currentTarget.getAttribute("data-id");
-        console.log(restaurantId);
+        loadDetailRestaurant(restaurantId);
       });
     }
   } catch (error) {
     console.error("Error fetching posts", error);
   }
+}
+
+// 식당 상세 페이지 이동하는 함수
+async function loadDetailRestaurant(restaurantId) {
+  // 해당 카테고리 페이지로 이동하면서 데이터도 함께 전달
+
+  window.location.href = `menu.html?${restaurantId}`;
 }
 
 document.getElementById("search-btn").addEventListener("click", function () {
