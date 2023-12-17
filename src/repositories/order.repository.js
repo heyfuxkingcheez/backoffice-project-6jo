@@ -50,6 +50,7 @@ export class OrderRepository {
             },
           });
 
+          console.log(orderPlace);
           const createdOrder = await tx.orders.create({
             data: {
               MenuId: result,

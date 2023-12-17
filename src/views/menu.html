@@ -98,8 +98,7 @@
           </div>
 
           <div id="Menu1" class="tabcontent" style="display: block">
-            <div>메뉴 소개</div>
-            <div>내용을 입력하세요.</div>
+            <div class="menu-lists"></div>
           </div>
 
           <div id="Menu2" class="tabcontent">
@@ -149,8 +148,90 @@
             </div>
             <div class="basket-sum">
               <p>
-                <strong>합계 : <span id="totalPrice"></span></strong>
+                <strong>합계 : <span id="totalPrice">0</span>원</strong>
               </p>
+            </div>
+            <div class="address-info">배달 주소</div>
+            <div class="address"><input id="orderPlace" /></div>
+
+            <div class="pay-btn">
+              <button id="payBtn">수라상 결제</button>
+            </div>
+          </div>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Pay Section
+                  </h5>
+                  <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button> -->
+                </div>
+                <div class="modal-body">
+                  <h5>배달정보</h5>
+                  <p class="pay-position">여긴 주소 확인 칸이여</p>
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-sm"
+                        >전화번호</span
+                      >
+                    </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      aria-label="Small"
+                      aria-describedby="inputGroup-sizing-sm"
+                    />
+                  </div>
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-sm"
+                        >배달시 요청사항</span
+                      >
+                    </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      aria-label="Small"
+                      aria-describedby="inputGroup-sizing-sm"
+                    />
+                  </div>
+
+                  <h5>결제금액</h5>
+                  <div class="alert alert-info" role="alert">
+                    30,000원
+                    <span class="alert-second">현재 잔액 포인트 : 몇 원</span>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    취소하기
+                  </button>
+                  <button type="button" class="btn btn-success">
+                    주문하기
+                  </button>
+                </div>
+              </div>
+              <div class="basket-sum">
+                <p>
+                  <strong>합계 : <span id="totalPrice"></span></strong>
+                </p>
+              </div>
             </div>
           </div>
         </div>
