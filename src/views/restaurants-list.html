@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="./restaurants-list.css" />
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <script defer src="./public/restaurant.list.public.js"></script>
-  <!-- <script src="./public/restaurant.search.public.js"></script> -->
+  <!-- <script defer src="./public/restaurant.list.public.js"></script> -->
+  <script defer src="./public/restaurant.search.public.js"></script>
 </head>
 
 <body>
@@ -37,32 +37,32 @@
     </div>
   </div>
   <div class="category-list">
-    <div class="category" data-categories="all">
+    <a class="category" data-categories="0" href="restaurants-list.html?category=0">
       <button>전체보기</button>
-    </div>
-    <div class="category" data-categories="1"><button>1인분</button></div>
-    <div class="category" data-categories="2"><button>치킨</button></div>
-    <div class="category" data-categories="3"><button>중국집</button></div>
-    <div class="category" data-categories="4"><button>한식</button></div>
-    <div class="category" data-categories="5">
+    </a>
+    <a class="category" data-categories="1" href="restaurants-list.html?category=1" ><button>1인분</button></a>
+    <a class="category" data-categories="2" href="restaurants-list.html?category=2"><button>치킨</button></a>
+    <a class="category" data-categories="3" href="restaurants-list.html?category=3"><button>중국집</button></a>
+    <a class="category" data-categories="4" href="restaurants-list.html?category=4"><button>한식</button></a>
+    <a class="category" data-categories="5" href="restaurants-list.html?category=5">
       <button>피자 / 양식</button>
-    </div>
-    <div class="category" data-categories="6"><button>야식</button></div>
-    <div class="category" data-categories="7">
+    </a>
+    <a class="category" data-categories="6" href="restaurants-list.html?category=6"><button>야식</button></a>
+    <a class="category" data-categories="7" href="restaurants-list.html?category=7">
       <button>일식 / 돈까스</button>
-    </div>
-    <div class="category" data-categories="8">
+    </a>
+    <a class="category" data-categories="8" href="restaurants-list.html?category=8">
       <button>족발 / 보쌈</button>
-    </div>
-    <div class="category" data-categories="9">
+    </a>
+    <a class="category" data-categories="9" href="restaurants-list.html?category=9">
       <button>카페 / 디저트</button>
-    </div>
-    <div class="category" data-categories="10">
+    </a>
+    <a class="category" data-categories="10" href="restaurants-list.html?category=10">
       <button>편의점 / 마트</button>
-    </div>
-    <div class="category" data-categories="11">
+    </a>
+    <a class="category" data-categories="11" href="restaurants-list.html?category=11">
       <button>패스트푸드</button>
-    </div>
+    </a>
   </div>
   <div id="restaurants-list" class="main-box"></div>
 </body>

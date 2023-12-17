@@ -1,5 +1,7 @@
-console.log("어 그래 형이야");
-
+// 홈으로 이동
+document.getElementById("gohome").addEventListener("click", function () {
+  window.location.href = "index.html";
+});
 document
   .getElementById("submit")
   .addEventListener("click", async function (event) {
@@ -18,6 +20,8 @@ document
         role: false,
       });
       alert("등록완료!");
+      //홈으로 이동
+      window.location.href = "index.html";
     } catch (error) {
       console.error(error);
     }

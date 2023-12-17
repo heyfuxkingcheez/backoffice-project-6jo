@@ -61,6 +61,7 @@ if (tokenCookie) {
   }
 }
 
+
 let cachedRestaurants = null;
 
 async function loadRestaurants() {
@@ -70,7 +71,13 @@ async function loadRestaurants() {
       cachedRestaurants = response.data.data;
       //가져온 레스토랑의 정보를 저장
     }
-
+    console.log(cachedRestaurants);
+    const categoryId = location.href.split("=")[1];
+    console.log(categoryId);
+    if (Number(categoryId) !== 0 && categoryId !== undefined) {
+      cachedRestaurants = cachedRestaurants.filter((shop) => shop.category == categoryId)
+    }
+    console.log(cachedRestaurants);
     const searchInput = document
       .querySelector(".search-input")
       .value.toLowerCase();
@@ -80,12 +87,11 @@ async function loadRestaurants() {
           data.name.toLowerCase().includes(searchInput.toLowerCase())
         )
       : cachedRestaurants;
-
     const restaurantsListContainer =
       document.querySelector("#restaurants-list");
     restaurantsListContainer.innerHTML = ""; // 초기화
 
-    console.log(cachedRestaurants);
+    console.log(filteredRestaurants);
     filteredRestaurants.forEach((data) => {
       let restaurantsList = `
           <div class="restaurant-box" data-id=${data.restaurantId}>

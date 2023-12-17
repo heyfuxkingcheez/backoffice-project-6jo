@@ -66,6 +66,7 @@ CREATE TABLE `Orders` (
     `RestaurantId` INTEGER NOT NULL,
     `orderDetails` JSON NOT NULL,
     `totalPrice` INTEGER NOT NULL,
+    `orderPlace` TEXT NOT NULL,
     `isCompleted` BOOLEAN NOT NULL DEFAULT false,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 

@@ -1,3 +1,8 @@
+// 홈으로 이동
+document.getElementById("gohome").addEventListener("click", function () {
+  window.location.href = "index.html";
+});
+
 async function getPost() {
   try {
     // 게시글 정보
