@@ -212,6 +212,9 @@ async function loadMenu(restaurantId) {
           .querySelector(".list01")
           .insertAdjacentHTML("beforeend", cartList);
 
+        document.querySelector("#totalPrice").innerHTML = totalPrice;
+
+
         document.querySelectorAll(".bt01.up").forEach((button) => {
           button.addEventListener("click", function () {
             const dataId = this.getAttribute("data-id");
@@ -250,9 +253,9 @@ async function loadMenu(restaurantId) {
             const itemQuantity = orderDetail.filter(
               (item) => item.menuId === dataId
             );
-            const countButton = this.closest(
-              ".item-list-section02"
-            ).querySelector(".bt-count").innerText;
+
+            const countButton = this.closest('.item-list-section02').querySelector('.bt-count').innerText;
+
             console.log(countButton);
             totalPrice -= Number(itemQuantity[0].menuPrice * countButton); // 특정 가격을 더합니다.
             document.querySelector("#totalPrice").innerHTML = totalPrice;
