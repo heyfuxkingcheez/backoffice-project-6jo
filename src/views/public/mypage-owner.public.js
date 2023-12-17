@@ -145,7 +145,7 @@ async function getOwnerInfo() {
 
     document.getElementById("image-view").setAttribute("src", restaurant.image);
     document.getElementById("image").value = restaurant.image;
-    document.getElementById("category").value = restaurant.category;
+    // document.getElementById("category").value = restaurant.category;
     document.getElementById("name").value = restaurant.name;
     document.getElementById("address").value = restaurant.address;
     document.getElementById("introduce").value = restaurant.introduce;
@@ -159,7 +159,7 @@ async function getOwnerInfo() {
         const restaurantId = restaurant.restaurantId;
 
         const image = document.getElementById("image").value;
-        const category = document.getElementById("category").value;
+        // const category = document.getElementById("category").value;
         const name = document.getElementById("name").value;
         const address = document.getElementById("address").value;
         const introduce = document.getElementById("introduce").value;
@@ -171,7 +171,7 @@ async function getOwnerInfo() {
           `/api/suragan/${restaurantId}`,
           {
             image,
-            category: Number(category),
+            // category: Number(category),
             name,
             address,
             introduce,

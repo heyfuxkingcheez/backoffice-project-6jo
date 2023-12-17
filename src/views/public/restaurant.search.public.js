@@ -61,7 +61,6 @@ if (tokenCookie) {
   }
 }
 
-
 let cachedRestaurants = null;
 
 async function loadRestaurants() {
@@ -75,7 +74,9 @@ async function loadRestaurants() {
     const categoryId = location.href.split("=")[1];
     console.log(categoryId);
     if (Number(categoryId) !== 0 && categoryId !== undefined) {
-      cachedRestaurants = cachedRestaurants.filter((shop) => shop.category == categoryId)
+      cachedRestaurants = cachedRestaurants.filter(
+        (shop) => shop.category == categoryId
+      );
     }
     console.log(cachedRestaurants);
     const searchInput = document
@@ -126,7 +127,7 @@ async function loadDetailRestaurant(restaurantId) {
   window.location.href = `menu.html?${restaurantId}`;
 }
 
-document.getElementById("search-btn").addEventListener("click", function () {
+document.querySelector(".search-btn").addEventListener("click", function () {
   loadRestaurants(); // 검색 버튼을 누를 때마다 데이터를 로드하고 화면을 갱신
 });
 
