@@ -5,8 +5,15 @@ import { auth_middleware } from "../middlewares/auth.middleware.js";
 const reviewsRouter = Router();
 const reviewController = new ReviewController();
 
-// 리뷰 조회 API
+// 리뷰 전체 조회 API
 reviewsRouter.get("/:restaurantId/order/review", reviewController.getReview);
+
+// 리뷰 단일 조회 API
+reviewsRouter.get(
+  "/:restaurantId/order/review/:orderId",
+  auth_middleware,
+  reviewController.getReviewOne
+);
 
 // // 리뷰 등록 API
 reviewsRouter.post(

@@ -318,3 +318,141 @@ document.querySelectorAll(".cartBtn").forEach((btn) => {
     console.log(totalPrice);
   });
 });
+
+// 탭메뉴 구현
+// 메뉴정보, 업장 정보, 리뷰 구현
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace("active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// 리뷰
+// 주문 불러오기
+const loadOrderToReview = async () => {
+  try {
+    const result = await axios.get(`/api/suragan/${restaurantId}`);
+    const restaurant = result.data.data.restaurantId;
+    const response = await axios.get(`/api/suragan/${restaurant}/order`);
+    const orderArr = response.data.data;
+    console.log(orderArr);
+
+    let completeOrders = [];
+    orderArr.forEach((data) => {
+      if (data.isCompleted === true) {
+        completeOrders.push(data);
+      }
+    });
+    console.log("컴플리트오더스", completeOrders);
+
+    for (let completedOrder of completeOrders) {
+      console.log("컴플리티드", completedOrder);
+      const reviewResult = await axios.get(
+        `/api/suragan/${restaurantId}/order/review/${completedOrder.orderId}`
+      );
+      const notExistReview = reviewResult.data.data;
+      console.log("낫익시스트리뷰", notExistReview);
+
+      if (completedOrder) {
+        if (notExistReview === null) {
+          const orderDate = completedOrder.createdAt.split("T")[0];
+          const orderMenu = Object.keys(completedOrder.orderDetails[0]);
+          let orderList = `<p>주문 메뉴 : ${orderMenu}</p><p>주문 일자: ${orderDate}</p>`;
+          document.getElementById("order-menu").innerHTML = orderList;
+          return;
+        }
+      }
+    }
+  } catch (error) {
+    console.error("Error fetching posts", error);
+  }
+};
+loadOrderToReview();
+
+// 주문 등록 axios
+
+// 리뷰 등록 버튼
+document.addEventListener("DOMContentLoaded", () => {
+  // 별점
+  let clickedIndex = null;
+  for (let i = 1; i <= 5; i++) {
+    let starsClick = document.getElementById(`star-${i}`);
+    starsClick.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      clickedIndex = Number(starsClick.id.split("-")[1]);
+
+      for (let j = 1; j <= 5; j++) {
+        let star = document.getElementById(`star-${j}`);
+
+        if (j <= clickedIndex) {
+          star.classList.replace("fa-regular", "fa-solid");
+        } else {
+          star.classList.replace("fa-solid", "fa-regular");
+        }
+      }
+    });
+  }
+
+  const reviewBtn = document.querySelector(".review-btn");
+  reviewBtn.addEventListener("click", () => {
+    const inputValue = document.querySelector(".review-input").value;
+    if (clickedIndex && inputValue) {
+      console.log("내용", inputValue, "별점", clickedIndex);
+      postReviewfunc();
+      alert("리뷰 등록 완료!");
+      window.location.reload();
+    } else {
+      alert("내용을 모두 입력 해야 합니다.");
+    }
+  });
+
+  const postReviewfunc = async () => {
+    try {
+      const result = await axios.get(`/api/suragan/${restaurantId}/order`);
+      const orderArr = result.data.data;
+
+      let completeOrders = [];
+      orderArr.forEach((data) => {
+        if (data.isCompleted === true) {
+          completeOrders.push(data);
+        }
+      });
+
+      for (let completedOrder of completeOrders) {
+        console.log(completedOrder);
+        const reviewResult = await axios.get(
+          `/api/suragan/${restaurantId}/order/review/${completedOrder.orderId}`
+        );
+        const notExistReview = reviewResult.data.data;
+        console.log("낫익시스트리뷰", notExistReview);
+        if (completedOrder) {
+          if (!notExistReview) {
+            const inputValue = document.querySelector(".review-input").value;
+
+            createReview = await axios.post(
+              `/api/suragan/${restaurantId}/order/review/${completedOrder.orderId}`,
+              {
+                OrderId: completedOrder.orderId,
+                star: clickedIndex,
+                review: inputValue,
+              }
+            );
+          } else {
+            alert("등록된 리뷰가 있음");
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching posts", error);
+    }
+  };
+});

@@ -7,7 +7,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="./image/king.png" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
-
+  <script src="https://kit.fontawesome.com/bad95817eb.js" crossorigin="anonymous"></script>
   <link rel="stylesheet"
     href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
     integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous" />
@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
   <link rel="stylesheet" href="./menu.css" />
   <!-- <script defer src="./public/menu.public.js"></script> -->
+
   <script defer src="./public/detail.restaurant.js"></script>
   <title>수라간 상차림</title>
   <style></style>
@@ -32,17 +33,20 @@
 <body>
   <div class="nav1">
     <div class="btn-box">
-      <button id="cart" style="display: none;"><img src="./image/cart.png" /></button>
-      <button id="my-page" style="display: none;"><img src="./image/user.png" /></button>
-      <button id="join-owner" style="display: none;">수라간등록</button>
-      <button id="owner-page" style="display: none;">마이수라간</button>
-      <button id="logout" style="display: none;">로그아웃</button>
+      <button id="cart" style="display: none">
+        <img src="./image/cart.png" />
+      </button>
+      <button id="my-page" style="display: none">
+        <img src="./image/user.png" />
+      </button>
+      <button id="join-owner" style="display: none">수라간등록</button>
+      <button id="owner-page" style="display: none">마이수라간</button>
+      <button id="logout" style="display: none">로그아웃</button>
       <button id="login">로그인</button>
-
     </div>
   </div>
-  <div class="nav2">
-    <div class="logo-image"><img src="../image/logo.png" id="gohome" /></div>
+  <div class="nav2" id="gohome">
+    <div class="logo-image"><img src="../image/logo.png" /></div>
   </div>
   <div class="container-custom">
     <div class="item-content-set01 row">
@@ -67,26 +71,32 @@
             </p>
           </div>
         </div>
-
-        <div class="item-list row">
-          <div class="item-menu item-set01">메뉴</div>
-          <a href="info.html">
-            <div class="item-info item-set01">정보</div>
-          </a>
-          <a href="review.html">
-            <div class="item-review item-set01">리뷰</div>
-          </a>
+        <div class="tab">
+          <button class="tablinks" onclick="openTab(event, 'Menu1')">
+            메뉴 소개
+          </button>
+          <button class="tablinks" onclick="openTab(event, 'Menu2')">
+            수라간 정보
+          </button>
+          <button class="tablinks" onclick="openTab(event, 'Menu3')">
+            임금님 리뷰
+          </button>
         </div>
-        <!--  -->
-        <!--  -->
-        <!-- <div class="item-content">
-          <div class="list-group">
-            <a href="" class="list-group-item list-group-item-action">
-              &nbsp;&nbsp;<span class="pset01">아직 등록된 메뉴가 없습니다!</span><span class="food-image-set"><img src="./image/heart2.png"
-                  width="80" /></span>
-            </a>
-          </div>
-        </div> -->
+
+        <div id="Menu1" class="tabcontent" style="display: block">
+          <div>메뉴 소개</div>
+          <div>내용을 입력하세요.</div>
+        </div>
+
+        <div id="Menu2" class="tabcontent">
+          <div>수라간 정보</div>
+          <div>내용을 입력하세요.</div>
+        </div>
+
+        <div id="Menu3" class="tabcontent">
+          <div>임금님 리뷰</div>
+          <div>내용을 입력하세요.</div>
+        </div>
       </div>
       <div class="item-side">
         <div class="basket">
@@ -128,74 +138,26 @@
               <strong>합계 : <span id="totalPrice"></span></strong>
             </p>
           </div>
-          <div class="pay-btn">
-            <button type="button" class="btn btn-outline-success btn-set01" data-toggle="modal"
-              data-target="#exampleModal">
-              결재하기
-            </button>
-            <button id="payBtn"></button>
-          </div>
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                  Pay Section
-                </h5>
-                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button> -->
-              </div>
-              <div class="modal-body">
-                <h5>배달정보</h5>
-                <p class="pay-position">여긴 주소 확인 칸이여</p>
-                <div class="input-group input-group-sm mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">전화번호</span>
-                  </div>
-                  <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
-                </div>
-                <div class="input-group input-group-sm mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">배달시 요청사항</span>
-                  </div>
-                  <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
-                </div>
+        <div class="review">
+          <div class="review-header"><strong>리뷰 작성</strong></div>
+          <div class="review-body">
+            <div id="order-menu">
 
-                <h5>결제금액</h5>
-                <div class="alert alert-info" role="alert">
-                  30,000원 <span class="alert-second">주문금액 30,000원</span>
-                </div>
-
-                <div class="input-group mb-3">
-                  <select class="custom-select" id="inputGroupSelect01">
-                    <option selected>Choose...</option>
-                    <option value="1">카카오페이</option>
-                    <option value="2">네이버페이</option>
-                    <option value="3">배민페이</option>
-                    <option value="4">배민페이 계좌이체</option>
-                    <option value="5">카드결제</option>
-                    <option value="6">휴대폰결제</option>
-                    <option value="7">페이코</option>
-                  </select>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                  취소하기
-                </button>
-                <button type="button" class="btn btn-success">
-                  주문하기
-                </button>
-              </div>
             </div>
+
+            <div id="stars">
+              <i id="star-1" class="fa-regular fa-star fa-lg"></i>
+              <i id="star-2" class="fa-regular fa-star fa-lg"></i>
+              <i id="star-3" class="fa-regular fa-star fa-lg"></i>
+              <i id="star-4" class="fa-regular fa-star fa-lg"></i>
+              <i id="star-5" class="fa-regular fa-star fa-lg"></i>
+            </div>
+            <input class="review-input" type="text" placeholder="리뷰를 작성 하세요.">
+            <button class="review-btn">완료</button>
           </div>
         </div>
-        <!-- Modal End -->
       </div>
     </div>
   </div>

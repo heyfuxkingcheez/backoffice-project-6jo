@@ -47,6 +47,7 @@ export class OrderController {
       console.log("restaurantId: ", restaurantId);
 
       const getOrders = await this.orderService.getOrders(restaurantId);
+      console.log("주문조회 컨트롤러어어어어어어ㅓ어어어", getOrders);
 
       return res.status(200).json({
         success: true,

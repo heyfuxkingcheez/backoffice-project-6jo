@@ -3,7 +3,7 @@ import { ReviewRepository } from "../repositories/review.repository.js";
 export class ReviewService {
   reviewRepository = new ReviewRepository();
 
-  // 리뷰 조회
+  // 리뷰 전체 조회
   getReview = async (restaurantId) => {
     const getReview = await this.reviewRepository.getReview(restaurantId);
     const result = [];
@@ -15,6 +15,14 @@ export class ReviewService {
     if (result.length === 0) throw new Error("리뷰가 존재하지 않습니다.");
 
     return result;
+  };
+
+  // 리뷰 단일 조회
+  getReviewOne = async (orderId) => {
+    const getReviewOne = await this.reviewRepository.getReviewOne(orderId);
+    // if (!getReviewOne) throw new Error("리뷰가 존재하지 않습니다.");
+
+    return getReviewOne;
   };
 
   // 리뷰 등록

@@ -19,6 +19,21 @@ export class ReviewController {
     }
   };
 
+  getReviewOne = async (req, res, next) => {
+    try {
+      const { orderId } = req.params;
+
+      const getReviewOne = await this.reviewService.getReviewOne(orderId);
+      return res.status(200).json({
+        success: true,
+        message: "리뷰 조회 성공",
+        data: getReviewOne,
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
+
   // 리뷰 등록
   createReview = async (req, res, next) => {
     try {
