@@ -22,6 +22,7 @@
   width: 15%;
   margin-right: 40px;
   display: inline;
+  cursor: pointer;
 }
 
 .btn-box {
