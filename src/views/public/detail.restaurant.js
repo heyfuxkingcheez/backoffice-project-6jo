@@ -52,13 +52,6 @@ document.getElementById("owner-page").addEventListener("click", function () {
   window.location.href = "mypage-owner.html";
 });
 
-// let roleCookie = document.cookie
-//   .split(";")
-//   .find((cookie) => cookie.trim().endsWith("true"));
-// let tokenCookie = document.cookie
-//   .split(";")
-//   .find((cookie) => cookie.trim().startsWith("authorization"));
-
 // 로그인 상태 확인
 if (
   document.cookie
@@ -139,7 +132,7 @@ async function loadMenu(restaurantId) {
         </div>
       `;
       document
-        .querySelector(".item-main")
+        .querySelector(".menu-lists")
         .insertAdjacentHTML("beforeend", menuList);
       let menuListModal = `
       <div class="modal fade" id="modal${data.menuId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -173,12 +166,12 @@ async function loadMenu(restaurantId) {
           </div>
       `;
       document
-        .querySelector(".item-side")
+        .querySelector(".menu-lists")
         .insertAdjacentHTML("beforeend", menuListModal);
     });
     document.querySelectorAll(".cartBtn").forEach((btn) => {
       btn.addEventListener("click", async function (e) {
-        // document.querySelector(".list01").innerHTML = "";
+        document.querySelector(".list01").innerHTML = "";
         menuId = e.target.getAttribute("data-id");
         console.log(menuId);
         if (cartMenuId.includes(Number(menuId)))
@@ -218,7 +211,9 @@ async function loadMenu(restaurantId) {
         document
           .querySelector(".list01")
           .insertAdjacentHTML("beforeend", cartList);
+
         document.querySelector("#totalPrice").innerHTML = totalPrice;
+
 
         document.querySelectorAll(".bt01.up").forEach((button) => {
           button.addEventListener("click", function () {
@@ -258,7 +253,9 @@ async function loadMenu(restaurantId) {
             const itemQuantity = orderDetail.filter(
               (item) => item.menuId === dataId
             );
+
             const countButton = this.closest('.item-list-section02').querySelector('.bt-count').innerText;
+
             console.log(countButton);
             totalPrice -= Number(itemQuantity[0].menuPrice * countButton); // 특정 가격을 더합니다.
             document.querySelector("#totalPrice").innerHTML = totalPrice;
@@ -274,6 +271,19 @@ async function loadMenu(restaurantId) {
         console.log(cartMenuId);
         console.log(orderDetail);
         console.log(totalPrice);
+        document
+          .querySelector("#payBtn")
+          .addEventListener("click", async function () {
+            await axios.post(`/api/suragan/${restaurantId}/order`, {
+              MenuId: cartMenuId,
+              orderDetails: orderDetail,
+              totalPrice: Number(totalPrice),
+              orderPlace: document.getElementById("orderPlace").value,
+            });
+            alert("주문 완료!");
+            location.reload();
+          });
+        console.log(orderPlace);
       });
     });
   } catch (error) {

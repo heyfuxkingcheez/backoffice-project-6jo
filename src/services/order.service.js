@@ -18,14 +18,16 @@ export class OrderService {
     MenuId,
     restaurantId,
     orderDetails,
-    totalPrice
+    totalPrice,
+    orderPlace
   ) => {
     const orderPayment = await this.orderRepository.orderPayment(
       userId,
       MenuId,
       restaurantId,
       orderDetails,
-      totalPrice
+      totalPrice,
+      orderPlace
     );
 
     return orderPayment;
