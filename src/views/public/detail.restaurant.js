@@ -99,9 +99,9 @@ async function loadMenu(restaurantId) {
       </div>
     </div>
     `;
-    document
-      .querySelector(".item-main")
-      .insertAdjacentHTML("beforeend", menuList);
+      document
+        .querySelector(".item-main")
+        .insertAdjacentHTML("beforeend", menuList);
     }
     menus.forEach((data) => {
       console.log("데이터", data);
@@ -176,7 +176,7 @@ async function loadMenu(restaurantId) {
       `;
       document
         .querySelector(".item-side")
-        .insertAdjacentHTML("beforeend", menuListModal);  
+        .insertAdjacentHTML("beforeend", menuListModal);
     });
   } catch (error) {
     console.error("Error fetching posts", error);
@@ -313,3 +313,19 @@ document.querySelectorAll(".cartBtn").forEach((btn) => {
     console.log(totalPrice);
   });
 });
+
+// 탭메뉴 구현
+// 메뉴정보, 업장 정보, 리뷰 구현
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
