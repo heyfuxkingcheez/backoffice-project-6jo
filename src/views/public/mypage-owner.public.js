@@ -158,7 +158,6 @@ async function getOwnerInfo() {
       .addEventListener("click", async function (event) {
         const restaurantId = restaurant.restaurantId;
 
-
         const image = document.getElementById("image").value;
         const category = document.getElementById("category").value;
         const name = document.getElementById("name").value;
@@ -181,8 +180,8 @@ async function getOwnerInfo() {
           }
         );
         console.log(updateRestaurant);
-        // alert("수라간 정보 업데이트 완료!");
-        // window.location.reload();
+        alert("수라간 정보 업데이트 완료!");
+        window.location.reload();
       });
 
     // 업장 정보 삭제
@@ -244,7 +243,7 @@ async function getOwnerInfo() {
           `/api/suragan/${restaurantId}/order`
         );
         const orderData = orderResult.data.data;
-        
+
         orderData.forEach((order) => {
           let orderList = `
           <tr class="delivery-table-td" data-orderId="${order.orderId}"> 
