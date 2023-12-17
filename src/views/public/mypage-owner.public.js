@@ -101,6 +101,7 @@ async function loadMenus() {
         const introduce = menuInfo.querySelector(".menu-introduce").value;
         const price = menuInfo.querySelector(".menu-price").value;
 
+        console.log(category);
         // 메뉴 정보 수정
         const updateMenu = await axios.patch(
           `/api/suragan/${restaurantId}/charimpyo/${menuId}`,
@@ -112,8 +113,8 @@ async function loadMenus() {
             image,
           }
         );
-        console.log(updateMenu);
-        alert("메뉴 정보 업데이트 완료!");
+        console.log(updateMenu.category);
+        // alert("메뉴 정보 업데이트 완료!");
       });
     }
 
@@ -140,37 +141,38 @@ async function loadMenus() {
 async function getOwnerInfo() {
   try {
     const result = await axios.get(`/api/suragan/owner`);
-    console.log("result: ", result);
     const restaurant = result.data.data[0];
-    console.log("restaurant: ", restaurant);
 
     document.getElementById("image-view").setAttribute("src", restaurant.image);
     document.getElementById("image").value = restaurant.image;
-    // document.getElementById("category").value = restaurant.category;
+    document.getElementById("category").value = restaurant.category;
     document.getElementById("name").value = restaurant.name;
     document.getElementById("address").value = restaurant.address;
     document.getElementById("introduce").value = restaurant.introduce;
     document.getElementById("businessHours").value = restaurant.businessHours;
     document.getElementById("phoneNumber").value = restaurant.phoneNumber;
 
+    // 업장 정보 수정
     document
       .getElementById("restaurant-update-btn")
-      .addEventListener("click", async function () {
+      .addEventListener("click", async function (event) {
         const restaurantId = restaurant.restaurantId;
+
+
         const image = document.getElementById("image").value;
-        // const category = document.getElementById("category").value;
+        const category = document.getElementById("category").value;
         const name = document.getElementById("name").value;
         const address = document.getElementById("address").value;
         const introduce = document.getElementById("introduce").value;
         const businessHours = document.getElementById("businessHours").value;
         const phoneNumber = document.getElementById("phoneNumber").value;
 
-        // 업장 정보 수정
+        // 업장 정보 업데이트 요청
         const updateRestaurant = await axios.patch(
           `/api/suragan/${restaurantId}`,
           {
             image,
-            // category: Number(category),
+            category: Number(category),
             name,
             address,
             introduce,
@@ -179,8 +181,8 @@ async function getOwnerInfo() {
           }
         );
         console.log(updateRestaurant);
-        alert("수라간 정보 업데이트 완료!");
-        window.location.reload();
+        // alert("수라간 정보 업데이트 완료!");
+        // window.location.reload();
       });
 
     // 업장 정보 삭제
@@ -242,8 +244,7 @@ async function getOwnerInfo() {
           `/api/suragan/${restaurantId}/order`
         );
         const orderData = orderResult.data.data;
-
-        // console.log(orderData[0].orderDetails.dfd);
+        
         orderData.forEach((order) => {
           let orderList = `
           <tr class="delivery-table-td" data-orderId="${order.orderId}"> 
