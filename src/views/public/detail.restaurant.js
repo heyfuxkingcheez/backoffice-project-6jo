@@ -6,6 +6,19 @@ document.getElementById("gohome").addEventListener("click", function () {
   window.location.href = "index.html";
 });
 
+// 담기 클릭 시 장바구니에 담김
+let menuId;
+// 장바구니 메뉴 중복 제거를 위한 아이디값 배열
+let cartMenuId = [];
+// 수량
+// let count = 0;
+// 메뉴 이름
+let orderDetail = [];
+// 수량
+let cartMenu = [];
+// 총가격
+let totalPrice = 0;
+
 // 로그인 이동
 document.getElementById("login").addEventListener("click", function () {
   window.location.href = "login.html";
@@ -105,7 +118,6 @@ async function loadMenu(restaurantId) {
       console.log("데이터", data);
       let menuList = `
         <div class="item-content">
-
             <a class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modal${data.menuId}">
               ${data.name}&nbsp;&nbsp;<span class="pset01">${data.price}원</span>
               <div class="food-image-set"><img src="${data.image}" width="80" /></div>
@@ -175,13 +187,11 @@ async function loadMenu(restaurantId) {
         console.log(menuId);
         if (cartMenuId.includes(Number(menuId)))
           return alert("이미 담은 메뉴입니다.");
-
         // 상세메뉴 조회하여 카트에 담기
         let result = await axios.get(
           `/api/suragan/${restaurantId}/charimpyo/${menuId}`
         );
         let menuInfo = result.data.data;
-
         cartMenuId.push(menuInfo.menuId);
         cartMenu.push(menuInfo);
         let menuName = menuInfo.name;
