@@ -21,6 +21,7 @@
 .logo-image > img {
   width: 15%;
   margin-right: 40px;
+  display: inline;
 }
 
 .btn-box {

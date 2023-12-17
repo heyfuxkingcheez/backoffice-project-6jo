@@ -1,6 +1,11 @@
 const restaurantId = location.href.split("?")[1];
 console.log(restaurantId);
 
+//홈으로 이동동
+document.getElementById("gohome").addEventListener("click", function () {
+  window.location.href = "index.html";
+});
+
 // 로그인 이동
 document.getElementById("login").addEventListener("click", function () {
   window.location.href = "login.html";
@@ -99,9 +104,9 @@ async function loadMenu(restaurantId) {
       </div>
     </div>
     `;
-    document
-      .querySelector(".item-main")
-      .insertAdjacentHTML("beforeend", menuList);
+      document
+        .querySelector(".item-main")
+        .insertAdjacentHTML("beforeend", menuList);
     }
     menus.forEach((data) => {
       console.log("데이터", data);
@@ -176,7 +181,7 @@ async function loadMenu(restaurantId) {
       `;
       document
         .querySelector(".item-side")
-        .insertAdjacentHTML("beforeend", menuListModal);  
+        .insertAdjacentHTML("beforeend", menuListModal);
     });
   } catch (error) {
     console.error("Error fetching posts", error);

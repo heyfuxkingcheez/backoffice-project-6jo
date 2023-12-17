@@ -1,3 +1,8 @@
+//홈으로 이동동
+document.getElementById("gohome").addEventListener("click", function () {
+  window.location.href = "index.html";
+});
+
 async function logIn() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;

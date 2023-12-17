@@ -137,20 +137,29 @@ button > img {
   cursor: pointer;
 }
 
+.searchbox-text {
+  font-size: 40px;
+  font-weight: 900;
+  color: white;
+  text-align: center;
+}
+
 .main-image {
   position: relative;
-  height: 150px;
-  background-color: antiquewhite;
+  height: 235px;
+  background-image: url("./image/searchBackground.png");
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   margin-bottom: 30px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .search-input {
   text-align: center;
-
+  margin-top: 30px;
   width: 400px;
   height: 50px;
   border: 1px solid lightgrey;
@@ -169,8 +178,8 @@ button > img {
   border-radius: 5px;
 
   position: absolute;
-  bottom: 38%;
-  left: 55%;
+  bottom: 24%;
+  left: 56.5%;
 }
 .search-btn > button > img {
   width: 100%;
