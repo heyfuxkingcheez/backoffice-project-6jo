@@ -3,11 +3,6 @@ document.getElementById("gohome").addEventListener("click", function () {
   window.location.href = "index.html";
 });
 
-// 로그인 이동
-document.getElementById("login").addEventListener("click", function () {
-  window.location.href = "login.html";
-});
-
 // 로그아웃 이동
 document.getElementById("logout").addEventListener("click", async () => {
   try {
@@ -38,16 +33,12 @@ if (tokenCookie) {
   // 사업자 상태 확인
   if (roleCookie) {
     document.getElementById("logout").style.display = "block";
-    document.getElementById("owner-page").style.display = "block";
     document.getElementById("cart").style.display = "block";
     document.getElementById("my-page").style.display = "block";
-    document.getElementById("login").style.display = "none";
   } else if (!roleCookie) {
     document.getElementById("logout").style.display = "block";
-    document.getElementById("join-owner").style.display = "block";
     document.getElementById("cart").style.display = "block";
     document.getElementById("my-page").style.display = "block";
-    document.getElementById("login").style.display = "none";
   } else {
   }
 }
