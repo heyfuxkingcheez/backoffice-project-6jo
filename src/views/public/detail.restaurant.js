@@ -253,7 +253,7 @@ async function loadMenu(restaurantId) {
               orderPlace: document.getElementById("orderPlace").value,
             });
             alert("주문 완료!");
-            // location.reload();
+            location.reload();
           });
         console.log(orderPlace);
       });
