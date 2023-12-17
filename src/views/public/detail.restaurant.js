@@ -1,6 +1,12 @@
 const restaurantId = location.href.split("?")[1];
 console.log(restaurantId);
 
+
+// 홈으로 이동
+document.getElementById("gohome").addEventListener("click", function () {
+  window.location.href = "index.html";
+});
+
 // 담기 클릭 시 장바구니에 담김
 let menuId;
 // 장바구니 메뉴 중복 제거를 위한 아이디값 배열
@@ -13,6 +19,7 @@ let orderDetail = [];
 let cartMenu = [];
 // 총가격
 let totalPrice = 0;
+
 
 // 로그인 이동
 document.getElementById("login").addEventListener("click", function () {

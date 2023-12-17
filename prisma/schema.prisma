@@ -89,6 +89,7 @@ model Orders {
   RestaurantId Int @map("RestaurantId")
   orderDetails Json @map("orderDetails") // 주문한 음식 / 품목별 수량을 json 형태로 받음 [{메뉴이름 : 수량}, {메뉴이름 : 수량}]
   totalPrice Int @map("totalPrice") // 주문한 내역 총 가격
+  orderPlace String @db.Text @map("orderPlace") // 주문 장소
   isCompleted Boolean @map("isCompleted") @default(false)// 처리중 false / 배달완료 true
 
   createdAt DateTime @default(now()) @map("createdAt")
