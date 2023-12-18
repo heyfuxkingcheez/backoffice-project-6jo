@@ -314,6 +314,39 @@ function openTab(evt, tabName) {
 }
 
 // 리뷰 불러오기
+const loadReviews = async () => {
+  try {
+    const reviews = await axios.get(
+      `/api/suragan/${restaurantId}/order/review`
+    );
+    console.log("reviews", reviews.data.data[0].Reviews);
+    const review = reviews.data.data;
+
+    let reviewList = ``;
+    review.forEach((data) => {
+      console.log(data.Reviews);
+      reviewList += `
+      
+      <div class="review-info-grid">
+                <h6>주문번호: ${data.Reviews.OrderId}</h6>
+                <p class="review-stars">
+                  <img src="./image/stars.png" width="80" class="review-stars-png" /><span class="td2">${data.Reviews.createdAt.slice(
+                    0,
+                    10
+                  )}</span>
+                </p>
+                <p class="review-text">${data.Reviews.review}</p>
+              </div>
+              `;
+    });
+    document.querySelector(".review-set").innerHTML = reviewList;
+  } catch (error) {
+    console.error("Error fetching posts", error);
+  }
+};
+loadReviews();
+
+// 주문 내역 불러오기
 const loadOrderToReview = async () => {
   try {
     const response = await axios.get(`/api/suragan/${restaurantId}/order/user`);

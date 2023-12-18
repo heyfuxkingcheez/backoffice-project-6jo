@@ -426,10 +426,26 @@ html {
 
 .review-set {
   margin-left: 0px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .review-info-grid {
   margin-left: 10px;
+
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.review-text {
+  margin-left: 40px;
+}
+.review-stars {
+  margin-left: 20px;
+}
+.td2 {
+  margin-left: 20px;
 }
 
 /* 주문, 결제 */
