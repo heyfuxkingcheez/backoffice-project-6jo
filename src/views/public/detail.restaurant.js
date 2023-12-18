@@ -313,6 +313,36 @@ function openTab(evt, tabName) {
   evt.currentTarget.className += " active";
 }
 
+// 리뷰 불러오기
+const loadOrderToReview = async () => {
+  try {
+    const response = await axios.get(`/api/suragan/${restaurantId}/order/user`);
+    const orderArr = response.data.data;
+    console.log(orderArr);
+
+    let reviewList = ``;
+    for (let i = 0; i < orderArr.length; i++) {
+      const orderId = orderArr[i].orderId;
+      const orderDetail = orderArr[i].orderDetails[0];
+      const DetailName = Object.keys(orderDetail);
+      console.log(orderId, DetailName);
+
+      const result = await axios.get(
+        `/api/suragan/${restaurantId}/order/review/${orderId}`
+      );
+      console.log("result", result);
+      if (!result.data.data) {
+        reviewList += `<option value="${orderId}">주문번호: ${orderId} 메뉴: ${DetailName}</option>`;
+      }
+    }
+    document.querySelector("#order-review").innerHTML = reviewList;
+    console.log(reviewList);
+  } catch (error) {
+    console.error("Error fetching posts", error);
+  }
+};
+loadOrderToReview();
+
 // 리뷰 등록 버튼
 document.addEventListener("DOMContentLoaded", () => {
   // 별점
@@ -341,8 +371,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputValue = document.querySelector(".review-input").value;
     if (clickedIndex && inputValue) {
       console.log("내용", inputValue, "별점", clickedIndex);
+      createReviewfunc();
+      alert("리뷰 등록 완료!");
+      window.location.reload();
     } else {
       alert("내용을 모두 입력 해야 합니다.");
     }
   });
+
+  const createReviewfunc = async () => {
+    try {
+      const inputValue = document.querySelector(".review-input").value;
+      const orderid = document.querySelector("#order-review").value;
+
+      const createReview = await axios.post(
+        `/api/suragan/${restaurantId}/order/review/${+orderid}`,
+        {
+          OrderId: +orderid,
+          star: clickedIndex,
+          review: inputValue,
+        }
+      );
+    } catch (err) {
+      console.error("Error fetching posts", error);
+    }
+  };
 });

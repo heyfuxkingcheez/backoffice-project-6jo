@@ -33,6 +33,15 @@ export class OrderService {
     return orderPayment;
   };
 
+  // 주문 조회 API (고객)
+  getOrdersUser = async (restaurantId) => {
+    const getOrdersUser = await this.orderRepository.getOrdersUser(
+      restaurantId
+    );
+
+    return getOrdersUser;
+  };
+
   // 주문 조회 API (사장)
   getOrders = async (restaurantId) => {
     const getOrders = await this.orderRepository.getOrders(restaurantId);

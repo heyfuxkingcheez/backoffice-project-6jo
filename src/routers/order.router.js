@@ -12,11 +12,17 @@ orderRouter.post(
   auth_middleware,
   orderController.orderPayment
 );
+// 주문 조회 API (고객)
+orderRouter.get(
+  "/:restaurantId/order/user",
+  auth_middleware,
+  orderController.getOrdersUser
+);
 //  주문 조회 API (사장)
 orderRouter.get(
   "/:restaurantId/order",
   auth_middleware,
-  // auth_owner_middleware,
+  auth_owner_middleware,
   orderController.getOrders
 );
 // // 주문 상태 수정 API(배달 완료) (사장)

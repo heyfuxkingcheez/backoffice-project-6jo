@@ -69,6 +69,24 @@ export class OrderRepository {
     return createdOrders;
   };
 
+  // 주문 조회 조회 API (고객)
+  getOrdersUser = async (restaurantId) => {
+    const getOrdersUser = await prisma.orders.findMany({
+      where: { RestaurantId: +restaurantId, isCompleted: true },
+      select: {
+        orderId: true,
+        UserId: true,
+        orderDetails: true,
+        totalPrice: true,
+        orderPlace: true,
+        isCompleted: true,
+        createdAt: true,
+      },
+    });
+
+    return getOrdersUser;
+  };
+
   // 주문 목록 조회 API (사장)
   getOrders = async (restaurantId) => {
     const getOrders = await prisma.orders.findMany({

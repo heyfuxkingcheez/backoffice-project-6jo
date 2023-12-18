@@ -41,6 +41,25 @@ export class OrderController {
     }
   };
 
+  // 주문 조회 API (고객)
+  getOrdersUser = async (req, res, next) => {
+    try {
+      const { restaurantId } = req.params;
+      console.log("restaurantId: ", restaurantId);
+
+      const getOrdersUser = await this.orderService.getOrdersUser(restaurantId);
+      console.log("고객 주문 조회", getOrdersUser);
+
+      return res.status(200).json({
+        success: true,
+        message: "주문 목록 조회 성공",
+        data: getOrdersUser,
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
+
   // 주문 조회 API (사장)
   getOrders = async (req, res, next) => {
     try {
