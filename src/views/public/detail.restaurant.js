@@ -176,7 +176,7 @@ async function loadMenu(restaurantId) {
     });
     document.querySelectorAll(".cartBtn").forEach((btn) => {
       btn.addEventListener("click", async function (e) {
-        document.querySelector(".list01").innerHTML = "";
+        // document.querySelector(".list01").innerHTML = "";
         menuId = e.target.getAttribute("data-id");
         console.log(menuId);
         if (cartMenuId.includes(Number(menuId)))
