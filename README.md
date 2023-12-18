@@ -64,6 +64,7 @@
 - ![Express](https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white)
 - ![MySQL](https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 - ![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
+- ![AWS](https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white)
 
 ## ✅ 주요 기능
 
