@@ -318,14 +318,12 @@ const loadOrderToReview = async () => {
   try {
     const response = await axios.get(`/api/suragan/${restaurantId}/order/user`);
     const orderArr = response.data.data;
-    console.log(orderArr);
 
     let reviewList = ``;
     for (let i = 0; i < orderArr.length; i++) {
       const orderId = orderArr[i].orderId;
       const orderDetail = orderArr[i].orderDetails[0];
       const DetailName = Object.keys(orderDetail);
-      console.log(orderId, DetailName);
 
       const result = await axios.get(
         `/api/suragan/${restaurantId}/order/review/${orderId}`
@@ -336,7 +334,6 @@ const loadOrderToReview = async () => {
       }
     }
     document.querySelector("#order-review").innerHTML = reviewList;
-    console.log(reviewList);
   } catch (error) {
     console.error("Error fetching posts", error);
   }
@@ -370,7 +367,6 @@ document.addEventListener("DOMContentLoaded", () => {
   reviewBtn.addEventListener("click", () => {
     const inputValue = document.querySelector(".review-input").value;
     if (clickedIndex && inputValue) {
-      console.log("내용", inputValue, "별점", clickedIndex);
       createReviewfunc();
       alert("리뷰 등록 완료!");
       window.location.reload();
@@ -392,7 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
           review: inputValue,
         }
       );
-    } catch (err) {
+    } catch (error) {
       console.error("Error fetching posts", error);
     }
   };
