@@ -1,11 +1,6 @@
 const restaurantId = location.href.split("?")[1];
 console.log(restaurantId);
 
-//홈으로 이동동
-document.getElementById("gohome").addEventListener("click", function () {
-  window.location.href = "index.html";
-});
-
 // 홈으로 이동
 document.getElementById("gohome").addEventListener("click", function () {
   window.location.href = "index.html";
@@ -307,7 +302,7 @@ function openTab(evt, tabName) {
   }
   tablinks = document.getElementsByClassName("tablinks");
   for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace("active", "");
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
   }
   document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
