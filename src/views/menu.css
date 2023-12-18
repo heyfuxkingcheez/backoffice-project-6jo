@@ -32,6 +32,10 @@ button > img {
   width: 100%;
 }
 
+button {
+  cursor: pointer;
+}
+
 #join {
   background-color: white;
   width: 80px;
@@ -290,10 +294,22 @@ button > img {
   border-radius: 8px;
   margin-top: 20px;
   cursor: pointer;
+  color: white;
+}
+.fa-star:hover {
+  cursor: pointer;
+}
+.review-btn:hover {
+  background-color: #af391e;
+  border: solid #af391e;
 }
 .review-select {
   width: 80%;
   text-align: center;
+}
+
+.review-select:hover {
+  cursor: pointer;
 }
 
 #stars {
@@ -415,6 +431,10 @@ html {
   width: 80%;
 }
 
+.list-group-item:hover {
+  cursor: pointer;
+}
+
 .food-image-set {
   position: absolute;
   margin-right: 300px;
@@ -482,4 +502,8 @@ html {
   color: white;
   border: none;
   cursor: pointer;
+}
+
+#payBtn:hover {
+  background-color: #af391e;
 }
