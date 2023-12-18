@@ -32,6 +32,15 @@ button > img {
   width: 100%;
 }
 
+.category {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.category:hover {
+  transform: scale(1.03);
+}
+
 #join {
   background-color: white;
   width: 80px;
@@ -231,13 +240,17 @@ button > img {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
+  transition: transform 0.2s;
   width: 45%;
   height: 200px;
   margin-bottom: 50px;
   box-sizing: border-box;
   border: 1px solid #353434;
-  border-radius: 15px;
+  border-radius: 10px;
+}
+
+.restaurant-box:hover {
+  background-color: rgb(230, 230, 230);
 }
 .restaurant-img {
   width: 50%;

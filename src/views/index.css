@@ -207,11 +207,16 @@ button > img {
   margin: 15px;
   border: 1px solid black;
   border-radius: 15px;
-
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: transform 0.2s;
+}
+.row-box:hover {
+  /* background-color: rgba(243, 243, 243, 0.653); */
+  transform: scale(1.04);
 }
 
 .category-name {
