@@ -346,19 +346,19 @@ const loadOrderToReview = async () => {
   try {
     const response = await axios.get(`/api/suragan/${restaurantId}/order/user`);
     const orderArr = response.data.data;
+    console.log("orderArr: ", orderArr);
 
     let reviewList = ``;
     for (let i = 0; i < orderArr.length; i++) {
       const orderId = orderArr[i].orderId;
-      const orderDetail = orderArr[i].orderDetails[0];
-      const DetailName = Object.keys(orderDetail);
+      const orderDetail = orderArr[i].orderDetails[0].menuName;
 
       const result = await axios.get(
         `/api/suragan/${restaurantId}/order/review/${orderId}`
       );
       console.log("result", result);
       if (!result.data.data) {
-        reviewList += `<option value="${orderId}">주문번호: ${orderId} 메뉴: ${DetailName}</option>`;
+        reviewList += `<option value="${orderId}">주문번호: ${orderId} 메뉴: ${orderDetail}</option>`;
       }
     }
     document.querySelector("#order-review").innerHTML = reviewList;

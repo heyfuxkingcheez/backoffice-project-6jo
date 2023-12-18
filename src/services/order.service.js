@@ -34,9 +34,10 @@ export class OrderService {
   };
 
   // 주문 조회 API (고객)
-  getOrdersUser = async (restaurantId) => {
+  getOrdersUser = async (restaurantId, userId) => {
     const getOrdersUser = await this.orderRepository.getOrdersUser(
-      restaurantId
+      restaurantId,
+      userId
     );
 
     return getOrdersUser;

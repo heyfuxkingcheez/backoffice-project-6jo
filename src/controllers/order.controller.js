@@ -45,9 +45,13 @@ export class OrderController {
   getOrdersUser = async (req, res, next) => {
     try {
       const { restaurantId } = req.params;
+      const { userId } = res.locals.user;
       console.log("restaurantId: ", restaurantId);
 
-      const getOrdersUser = await this.orderService.getOrdersUser(restaurantId);
+      const getOrdersUser = await this.orderService.getOrdersUser(
+        restaurantId,
+        userId
+      );
       console.log("고객 주문 조회", getOrdersUser);
 
       return res.status(200).json({
