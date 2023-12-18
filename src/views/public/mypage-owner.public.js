@@ -13,7 +13,7 @@ document.getElementById("logout").addEventListener("click", async () => {
     alert("로그아웃 성공!");
 
     // Reload the window after successful logout
-    window.location.reload();
+    window.location.href = "index.html";
   } catch (error) {
     // Handle errors
     console.error("Logout failed:", error.message);
