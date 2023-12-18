@@ -507,3 +507,41 @@ html {
 #payBtn:hover {
   background-color: #af391e;
 }
+
+/* index.css 파일에 아래 내용을 추가합니다. */
+
+.footer {
+  background-color: #f8f8f8; /* 배경색을 설정합니다. */
+  color: #333; /* 텍스트 색상을 설정합니다. */
+  padding: 20px 0; /* 상하 20px, 좌우 0px의 패딩을 설정합니다. */
+  text-align: center;
+}
+
+.footer-content {
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-logo img {
+  width: 80px; /* 로고 이미지의 크기를 조절합니다. */
+}
+
+.footer-links a {
+  margin-right: 15px; /* 각 링크 사이의 간격을 조절합니다. */
+  color: #333; /* 링크 텍스트의 색상을 설정합니다. */
+  text-decoration: none; /* 밑줄을 제거합니다. */
+  font-weight: bold; /* 텍스트를 굵게 표시합니다. */
+}
+
+.footer-social a {
+  margin-right: 15px; /* 각 소셜 미디어 아이콘 사이의 간격을 조절합니다. */
+  display: inline-block;
+}
+
+.footer-bottom {
+  margin-top: 20px; /* 하단 정보와 상단 내용 간의 간격을 조절합니다. */
+  text-align: center;
+}
+
+/* 추가적인 스타일링은 프로젝트에 맞게 수정하셔도 됩니다. */
