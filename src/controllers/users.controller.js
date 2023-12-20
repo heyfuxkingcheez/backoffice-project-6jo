@@ -71,4 +71,16 @@ export class UsersController {
       next(error);
     }
   };
+
+  getUser = async (req, res, next) => {
+    const { userId } = res.locals.user;
+
+    const getUser = await this.usersService.getUser(userId);
+
+    return res.status(200).json({
+      success: true,
+      message: "유저 정보 조회 성공",
+      data: getUser,
+    });
+  };
 }

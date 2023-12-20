@@ -31,6 +31,22 @@ button > img {
   width: 100%;
 }
 
+#userInfo {
+  background-color: white;
+  width: auto;
+  height: 27px;
+  color: rgb(40, 39, 39);
+  border: none;
+  border-radius: 5px;
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.user-balance {
+  padding: 3px 6px;
+}
+
 #join {
   background-color: white;
   width: 80px;

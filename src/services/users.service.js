@@ -27,4 +27,9 @@ export class UsersService {
       data: newUser,
     };
   };
+
+  getUser = async (userId) => {
+    const getUser = await this.usersRepository.getUser(userId);
+    return getUser;
+  };
 }

@@ -16,7 +16,7 @@ POST http://localhost:3333/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "example11@gmail.com",
+  "email": "example13@gmail.com",
   "password": "aaaa1111"
 }
 
@@ -184,3 +184,7 @@ Content-Type: application/json
 # 메뉴 삭제
 ###
 DELETE http://localhost:3333/api/suragan/4/charimpyo/10
+
+# 유저 정보 조회
+###
+GET http://localhost:3333/api/users/info

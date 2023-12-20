@@ -31,4 +31,24 @@ export class UsersRepository {
 
     return user;
   };
+
+  getUser = async (userId) => {
+    const user = await prisma.users.findUnique({
+      where: { userId },
+      include: {
+        points: {
+          select: {
+            balance: true,
+          },
+          orderBy: { createdAt: "desc" },
+          take: 1,
+        },
+      },
+    });
+
+    return {
+      nickname: user.nickname,
+      balance: user.points[0].balance,
+    };
+  };
 }

@@ -82,3 +82,19 @@ async function loadRestaurants(category) {
   const queryString = `?category=${category}`;
   window.location.href = `restaurants-list.html${queryString}`;
 }
+
+// 유저 정보 표시
+const getInfo = async () => {
+  const userInfo = document.getElementById("userInfo");
+  try {
+    const getInfo = await axios.get("/api/users/info");
+    const user = getInfo.data.data;
+    console.log(user.nickname);
+    const insert = `<span class="user-balance">${user.balance} 포인트</span>`;
+    userInfo.innerHTML = insert;
+  } catch (error) {
+    console.error("Logout failed:", error.message);
+  }
+};
+
+getInfo();
